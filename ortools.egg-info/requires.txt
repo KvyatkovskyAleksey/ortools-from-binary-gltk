@@ -1,0 +1,4 @@
+absl-py>=2.0.0
+numpy>=1.13.3
+pandas>=2.0.0
+protobuf>=4.25.0
