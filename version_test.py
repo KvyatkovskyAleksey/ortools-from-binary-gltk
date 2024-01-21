@@ -24,11 +24,11 @@ class VersionApi(unittest.TestCase):
         print("test_version_api")
         self.assertEqual(9, init.OrToolsVersion.major_number())
         self.assertEqual(8, init.OrToolsVersion.minor_number())
-        self.assertEqual(9999, init.OrToolsVersion.patch_number())
+        self.assertEqual(3309, init.OrToolsVersion.patch_number())
 
     def test_version(self):
         print("test_version")
-        self.assertEqual("9.8.9999", ortools.__version__)
+        self.assertEqual("9.8.3309", ortools.__version__)
 
 
 if __name__ == "__main__":

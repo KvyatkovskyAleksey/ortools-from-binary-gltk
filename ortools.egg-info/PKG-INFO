@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: ortools
-Version: 9.8.9999
+Version: 9.8.3309
 Summary: Google OR-Tools python libraries and modules
 Home-page: https://developers.google.com/optimization/
 Download-URL: https://github.com/google/or-tools/releases

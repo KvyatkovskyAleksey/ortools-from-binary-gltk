@@ -39,7 +39,7 @@ def read(fname):
 
 setup(
     name='ortools',
-    version='9.8.9999',
+    version='9.8.3309',
     packages=find_packages(),
     python_requires='>= 3.8',
     install_requires=[
