@@ -4,29 +4,30 @@ isort:skip_file
 These proto messages are for collecting solve statistics, e.g., during
 experiments.
 """
-import builtins
-import collections.abc
-import google.protobuf.descriptor
-import google.protobuf.internal.containers
-import google.protobuf.internal.enum_type_wrapper
-import google.protobuf.message
-import ortools.pdlp.solvers_pb2
+
+from collections import abc as _abc
+from google.protobuf import descriptor as _descriptor
+from google.protobuf import message as _message
+from google.protobuf.internal import containers as _containers
+from google.protobuf.internal import enum_type_wrapper as _enum_type_wrapper
+from ortools.pdlp import solvers_pb2 as _solvers_pb2
+import builtins as _builtins
 import sys
-import typing
+import typing as _typing
 
 if sys.version_info >= (3, 10):
-    import typing as typing_extensions
+    from typing import TypeAlias as _TypeAlias
 else:
-    import typing_extensions
+    from typing_extensions import TypeAlias as _TypeAlias
 
-DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
+DESCRIPTOR: _descriptor.FileDescriptor
 
 class _RestartChoice:
-    ValueType = typing.NewType("ValueType", builtins.int)
-    V: typing_extensions.TypeAlias = ValueType
+    ValueType = _typing.NewType("ValueType", _builtins.int)
+    V: _TypeAlias = ValueType  # noqa: Y015
 
-class _RestartChoiceEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_RestartChoice.ValueType], builtins.type):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+class _RestartChoiceEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[_RestartChoice.ValueType], _builtins.type):
+    DESCRIPTOR: _descriptor.EnumDescriptor
     RESTART_CHOICE_UNSPECIFIED: _RestartChoice.ValueType  # 0
     RESTART_CHOICE_NO_RESTART: _RestartChoice.ValueType  # 1
     """No restart on this iteration."""
@@ -57,14 +58,14 @@ RESTART_CHOICE_RESTART_TO_AVERAGE: RestartChoice.ValueType  # 3
 """The algorithm is restarted at the average of iterates since the last
 restart.
 """
-global___RestartChoice = RestartChoice
+Global___RestartChoice: _TypeAlias = RestartChoice  # noqa: Y015
 
 class _PointType:
-    ValueType = typing.NewType("ValueType", builtins.int)
-    V: typing_extensions.TypeAlias = ValueType
+    ValueType = _typing.NewType("ValueType", _builtins.int)
+    V: _TypeAlias = ValueType  # noqa: Y015
 
-class _PointTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_PointType.ValueType], builtins.type):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+class _PointTypeEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[_PointType.ValueType], _builtins.type):
+    DESCRIPTOR: _descriptor.EnumDescriptor
     POINT_TYPE_UNSPECIFIED: _PointType.ValueType  # 0
     POINT_TYPE_CURRENT_ITERATE: _PointType.ValueType  # 1
     """Current iterate (x_k, y_k)."""
@@ -97,14 +98,14 @@ POINT_TYPE_PRESOLVER_SOLUTION: PointType.ValueType  # 5
 """Output of presolver."""
 POINT_TYPE_FEASIBILITY_POLISHING_SOLUTION: PointType.ValueType  # 6
 """Combined solution from primal and dual feasibility polishing."""
-global___PointType = PointType
+Global___PointType: _TypeAlias = PointType  # noqa: Y015
 
 class _TerminationReason:
-    ValueType = typing.NewType("ValueType", builtins.int)
-    V: typing_extensions.TypeAlias = ValueType
+    ValueType = _typing.NewType("ValueType", _builtins.int)
+    V: _TypeAlias = ValueType  # noqa: Y015
 
-class _TerminationReasonEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_TerminationReason.ValueType], builtins.type):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+class _TerminationReasonEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[_TerminationReason.ValueType], _builtins.type):
+    DESCRIPTOR: _descriptor.EnumDescriptor
     TERMINATION_REASON_UNSPECIFIED: _TerminationReason.ValueType  # 0
     TERMINATION_REASON_OPTIMAL: _TerminationReason.ValueType  # 1
     TERMINATION_REASON_PRIMAL_INFEASIBLE: _TerminationReason.ValueType  # 2
@@ -160,14 +161,14 @@ TERMINATION_REASON_PRIMAL_OR_DUAL_INFEASIBLE: TerminationReason.ValueType  # 11
 """Primal or dual infeasibility was detected (e.g. by presolve) but no
 certificate is available.
 """
-global___TerminationReason = TerminationReason
+Global___TerminationReason: _TypeAlias = TerminationReason  # noqa: Y015
 
 class _PolishingPhaseType:
-    ValueType = typing.NewType("ValueType", builtins.int)
-    V: typing_extensions.TypeAlias = ValueType
+    ValueType = _typing.NewType("ValueType", _builtins.int)
+    V: _TypeAlias = ValueType  # noqa: Y015
 
-class _PolishingPhaseTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_PolishingPhaseType.ValueType], builtins.type):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+class _PolishingPhaseTypeEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[_PolishingPhaseType.ValueType], _builtins.type):
+    DESCRIPTOR: _descriptor.EnumDescriptor
     POLISHING_PHASE_TYPE_UNSPECIFIED: _PolishingPhaseType.ValueType  # 0
     POLISHING_PHASE_TYPE_PRIMAL_FEASIBILITY: _PolishingPhaseType.ValueType  # 1
     POLISHING_PHASE_TYPE_DUAL_FEASIBILITY: _PolishingPhaseType.ValueType  # 2
@@ -177,56 +178,56 @@ class PolishingPhaseType(_PolishingPhaseType, metaclass=_PolishingPhaseTypeEnumT
 POLISHING_PHASE_TYPE_UNSPECIFIED: PolishingPhaseType.ValueType  # 0
 POLISHING_PHASE_TYPE_PRIMAL_FEASIBILITY: PolishingPhaseType.ValueType  # 1
 POLISHING_PHASE_TYPE_DUAL_FEASIBILITY: PolishingPhaseType.ValueType  # 2
-global___PolishingPhaseType = PolishingPhaseType
+Global___PolishingPhaseType: _TypeAlias = PolishingPhaseType  # noqa: Y015
 
-@typing_extensions.final
-class QuadraticProgramStats(google.protobuf.message.Message):
+@_typing.final
+class QuadraticProgramStats(_message.Message):
     """Easy-to-compute statistics for the quadratic program."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    NUM_VARIABLES_FIELD_NUMBER: builtins.int
-    NUM_CONSTRAINTS_FIELD_NUMBER: builtins.int
-    CONSTRAINT_MATRIX_COL_MIN_L_INF_NORM_FIELD_NUMBER: builtins.int
-    CONSTRAINT_MATRIX_ROW_MIN_L_INF_NORM_FIELD_NUMBER: builtins.int
-    CONSTRAINT_MATRIX_NUM_NONZEROS_FIELD_NUMBER: builtins.int
-    CONSTRAINT_MATRIX_ABS_MAX_FIELD_NUMBER: builtins.int
-    CONSTRAINT_MATRIX_ABS_MIN_FIELD_NUMBER: builtins.int
-    CONSTRAINT_MATRIX_ABS_AVG_FIELD_NUMBER: builtins.int
-    CONSTRAINT_MATRIX_L2_NORM_FIELD_NUMBER: builtins.int
-    COMBINED_BOUNDS_MAX_FIELD_NUMBER: builtins.int
-    COMBINED_BOUNDS_MIN_FIELD_NUMBER: builtins.int
-    COMBINED_BOUNDS_AVG_FIELD_NUMBER: builtins.int
-    COMBINED_BOUNDS_L2_NORM_FIELD_NUMBER: builtins.int
-    COMBINED_VARIABLE_BOUNDS_MAX_FIELD_NUMBER: builtins.int
-    COMBINED_VARIABLE_BOUNDS_MIN_FIELD_NUMBER: builtins.int
-    COMBINED_VARIABLE_BOUNDS_AVG_FIELD_NUMBER: builtins.int
-    COMBINED_VARIABLE_BOUNDS_L2_NORM_FIELD_NUMBER: builtins.int
-    VARIABLE_BOUND_GAPS_NUM_FINITE_FIELD_NUMBER: builtins.int
-    VARIABLE_BOUND_GAPS_MAX_FIELD_NUMBER: builtins.int
-    VARIABLE_BOUND_GAPS_MIN_FIELD_NUMBER: builtins.int
-    VARIABLE_BOUND_GAPS_AVG_FIELD_NUMBER: builtins.int
-    VARIABLE_BOUND_GAPS_L2_NORM_FIELD_NUMBER: builtins.int
-    OBJECTIVE_VECTOR_ABS_MAX_FIELD_NUMBER: builtins.int
-    OBJECTIVE_VECTOR_ABS_MIN_FIELD_NUMBER: builtins.int
-    OBJECTIVE_VECTOR_ABS_AVG_FIELD_NUMBER: builtins.int
-    OBJECTIVE_VECTOR_L2_NORM_FIELD_NUMBER: builtins.int
-    OBJECTIVE_MATRIX_NUM_NONZEROS_FIELD_NUMBER: builtins.int
-    OBJECTIVE_MATRIX_ABS_MAX_FIELD_NUMBER: builtins.int
-    OBJECTIVE_MATRIX_ABS_MIN_FIELD_NUMBER: builtins.int
-    OBJECTIVE_MATRIX_ABS_AVG_FIELD_NUMBER: builtins.int
-    OBJECTIVE_MATRIX_L2_NORM_FIELD_NUMBER: builtins.int
-    num_variables: builtins.int
-    num_constraints: builtins.int
-    constraint_matrix_col_min_l_inf_norm: builtins.float
+    NUM_VARIABLES_FIELD_NUMBER: _builtins.int
+    NUM_CONSTRAINTS_FIELD_NUMBER: _builtins.int
+    CONSTRAINT_MATRIX_COL_MIN_L_INF_NORM_FIELD_NUMBER: _builtins.int
+    CONSTRAINT_MATRIX_ROW_MIN_L_INF_NORM_FIELD_NUMBER: _builtins.int
+    CONSTRAINT_MATRIX_NUM_NONZEROS_FIELD_NUMBER: _builtins.int
+    CONSTRAINT_MATRIX_ABS_MAX_FIELD_NUMBER: _builtins.int
+    CONSTRAINT_MATRIX_ABS_MIN_FIELD_NUMBER: _builtins.int
+    CONSTRAINT_MATRIX_ABS_AVG_FIELD_NUMBER: _builtins.int
+    CONSTRAINT_MATRIX_L2_NORM_FIELD_NUMBER: _builtins.int
+    COMBINED_BOUNDS_MAX_FIELD_NUMBER: _builtins.int
+    COMBINED_BOUNDS_MIN_FIELD_NUMBER: _builtins.int
+    COMBINED_BOUNDS_AVG_FIELD_NUMBER: _builtins.int
+    COMBINED_BOUNDS_L2_NORM_FIELD_NUMBER: _builtins.int
+    COMBINED_VARIABLE_BOUNDS_MAX_FIELD_NUMBER: _builtins.int
+    COMBINED_VARIABLE_BOUNDS_MIN_FIELD_NUMBER: _builtins.int
+    COMBINED_VARIABLE_BOUNDS_AVG_FIELD_NUMBER: _builtins.int
+    COMBINED_VARIABLE_BOUNDS_L2_NORM_FIELD_NUMBER: _builtins.int
+    VARIABLE_BOUND_GAPS_NUM_FINITE_FIELD_NUMBER: _builtins.int
+    VARIABLE_BOUND_GAPS_MAX_FIELD_NUMBER: _builtins.int
+    VARIABLE_BOUND_GAPS_MIN_FIELD_NUMBER: _builtins.int
+    VARIABLE_BOUND_GAPS_AVG_FIELD_NUMBER: _builtins.int
+    VARIABLE_BOUND_GAPS_L2_NORM_FIELD_NUMBER: _builtins.int
+    OBJECTIVE_VECTOR_ABS_MAX_FIELD_NUMBER: _builtins.int
+    OBJECTIVE_VECTOR_ABS_MIN_FIELD_NUMBER: _builtins.int
+    OBJECTIVE_VECTOR_ABS_AVG_FIELD_NUMBER: _builtins.int
+    OBJECTIVE_VECTOR_L2_NORM_FIELD_NUMBER: _builtins.int
+    OBJECTIVE_MATRIX_NUM_NONZEROS_FIELD_NUMBER: _builtins.int
+    OBJECTIVE_MATRIX_ABS_MAX_FIELD_NUMBER: _builtins.int
+    OBJECTIVE_MATRIX_ABS_MIN_FIELD_NUMBER: _builtins.int
+    OBJECTIVE_MATRIX_ABS_AVG_FIELD_NUMBER: _builtins.int
+    OBJECTIVE_MATRIX_L2_NORM_FIELD_NUMBER: _builtins.int
+    num_variables: _builtins.int
+    num_constraints: _builtins.int
+    constraint_matrix_col_min_l_inf_norm: _builtins.float
     """Minimum row and column infinity norms of the constraint matrix. All-zero
     rows and columns are excluded. If the constraint matrix contains no nonzero
     entries, the values returned are 0.0.
     """
-    constraint_matrix_row_min_l_inf_norm: builtins.float
-    constraint_matrix_num_nonzeros: builtins.int
+    constraint_matrix_row_min_l_inf_norm: _builtins.float
+    constraint_matrix_num_nonzeros: _builtins.int
     """The number of (finite) nonzero entries in the constraint matrix."""
-    constraint_matrix_abs_max: builtins.float
+    constraint_matrix_abs_max: _builtins.float
     """Max/min/mean/l2_norm of absolute values of (finite) elements in constraint
     matrix. Explicit zeros are included in the mean, but excluded from the min.
     Note that the maximum absolute value is also equal to the maximal row and
@@ -234,10 +235,10 @@ class QuadraticProgramStats(google.protobuf.message.Message):
     empty, the values returned are 0.0 for the maximum, minimum, and l2_norm,
     and NaN for the average.
     """
-    constraint_matrix_abs_min: builtins.float
-    constraint_matrix_abs_avg: builtins.float
-    constraint_matrix_l2_norm: builtins.float
-    combined_bounds_max: builtins.float
+    constraint_matrix_abs_min: _builtins.float
+    constraint_matrix_abs_avg: _builtins.float
+    constraint_matrix_l2_norm: _builtins.float
+    combined_bounds_max: _builtins.float
     """Statistics of the combined vector of the constraint lower and upper bounds.
     Given parallel lower and upper bounds vectors, the "combined bounds" vector
     takes the maximum absolute value of each pair of bounds, ignoring all non-
@@ -246,113 +247,115 @@ class QuadraticProgramStats(google.protobuf.message.Message):
     bounds. If there are no constraints, the values returned are 0 for the
     maximum, minimum, and l2 norm and NaN for the average.
     """
-    combined_bounds_min: builtins.float
-    combined_bounds_avg: builtins.float
-    combined_bounds_l2_norm: builtins.float
-    combined_variable_bounds_max: builtins.float
+    combined_bounds_min: _builtins.float
+    combined_bounds_avg: _builtins.float
+    combined_bounds_l2_norm: _builtins.float
+    combined_variable_bounds_max: _builtins.float
     """Statistics of the combined vector of the variable lower and upper bounds.
     See the comment before `combined_bounds_max` for a description of the
     "combined bounds" vector. The min is over the nonzero combined bounds. If
     there are no variables, the values returned are 0 for the maximum, minimum,
     and l2 norm and NaN for the average.
     """
-    combined_variable_bounds_min: builtins.float
-    combined_variable_bounds_avg: builtins.float
-    combined_variable_bounds_l2_norm: builtins.float
-    variable_bound_gaps_num_finite: builtins.int
+    combined_variable_bounds_min: _builtins.float
+    combined_variable_bounds_avg: _builtins.float
+    combined_variable_bounds_l2_norm: _builtins.float
+    variable_bound_gaps_num_finite: _builtins.int
     """Number of finite variable bound gaps, which are the elementwise difference
     between the upper and lower bounds on primal feasible solutions.
     """
-    variable_bound_gaps_max: builtins.float
+    variable_bound_gaps_max: _builtins.float
     """Max/min/mean/l2_norm over all finite variable bound gaps. The min excludes
     zero bound gaps (i.e., fixed variables). When there are no finite gaps, the
     values returned are 0 for the maximum, minimum, and l2_norm, and NaN for
     the average.
     """
-    variable_bound_gaps_min: builtins.float
-    variable_bound_gaps_avg: builtins.float
-    variable_bound_gaps_l2_norm: builtins.float
-    objective_vector_abs_max: builtins.float
+    variable_bound_gaps_min: _builtins.float
+    variable_bound_gaps_avg: _builtins.float
+    variable_bound_gaps_l2_norm: _builtins.float
+    objective_vector_abs_max: _builtins.float
     """Statistics of the objective vector. The min is over the nonzero terms."""
-    objective_vector_abs_min: builtins.float
-    objective_vector_abs_avg: builtins.float
-    objective_vector_l2_norm: builtins.float
-    objective_matrix_num_nonzeros: builtins.int
-    objective_matrix_abs_max: builtins.float
+    objective_vector_abs_min: _builtins.float
+    objective_vector_abs_avg: _builtins.float
+    objective_vector_l2_norm: _builtins.float
+    objective_matrix_num_nonzeros: _builtins.int
+    objective_matrix_abs_max: _builtins.float
     """Max/min/mean/l2_norm of absolute values of elements of the objective
     matrix. The min is over nonzero terms. If the objective matrix is empty,
     the returned values are 0.0, 0.0, NaN, and 0.0 respectively.
     """
-    objective_matrix_abs_min: builtins.float
-    objective_matrix_abs_avg: builtins.float
-    objective_matrix_l2_norm: builtins.float
+    objective_matrix_abs_min: _builtins.float
+    objective_matrix_abs_avg: _builtins.float
+    objective_matrix_l2_norm: _builtins.float
     def __init__(
         self,
         *,
-        num_variables: builtins.int | None = ...,
-        num_constraints: builtins.int | None = ...,
-        constraint_matrix_col_min_l_inf_norm: builtins.float | None = ...,
-        constraint_matrix_row_min_l_inf_norm: builtins.float | None = ...,
-        constraint_matrix_num_nonzeros: builtins.int | None = ...,
-        constraint_matrix_abs_max: builtins.float | None = ...,
-        constraint_matrix_abs_min: builtins.float | None = ...,
-        constraint_matrix_abs_avg: builtins.float | None = ...,
-        constraint_matrix_l2_norm: builtins.float | None = ...,
-        combined_bounds_max: builtins.float | None = ...,
-        combined_bounds_min: builtins.float | None = ...,
-        combined_bounds_avg: builtins.float | None = ...,
-        combined_bounds_l2_norm: builtins.float | None = ...,
-        combined_variable_bounds_max: builtins.float | None = ...,
-        combined_variable_bounds_min: builtins.float | None = ...,
-        combined_variable_bounds_avg: builtins.float | None = ...,
-        combined_variable_bounds_l2_norm: builtins.float | None = ...,
-        variable_bound_gaps_num_finite: builtins.int | None = ...,
-        variable_bound_gaps_max: builtins.float | None = ...,
-        variable_bound_gaps_min: builtins.float | None = ...,
-        variable_bound_gaps_avg: builtins.float | None = ...,
-        variable_bound_gaps_l2_norm: builtins.float | None = ...,
-        objective_vector_abs_max: builtins.float | None = ...,
-        objective_vector_abs_min: builtins.float | None = ...,
-        objective_vector_abs_avg: builtins.float | None = ...,
-        objective_vector_l2_norm: builtins.float | None = ...,
-        objective_matrix_num_nonzeros: builtins.int | None = ...,
-        objective_matrix_abs_max: builtins.float | None = ...,
-        objective_matrix_abs_min: builtins.float | None = ...,
-        objective_matrix_abs_avg: builtins.float | None = ...,
-        objective_matrix_l2_norm: builtins.float | None = ...,
+        num_variables: _builtins.int | None = ...,
+        num_constraints: _builtins.int | None = ...,
+        constraint_matrix_col_min_l_inf_norm: _builtins.float | None = ...,
+        constraint_matrix_row_min_l_inf_norm: _builtins.float | None = ...,
+        constraint_matrix_num_nonzeros: _builtins.int | None = ...,
+        constraint_matrix_abs_max: _builtins.float | None = ...,
+        constraint_matrix_abs_min: _builtins.float | None = ...,
+        constraint_matrix_abs_avg: _builtins.float | None = ...,
+        constraint_matrix_l2_norm: _builtins.float | None = ...,
+        combined_bounds_max: _builtins.float | None = ...,
+        combined_bounds_min: _builtins.float | None = ...,
+        combined_bounds_avg: _builtins.float | None = ...,
+        combined_bounds_l2_norm: _builtins.float | None = ...,
+        combined_variable_bounds_max: _builtins.float | None = ...,
+        combined_variable_bounds_min: _builtins.float | None = ...,
+        combined_variable_bounds_avg: _builtins.float | None = ...,
+        combined_variable_bounds_l2_norm: _builtins.float | None = ...,
+        variable_bound_gaps_num_finite: _builtins.int | None = ...,
+        variable_bound_gaps_max: _builtins.float | None = ...,
+        variable_bound_gaps_min: _builtins.float | None = ...,
+        variable_bound_gaps_avg: _builtins.float | None = ...,
+        variable_bound_gaps_l2_norm: _builtins.float | None = ...,
+        objective_vector_abs_max: _builtins.float | None = ...,
+        objective_vector_abs_min: _builtins.float | None = ...,
+        objective_vector_abs_avg: _builtins.float | None = ...,
+        objective_vector_l2_norm: _builtins.float | None = ...,
+        objective_matrix_num_nonzeros: _builtins.int | None = ...,
+        objective_matrix_abs_max: _builtins.float | None = ...,
+        objective_matrix_abs_min: _builtins.float | None = ...,
+        objective_matrix_abs_avg: _builtins.float | None = ...,
+        objective_matrix_l2_norm: _builtins.float | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["combined_bounds_avg", b"combined_bounds_avg", "combined_bounds_l2_norm", b"combined_bounds_l2_norm", "combined_bounds_max", b"combined_bounds_max", "combined_bounds_min", b"combined_bounds_min", "combined_variable_bounds_avg", b"combined_variable_bounds_avg", "combined_variable_bounds_l2_norm", b"combined_variable_bounds_l2_norm", "combined_variable_bounds_max", b"combined_variable_bounds_max", "combined_variable_bounds_min", b"combined_variable_bounds_min", "constraint_matrix_abs_avg", b"constraint_matrix_abs_avg", "constraint_matrix_abs_max", b"constraint_matrix_abs_max", "constraint_matrix_abs_min", b"constraint_matrix_abs_min", "constraint_matrix_col_min_l_inf_norm", b"constraint_matrix_col_min_l_inf_norm", "constraint_matrix_l2_norm", b"constraint_matrix_l2_norm", "constraint_matrix_num_nonzeros", b"constraint_matrix_num_nonzeros", "constraint_matrix_row_min_l_inf_norm", b"constraint_matrix_row_min_l_inf_norm", "num_constraints", b"num_constraints", "num_variables", b"num_variables", "objective_matrix_abs_avg", b"objective_matrix_abs_avg", "objective_matrix_abs_max", b"objective_matrix_abs_max", "objective_matrix_abs_min", b"objective_matrix_abs_min", "objective_matrix_l2_norm", b"objective_matrix_l2_norm", "objective_matrix_num_nonzeros", b"objective_matrix_num_nonzeros", "objective_vector_abs_avg", b"objective_vector_abs_avg", "objective_vector_abs_max", b"objective_vector_abs_max", "objective_vector_abs_min", b"objective_vector_abs_min", "objective_vector_l2_norm", b"objective_vector_l2_norm", "variable_bound_gaps_avg", b"variable_bound_gaps_avg", "variable_bound_gaps_l2_norm", b"variable_bound_gaps_l2_norm", "variable_bound_gaps_max", b"variable_bound_gaps_max", "variable_bound_gaps_min", b"variable_bound_gaps_min", "variable_bound_gaps_num_finite", b"variable_bound_gaps_num_finite"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["combined_bounds_avg", b"combined_bounds_avg", "combined_bounds_l2_norm", b"combined_bounds_l2_norm", "combined_bounds_max", b"combined_bounds_max", "combined_bounds_min", b"combined_bounds_min", "combined_variable_bounds_avg", b"combined_variable_bounds_avg", "combined_variable_bounds_l2_norm", b"combined_variable_bounds_l2_norm", "combined_variable_bounds_max", b"combined_variable_bounds_max", "combined_variable_bounds_min", b"combined_variable_bounds_min", "constraint_matrix_abs_avg", b"constraint_matrix_abs_avg", "constraint_matrix_abs_max", b"constraint_matrix_abs_max", "constraint_matrix_abs_min", b"constraint_matrix_abs_min", "constraint_matrix_col_min_l_inf_norm", b"constraint_matrix_col_min_l_inf_norm", "constraint_matrix_l2_norm", b"constraint_matrix_l2_norm", "constraint_matrix_num_nonzeros", b"constraint_matrix_num_nonzeros", "constraint_matrix_row_min_l_inf_norm", b"constraint_matrix_row_min_l_inf_norm", "num_constraints", b"num_constraints", "num_variables", b"num_variables", "objective_matrix_abs_avg", b"objective_matrix_abs_avg", "objective_matrix_abs_max", b"objective_matrix_abs_max", "objective_matrix_abs_min", b"objective_matrix_abs_min", "objective_matrix_l2_norm", b"objective_matrix_l2_norm", "objective_matrix_num_nonzeros", b"objective_matrix_num_nonzeros", "objective_vector_abs_avg", b"objective_vector_abs_avg", "objective_vector_abs_max", b"objective_vector_abs_max", "objective_vector_abs_min", b"objective_vector_abs_min", "objective_vector_l2_norm", b"objective_vector_l2_norm", "variable_bound_gaps_avg", b"variable_bound_gaps_avg", "variable_bound_gaps_l2_norm", b"variable_bound_gaps_l2_norm", "variable_bound_gaps_max", b"variable_bound_gaps_max", "variable_bound_gaps_min", b"variable_bound_gaps_min", "variable_bound_gaps_num_finite", b"variable_bound_gaps_num_finite"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["combined_bounds_avg", b"combined_bounds_avg", "combined_bounds_l2_norm", b"combined_bounds_l2_norm", "combined_bounds_max", b"combined_bounds_max", "combined_bounds_min", b"combined_bounds_min", "combined_variable_bounds_avg", b"combined_variable_bounds_avg", "combined_variable_bounds_l2_norm", b"combined_variable_bounds_l2_norm", "combined_variable_bounds_max", b"combined_variable_bounds_max", "combined_variable_bounds_min", b"combined_variable_bounds_min", "constraint_matrix_abs_avg", b"constraint_matrix_abs_avg", "constraint_matrix_abs_max", b"constraint_matrix_abs_max", "constraint_matrix_abs_min", b"constraint_matrix_abs_min", "constraint_matrix_col_min_l_inf_norm", b"constraint_matrix_col_min_l_inf_norm", "constraint_matrix_l2_norm", b"constraint_matrix_l2_norm", "constraint_matrix_num_nonzeros", b"constraint_matrix_num_nonzeros", "constraint_matrix_row_min_l_inf_norm", b"constraint_matrix_row_min_l_inf_norm", "num_constraints", b"num_constraints", "num_variables", b"num_variables", "objective_matrix_abs_avg", b"objective_matrix_abs_avg", "objective_matrix_abs_max", b"objective_matrix_abs_max", "objective_matrix_abs_min", b"objective_matrix_abs_min", "objective_matrix_l2_norm", b"objective_matrix_l2_norm", "objective_matrix_num_nonzeros", b"objective_matrix_num_nonzeros", "objective_vector_abs_avg", b"objective_vector_abs_avg", "objective_vector_abs_max", b"objective_vector_abs_max", "objective_vector_abs_min", b"objective_vector_abs_min", "objective_vector_l2_norm", b"objective_vector_l2_norm", "variable_bound_gaps_avg", b"variable_bound_gaps_avg", "variable_bound_gaps_l2_norm", b"variable_bound_gaps_l2_norm", "variable_bound_gaps_max", b"variable_bound_gaps_max", "variable_bound_gaps_min", b"variable_bound_gaps_min", "variable_bound_gaps_num_finite", b"variable_bound_gaps_num_finite"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["combined_bounds_avg", b"combined_bounds_avg", "combined_bounds_l2_norm", b"combined_bounds_l2_norm", "combined_bounds_max", b"combined_bounds_max", "combined_bounds_min", b"combined_bounds_min", "combined_variable_bounds_avg", b"combined_variable_bounds_avg", "combined_variable_bounds_l2_norm", b"combined_variable_bounds_l2_norm", "combined_variable_bounds_max", b"combined_variable_bounds_max", "combined_variable_bounds_min", b"combined_variable_bounds_min", "constraint_matrix_abs_avg", b"constraint_matrix_abs_avg", "constraint_matrix_abs_max", b"constraint_matrix_abs_max", "constraint_matrix_abs_min", b"constraint_matrix_abs_min", "constraint_matrix_col_min_l_inf_norm", b"constraint_matrix_col_min_l_inf_norm", "constraint_matrix_l2_norm", b"constraint_matrix_l2_norm", "constraint_matrix_num_nonzeros", b"constraint_matrix_num_nonzeros", "constraint_matrix_row_min_l_inf_norm", b"constraint_matrix_row_min_l_inf_norm", "num_constraints", b"num_constraints", "num_variables", b"num_variables", "objective_matrix_abs_avg", b"objective_matrix_abs_avg", "objective_matrix_abs_max", b"objective_matrix_abs_max", "objective_matrix_abs_min", b"objective_matrix_abs_min", "objective_matrix_l2_norm", b"objective_matrix_l2_norm", "objective_matrix_num_nonzeros", b"objective_matrix_num_nonzeros", "objective_vector_abs_avg", b"objective_vector_abs_avg", "objective_vector_abs_max", b"objective_vector_abs_max", "objective_vector_abs_min", b"objective_vector_abs_min", "objective_vector_l2_norm", b"objective_vector_l2_norm", "variable_bound_gaps_avg", b"variable_bound_gaps_avg", "variable_bound_gaps_l2_norm", b"variable_bound_gaps_l2_norm", "variable_bound_gaps_max", b"variable_bound_gaps_max", "variable_bound_gaps_min", b"variable_bound_gaps_min", "variable_bound_gaps_num_finite", b"variable_bound_gaps_num_finite"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-global___QuadraticProgramStats = QuadraticProgramStats
+Global___QuadraticProgramStats: _TypeAlias = QuadraticProgramStats  # noqa: Y015
 
-@typing_extensions.final
-class ConvergenceInformation(google.protobuf.message.Message):
+@_typing.final
+class ConvergenceInformation(_message.Message):
     """Information measuring how close a candidate is to establishing feasibility
     and optimality; see also TerminationCriteria.
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    CANDIDATE_TYPE_FIELD_NUMBER: builtins.int
-    PRIMAL_OBJECTIVE_FIELD_NUMBER: builtins.int
-    DUAL_OBJECTIVE_FIELD_NUMBER: builtins.int
-    CORRECTED_DUAL_OBJECTIVE_FIELD_NUMBER: builtins.int
-    L_INF_PRIMAL_RESIDUAL_FIELD_NUMBER: builtins.int
-    L2_PRIMAL_RESIDUAL_FIELD_NUMBER: builtins.int
-    L_INF_COMPONENTWISE_PRIMAL_RESIDUAL_FIELD_NUMBER: builtins.int
-    L_INF_DUAL_RESIDUAL_FIELD_NUMBER: builtins.int
-    L2_DUAL_RESIDUAL_FIELD_NUMBER: builtins.int
-    L_INF_COMPONENTWISE_DUAL_RESIDUAL_FIELD_NUMBER: builtins.int
-    L_INF_PRIMAL_VARIABLE_FIELD_NUMBER: builtins.int
-    L2_PRIMAL_VARIABLE_FIELD_NUMBER: builtins.int
-    L_INF_DUAL_VARIABLE_FIELD_NUMBER: builtins.int
-    L2_DUAL_VARIABLE_FIELD_NUMBER: builtins.int
-    candidate_type: global___PointType.ValueType
+    CANDIDATE_TYPE_FIELD_NUMBER: _builtins.int
+    PRIMAL_OBJECTIVE_FIELD_NUMBER: _builtins.int
+    DUAL_OBJECTIVE_FIELD_NUMBER: _builtins.int
+    CORRECTED_DUAL_OBJECTIVE_FIELD_NUMBER: _builtins.int
+    L_INF_PRIMAL_RESIDUAL_FIELD_NUMBER: _builtins.int
+    L2_PRIMAL_RESIDUAL_FIELD_NUMBER: _builtins.int
+    L_INF_COMPONENTWISE_PRIMAL_RESIDUAL_FIELD_NUMBER: _builtins.int
+    L_INF_DUAL_RESIDUAL_FIELD_NUMBER: _builtins.int
+    L2_DUAL_RESIDUAL_FIELD_NUMBER: _builtins.int
+    L_INF_COMPONENTWISE_DUAL_RESIDUAL_FIELD_NUMBER: _builtins.int
+    L_INF_PRIMAL_VARIABLE_FIELD_NUMBER: _builtins.int
+    L2_PRIMAL_VARIABLE_FIELD_NUMBER: _builtins.int
+    L_INF_DUAL_VARIABLE_FIELD_NUMBER: _builtins.int
+    L2_DUAL_VARIABLE_FIELD_NUMBER: _builtins.int
+    candidate_type: Global___PointType.ValueType
     """Type of the candidate point described by this ConvergenceInformation."""
-    primal_objective: builtins.float
+    primal_objective: _builtins.float
     """The primal objective. The primal need not be feasible."""
-    dual_objective: builtins.float
+    dual_objective: _builtins.float
     """The dual objective. The dual need not be feasible. The dual objective
     includes the contributions from reduced costs.
     NOTE: The definition of dual_objective changed in OR-tools version 9.8.
@@ -360,188 +363,197 @@ class ConvergenceInformation(google.protobuf.message.Message):
     https://developers.google.com/optimization/lp/pdlp_math#reduced_costs_dual_residuals_and_the_corrected_dual_objective
     for details.
     """
-    corrected_dual_objective: builtins.float
+    corrected_dual_objective: _builtins.float
     """If possible (e.g., when all primal variables have lower and upper bounds),
     a correct dual bound. The value is negative infinity if no corrected dual
     bound is available.
     """
-    l_inf_primal_residual: builtins.float
+    l_inf_primal_residual: _builtins.float
     """The maximum violation of any primal constraint, i.e., the l_∞ norm of the
     violations.
     """
-    l2_primal_residual: builtins.float
+    l2_primal_residual: _builtins.float
     """The l_2 norm of the violations of primal constraints."""
-    l_inf_componentwise_primal_residual: builtins.float
+    l_inf_componentwise_primal_residual: _builtins.float
     """The maximum relative violation of any primal constraint, with an absolute
     offset, i.e., the l_∞ norm of [violation / (eps_ratio + |bound|)] where
     eps_ratio = eps_optimal_primal_residual_absolute
               / eps_optimal_primal_residual_relative
     and bound is the violated bound.
     """
-    l_inf_dual_residual: builtins.float
+    l_inf_dual_residual: _builtins.float
     """The maximum violation of any dual constraint, i.e., the l_∞ norm of the
     violations.
     """
-    l2_dual_residual: builtins.float
+    l2_dual_residual: _builtins.float
     """The l_2 norm of the violations of dual constraints."""
-    l_inf_componentwise_dual_residual: builtins.float
+    l_inf_componentwise_dual_residual: _builtins.float
     """The maximum relative violation of any dual constraint, with an absolute
     offset, i.e., the l_∞ norm of [violation / (eps_ratio + |objective|)] where
     eps_ratio = eps_optimal_dual_residual_absolute
               / eps_optimal_dual_residual_relative
     """
-    l_inf_primal_variable: builtins.float
+    l_inf_primal_variable: _builtins.float
     """The maximum absolute value of the primal variables, i.e., the l_∞ norm.
     This is useful to detect when the primal iterates are diverging. Divergence
     of the primal variables could be an algorithmic issue, or indicate that the
     dual is infeasible.
     """
-    l2_primal_variable: builtins.float
+    l2_primal_variable: _builtins.float
     """The l_2 norm of the primal variables."""
-    l_inf_dual_variable: builtins.float
+    l_inf_dual_variable: _builtins.float
     """The maximum absolute value of the dual variables, i.e., the l_∞ norm. This
     is useful to detect when the dual iterates are diverging. Divergence of the
     dual variables could be an algorithmic issue, or indicate the primal is
     infeasible.
     """
-    l2_dual_variable: builtins.float
+    l2_dual_variable: _builtins.float
     """The l_2 norm of the dual variables."""
     def __init__(
         self,
         *,
-        candidate_type: global___PointType.ValueType | None = ...,
-        primal_objective: builtins.float | None = ...,
-        dual_objective: builtins.float | None = ...,
-        corrected_dual_objective: builtins.float | None = ...,
-        l_inf_primal_residual: builtins.float | None = ...,
-        l2_primal_residual: builtins.float | None = ...,
-        l_inf_componentwise_primal_residual: builtins.float | None = ...,
-        l_inf_dual_residual: builtins.float | None = ...,
-        l2_dual_residual: builtins.float | None = ...,
-        l_inf_componentwise_dual_residual: builtins.float | None = ...,
-        l_inf_primal_variable: builtins.float | None = ...,
-        l2_primal_variable: builtins.float | None = ...,
-        l_inf_dual_variable: builtins.float | None = ...,
-        l2_dual_variable: builtins.float | None = ...,
+        candidate_type: Global___PointType.ValueType | None = ...,
+        primal_objective: _builtins.float | None = ...,
+        dual_objective: _builtins.float | None = ...,
+        corrected_dual_objective: _builtins.float | None = ...,
+        l_inf_primal_residual: _builtins.float | None = ...,
+        l2_primal_residual: _builtins.float | None = ...,
+        l_inf_componentwise_primal_residual: _builtins.float | None = ...,
+        l_inf_dual_residual: _builtins.float | None = ...,
+        l2_dual_residual: _builtins.float | None = ...,
+        l_inf_componentwise_dual_residual: _builtins.float | None = ...,
+        l_inf_primal_variable: _builtins.float | None = ...,
+        l2_primal_variable: _builtins.float | None = ...,
+        l_inf_dual_variable: _builtins.float | None = ...,
+        l2_dual_variable: _builtins.float | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["candidate_type", b"candidate_type", "corrected_dual_objective", b"corrected_dual_objective", "dual_objective", b"dual_objective", "l2_dual_residual", b"l2_dual_residual", "l2_dual_variable", b"l2_dual_variable", "l2_primal_residual", b"l2_primal_residual", "l2_primal_variable", b"l2_primal_variable", "l_inf_componentwise_dual_residual", b"l_inf_componentwise_dual_residual", "l_inf_componentwise_primal_residual", b"l_inf_componentwise_primal_residual", "l_inf_dual_residual", b"l_inf_dual_residual", "l_inf_dual_variable", b"l_inf_dual_variable", "l_inf_primal_residual", b"l_inf_primal_residual", "l_inf_primal_variable", b"l_inf_primal_variable", "primal_objective", b"primal_objective"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["candidate_type", b"candidate_type", "corrected_dual_objective", b"corrected_dual_objective", "dual_objective", b"dual_objective", "l2_dual_residual", b"l2_dual_residual", "l2_dual_variable", b"l2_dual_variable", "l2_primal_residual", b"l2_primal_residual", "l2_primal_variable", b"l2_primal_variable", "l_inf_componentwise_dual_residual", b"l_inf_componentwise_dual_residual", "l_inf_componentwise_primal_residual", b"l_inf_componentwise_primal_residual", "l_inf_dual_residual", b"l_inf_dual_residual", "l_inf_dual_variable", b"l_inf_dual_variable", "l_inf_primal_residual", b"l_inf_primal_residual", "l_inf_primal_variable", b"l_inf_primal_variable", "primal_objective", b"primal_objective"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["candidate_type", b"candidate_type", "corrected_dual_objective", b"corrected_dual_objective", "dual_objective", b"dual_objective", "l2_dual_residual", b"l2_dual_residual", "l2_dual_variable", b"l2_dual_variable", "l2_primal_residual", b"l2_primal_residual", "l2_primal_variable", b"l2_primal_variable", "l_inf_componentwise_dual_residual", b"l_inf_componentwise_dual_residual", "l_inf_componentwise_primal_residual", b"l_inf_componentwise_primal_residual", "l_inf_dual_residual", b"l_inf_dual_residual", "l_inf_dual_variable", b"l_inf_dual_variable", "l_inf_primal_residual", b"l_inf_primal_residual", "l_inf_primal_variable", b"l_inf_primal_variable", "primal_objective", b"primal_objective"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["candidate_type", b"candidate_type", "corrected_dual_objective", b"corrected_dual_objective", "dual_objective", b"dual_objective", "l2_dual_residual", b"l2_dual_residual", "l2_dual_variable", b"l2_dual_variable", "l2_primal_residual", b"l2_primal_residual", "l2_primal_variable", b"l2_primal_variable", "l_inf_componentwise_dual_residual", b"l_inf_componentwise_dual_residual", "l_inf_componentwise_primal_residual", b"l_inf_componentwise_primal_residual", "l_inf_dual_residual", b"l_inf_dual_residual", "l_inf_dual_variable", b"l_inf_dual_variable", "l_inf_primal_residual", b"l_inf_primal_residual", "l_inf_primal_variable", b"l_inf_primal_variable", "primal_objective", b"primal_objective"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-global___ConvergenceInformation = ConvergenceInformation
+Global___ConvergenceInformation: _TypeAlias = ConvergenceInformation  # noqa: Y015
 
-@typing_extensions.final
-class InfeasibilityInformation(google.protobuf.message.Message):
+@_typing.final
+class InfeasibilityInformation(_message.Message):
     """Information measuring how close a point is to establishing primal or dual
     infeasibility (i.e. has no solution); see also TerminationCriteria.
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    MAX_PRIMAL_RAY_INFEASIBILITY_FIELD_NUMBER: builtins.int
-    PRIMAL_RAY_LINEAR_OBJECTIVE_FIELD_NUMBER: builtins.int
-    PRIMAL_RAY_QUADRATIC_NORM_FIELD_NUMBER: builtins.int
-    MAX_DUAL_RAY_INFEASIBILITY_FIELD_NUMBER: builtins.int
-    DUAL_RAY_OBJECTIVE_FIELD_NUMBER: builtins.int
-    CANDIDATE_TYPE_FIELD_NUMBER: builtins.int
-    max_primal_ray_infeasibility: builtins.float
+    MAX_PRIMAL_RAY_INFEASIBILITY_FIELD_NUMBER: _builtins.int
+    PRIMAL_RAY_LINEAR_OBJECTIVE_FIELD_NUMBER: _builtins.int
+    PRIMAL_RAY_QUADRATIC_NORM_FIELD_NUMBER: _builtins.int
+    MAX_DUAL_RAY_INFEASIBILITY_FIELD_NUMBER: _builtins.int
+    DUAL_RAY_OBJECTIVE_FIELD_NUMBER: _builtins.int
+    CANDIDATE_TYPE_FIELD_NUMBER: _builtins.int
+    max_primal_ray_infeasibility: _builtins.float
     """Let x_ray be the algorithm's estimate of the primal extreme ray where x_ray
-    is a vector scaled such that its infinity norm is one. A simple and typical
+    is a vector that satisfies the sign constraints for a ray, scaled such that
+    its infinity norm is one (the sign constraints are the variable bound
+    constraints, with all finite bounds mapped to zero). A simple and typical
     choice of x_ray is x_ray = x / | x |_∞ where x is the current primal
-    iterate. For this value compute the maximum absolute error in the primal
-    linear program with the right hand side and finite variable bounds set to
-    zero. This error refers to both the linear constraints and sign constraints
-    on the ray.
+    iterate projected onto the primal ray sign constraints. For this value
+    compute the maximum absolute error in the primal linear program with the
+    right hand side set to zero.
     """
-    primal_ray_linear_objective: builtins.float
+    primal_ray_linear_objective: _builtins.float
     """The value of the linear part of the primal objective (ignoring additive
     constants) evaluated at x_ray, i.e., c' * x_ray where c is the objective
     coefficient vector.
     """
-    primal_ray_quadratic_norm: builtins.float
+    primal_ray_quadratic_norm: _builtins.float
     """The l_∞ norm of the vector resulting from taking the quadratic matrix from
     primal objective and multiplying it by the primal variables. For linear
     programming problems this is zero.
     """
-    max_dual_ray_infeasibility: builtins.float
+    max_dual_ray_infeasibility: _builtins.float
     """Let (y_ray, r_ray) be the algorithm's estimate of the dual and reduced cost
-    extreme ray where (y_ray, r_ray) is a vector scaled such that its infinity
-    norm is one. A simple and typical choice of y_ray is
-    (y_ray, r_ray) = (y, r) / max(| y |_∞, | r |_∞) where y is the
-    current dual iterate and r is the current dual reduced costs.
-    Consider the quadratic program we are solving but with the objective (both
-    quadratic and linear terms) set to zero. This forms a linear program
+    extreme ray where (y_ray, r_ray) is a vector (satisfying the dual variable
+    constraints) scaled such that its infinity norm is one. A simple and
+    typical choice of y_ray is (y_ray, r_ray) = (y, r) / max(| y |_∞, | r |_∞)
+    where y is the current dual iterate and r is the current dual reduced
+    costs. Consider the quadratic program we are solving but with the objective
+    (both quadratic and linear terms) set to zero. This forms a linear program
     (label this linear program (1)) with no objective. Take the dual of (1) and
     compute the maximum absolute value of the constraint error for
     (y_ray, r_ray) to obtain the value of max_dual_ray_infeasibility.
     """
-    dual_ray_objective: builtins.float
+    dual_ray_objective: _builtins.float
     """The objective of the linear program labeled (1) in the previous paragraph."""
-    candidate_type: global___PointType.ValueType
+    candidate_type: Global___PointType.ValueType
     """Type of the point used to compute the InfeasibilityInformation."""
     def __init__(
         self,
         *,
-        max_primal_ray_infeasibility: builtins.float | None = ...,
-        primal_ray_linear_objective: builtins.float | None = ...,
-        primal_ray_quadratic_norm: builtins.float | None = ...,
-        max_dual_ray_infeasibility: builtins.float | None = ...,
-        dual_ray_objective: builtins.float | None = ...,
-        candidate_type: global___PointType.ValueType | None = ...,
+        max_primal_ray_infeasibility: _builtins.float | None = ...,
+        primal_ray_linear_objective: _builtins.float | None = ...,
+        primal_ray_quadratic_norm: _builtins.float | None = ...,
+        max_dual_ray_infeasibility: _builtins.float | None = ...,
+        dual_ray_objective: _builtins.float | None = ...,
+        candidate_type: Global___PointType.ValueType | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["candidate_type", b"candidate_type", "dual_ray_objective", b"dual_ray_objective", "max_dual_ray_infeasibility", b"max_dual_ray_infeasibility", "max_primal_ray_infeasibility", b"max_primal_ray_infeasibility", "primal_ray_linear_objective", b"primal_ray_linear_objective", "primal_ray_quadratic_norm", b"primal_ray_quadratic_norm"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["candidate_type", b"candidate_type", "dual_ray_objective", b"dual_ray_objective", "max_dual_ray_infeasibility", b"max_dual_ray_infeasibility", "max_primal_ray_infeasibility", b"max_primal_ray_infeasibility", "primal_ray_linear_objective", b"primal_ray_linear_objective", "primal_ray_quadratic_norm", b"primal_ray_quadratic_norm"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["candidate_type", b"candidate_type", "dual_ray_objective", b"dual_ray_objective", "max_dual_ray_infeasibility", b"max_dual_ray_infeasibility", "max_primal_ray_infeasibility", b"max_primal_ray_infeasibility", "primal_ray_linear_objective", b"primal_ray_linear_objective", "primal_ray_quadratic_norm", b"primal_ray_quadratic_norm"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["candidate_type", b"candidate_type", "dual_ray_objective", b"dual_ray_objective", "max_dual_ray_infeasibility", b"max_dual_ray_infeasibility", "max_primal_ray_infeasibility", b"max_primal_ray_infeasibility", "primal_ray_linear_objective", b"primal_ray_linear_objective", "primal_ray_quadratic_norm", b"primal_ray_quadratic_norm"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-global___InfeasibilityInformation = InfeasibilityInformation
+Global___InfeasibilityInformation: _TypeAlias = InfeasibilityInformation  # noqa: Y015
 
-@typing_extensions.final
-class PointMetadata(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class PointMetadata(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
-    POINT_TYPE_FIELD_NUMBER: builtins.int
-    RANDOM_PRIMAL_PROJECTIONS_FIELD_NUMBER: builtins.int
-    RANDOM_DUAL_PROJECTIONS_FIELD_NUMBER: builtins.int
-    ACTIVE_PRIMAL_VARIABLE_COUNT_FIELD_NUMBER: builtins.int
-    ACTIVE_DUAL_VARIABLE_COUNT_FIELD_NUMBER: builtins.int
-    ACTIVE_PRIMAL_VARIABLE_CHANGE_FIELD_NUMBER: builtins.int
-    ACTIVE_DUAL_VARIABLE_CHANGE_FIELD_NUMBER: builtins.int
-    point_type: global___PointType.ValueType
+    POINT_TYPE_FIELD_NUMBER: _builtins.int
+    RANDOM_PRIMAL_PROJECTIONS_FIELD_NUMBER: _builtins.int
+    RANDOM_DUAL_PROJECTIONS_FIELD_NUMBER: _builtins.int
+    ACTIVE_PRIMAL_VARIABLE_COUNT_FIELD_NUMBER: _builtins.int
+    ACTIVE_DUAL_VARIABLE_COUNT_FIELD_NUMBER: _builtins.int
+    ACTIVE_PRIMAL_VARIABLE_CHANGE_FIELD_NUMBER: _builtins.int
+    ACTIVE_DUAL_VARIABLE_CHANGE_FIELD_NUMBER: _builtins.int
+    point_type: Global___PointType.ValueType
     """Type of the point that this metadata corresponds to."""
-    @property
-    def random_primal_projections(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.float]:
-        """Projections of the primal solution onto random planes."""
-    @property
-    def random_dual_projections(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.float]:
-        """Projections of the dual solution onto random planes."""
-    active_primal_variable_count: builtins.int
+    active_primal_variable_count: _builtins.int
     """The number of primal variables that are not at their bounds."""
-    active_dual_variable_count: builtins.int
+    active_dual_variable_count: _builtins.int
     """The number of dual variables that are not at their bounds."""
-    active_primal_variable_change: builtins.int
+    active_primal_variable_change: _builtins.int
     """The number of primal variables that have a different bound status than they
     did at the last restart.
     """
-    active_dual_variable_change: builtins.int
+    active_dual_variable_change: _builtins.int
     """The number of dual variables that have a different bound status than they
     did at the last restart.
     """
+    @_builtins.property
+    def random_primal_projections(self) -> _containers.RepeatedScalarFieldContainer[_builtins.float]:
+        """Projections of the primal solution onto random planes."""
+
+    @_builtins.property
+    def random_dual_projections(self) -> _containers.RepeatedScalarFieldContainer[_builtins.float]:
+        """Projections of the dual solution onto random planes."""
+
     def __init__(
         self,
         *,
-        point_type: global___PointType.ValueType | None = ...,
-        random_primal_projections: collections.abc.Iterable[builtins.float] | None = ...,
-        random_dual_projections: collections.abc.Iterable[builtins.float] | None = ...,
-        active_primal_variable_count: builtins.int | None = ...,
-        active_dual_variable_count: builtins.int | None = ...,
-        active_primal_variable_change: builtins.int | None = ...,
-        active_dual_variable_change: builtins.int | None = ...,
+        point_type: Global___PointType.ValueType | None = ...,
+        random_primal_projections: _abc.Iterable[_builtins.float] | None = ...,
+        random_dual_projections: _abc.Iterable[_builtins.float] | None = ...,
+        active_primal_variable_count: _builtins.int | None = ...,
+        active_dual_variable_count: _builtins.int | None = ...,
+        active_primal_variable_change: _builtins.int | None = ...,
+        active_dual_variable_change: _builtins.int | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["active_dual_variable_change", b"active_dual_variable_change", "active_dual_variable_count", b"active_dual_variable_count", "active_primal_variable_change", b"active_primal_variable_change", "active_primal_variable_count", b"active_primal_variable_count", "point_type", b"point_type"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["active_dual_variable_change", b"active_dual_variable_change", "active_dual_variable_count", b"active_dual_variable_count", "active_primal_variable_change", b"active_primal_variable_change", "active_primal_variable_count", b"active_primal_variable_count", "point_type", b"point_type", "random_dual_projections", b"random_dual_projections", "random_primal_projections", b"random_primal_projections"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["active_dual_variable_change", b"active_dual_variable_change", "active_dual_variable_count", b"active_dual_variable_count", "active_primal_variable_change", b"active_primal_variable_change", "active_primal_variable_count", b"active_primal_variable_count", "point_type", b"point_type"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["active_dual_variable_change", b"active_dual_variable_change", "active_dual_variable_count", b"active_dual_variable_count", "active_primal_variable_change", b"active_primal_variable_change", "active_primal_variable_count", b"active_primal_variable_count", "point_type", b"point_type", "random_dual_projections", b"random_dual_projections", "random_primal_projections", b"random_primal_projections"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-global___PointMetadata = PointMetadata
+Global___PointMetadata: _TypeAlias = PointMetadata  # noqa: Y015
 
-@typing_extensions.final
-class IterationStats(google.protobuf.message.Message):
+@_typing.final
+class IterationStats(_message.Message):
     """All values in IterationStats assume that the primal quadratic program is a
     minimization problem and the dual is a maximization problem. Problems should
     be transformed to this form if they are not already in this form. The dual
@@ -549,40 +561,25 @@ class IterationStats(google.protobuf.message.Message):
     that is, excluding dual multipliers on variable bounds (reduced costs).
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    ITERATION_NUMBER_FIELD_NUMBER: builtins.int
-    CONVERGENCE_INFORMATION_FIELD_NUMBER: builtins.int
-    INFEASIBILITY_INFORMATION_FIELD_NUMBER: builtins.int
-    POINT_METADATA_FIELD_NUMBER: builtins.int
-    CUMULATIVE_KKT_MATRIX_PASSES_FIELD_NUMBER: builtins.int
-    CUMULATIVE_REJECTED_STEPS_FIELD_NUMBER: builtins.int
-    CUMULATIVE_TIME_SEC_FIELD_NUMBER: builtins.int
-    RESTART_USED_FIELD_NUMBER: builtins.int
-    STEP_SIZE_FIELD_NUMBER: builtins.int
-    PRIMAL_WEIGHT_FIELD_NUMBER: builtins.int
-    iteration_number: builtins.int
+    ITERATION_NUMBER_FIELD_NUMBER: _builtins.int
+    CONVERGENCE_INFORMATION_FIELD_NUMBER: _builtins.int
+    INFEASIBILITY_INFORMATION_FIELD_NUMBER: _builtins.int
+    POINT_METADATA_FIELD_NUMBER: _builtins.int
+    CUMULATIVE_KKT_MATRIX_PASSES_FIELD_NUMBER: _builtins.int
+    CUMULATIVE_REJECTED_STEPS_FIELD_NUMBER: _builtins.int
+    CUMULATIVE_TIME_SEC_FIELD_NUMBER: _builtins.int
+    RESTART_USED_FIELD_NUMBER: _builtins.int
+    STEP_SIZE_FIELD_NUMBER: _builtins.int
+    PRIMAL_WEIGHT_FIELD_NUMBER: _builtins.int
+    iteration_number: _builtins.int
     """The iteration number at which these stats were recorded. By convention,
     iteration counts start at 1, and the stats correspond to the solution
     *after* the iteration. Therefore stats from iteration 0 are the stats at
     the starting point.
     """
-    @property
-    def convergence_information(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___ConvergenceInformation]:
-        """A set of statistics measuring how close a point is to establishing primal
-        and dual feasibility and optimality. This field is repeated since there
-        might be several different points that are considered.
-        """
-    @property
-    def infeasibility_information(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___InfeasibilityInformation]:
-        """A set of statistics measuring how close a point is to establishing primal
-        or dual infeasibility (i.e., has no solution). This field is repeated since
-        there might be several different points that could establish infeasibility.
-        """
-    @property
-    def point_metadata(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___PointMetadata]:
-        """Auxiliary statistics for each type of point."""
-    cumulative_kkt_matrix_passes: builtins.float
+    cumulative_kkt_matrix_passes: _builtins.float
     """The cumulative number of passes through the KKT matrix since the start of
     the solve. One pass is a multply by the constraint matrix, its transpose
     and the matrix that defines the quadratic part of the objective.
@@ -593,149 +590,158 @@ class IterationStats(google.protobuf.message.Message):
     20% of the nonzeros of the KKT matrix at each iteration in which case 0.2
     would be added to the total.
     """
-    cumulative_rejected_steps: builtins.int
+    cumulative_rejected_steps: _builtins.int
     """The total number of rejected steps (e.g., within a line search procedure)
     since the start of the solve.
     """
-    cumulative_time_sec: builtins.float
+    cumulative_time_sec: _builtins.float
     """The amount of time passed since we started solving the problem (see solver
     log `solve_time_sec` which records total time).
     """
-    restart_used: global___RestartChoice.ValueType
+    restart_used: Global___RestartChoice.ValueType
     """The kind of restart that occurred at this iteration, or NO_RESTART if a
     restart did not occur.
     """
-    step_size: builtins.float
+    step_size: _builtins.float
     """Step size used at this iteration. Note that the step size used for the
     primal update is step_size / primal_weight, while the one used for the dual
     update is step_size * primal_weight.
     """
-    primal_weight: builtins.float
+    primal_weight: _builtins.float
     """Primal weight controlling the relation between primal and dual step sizes.
     See field 'step_size' for a detailed description.
     """
+    @_builtins.property
+    def convergence_information(self) -> _containers.RepeatedCompositeFieldContainer[Global___ConvergenceInformation]:
+        """A set of statistics measuring how close a point is to establishing primal
+        and dual feasibility and optimality. This field is repeated since there
+        might be several different points that are considered.
+        """
+
+    @_builtins.property
+    def infeasibility_information(self) -> _containers.RepeatedCompositeFieldContainer[Global___InfeasibilityInformation]:
+        """A set of statistics measuring how close a point is to establishing primal
+        or dual infeasibility (i.e., has no solution). This field is repeated since
+        there might be several different points that could establish infeasibility.
+        """
+
+    @_builtins.property
+    def point_metadata(self) -> _containers.RepeatedCompositeFieldContainer[Global___PointMetadata]:
+        """Auxiliary statistics for each type of point."""
+
     def __init__(
         self,
         *,
-        iteration_number: builtins.int | None = ...,
-        convergence_information: collections.abc.Iterable[global___ConvergenceInformation] | None = ...,
-        infeasibility_information: collections.abc.Iterable[global___InfeasibilityInformation] | None = ...,
-        point_metadata: collections.abc.Iterable[global___PointMetadata] | None = ...,
-        cumulative_kkt_matrix_passes: builtins.float | None = ...,
-        cumulative_rejected_steps: builtins.int | None = ...,
-        cumulative_time_sec: builtins.float | None = ...,
-        restart_used: global___RestartChoice.ValueType | None = ...,
-        step_size: builtins.float | None = ...,
-        primal_weight: builtins.float | None = ...,
+        iteration_number: _builtins.int | None = ...,
+        convergence_information: _abc.Iterable[Global___ConvergenceInformation] | None = ...,
+        infeasibility_information: _abc.Iterable[Global___InfeasibilityInformation] | None = ...,
+        point_metadata: _abc.Iterable[Global___PointMetadata] | None = ...,
+        cumulative_kkt_matrix_passes: _builtins.float | None = ...,
+        cumulative_rejected_steps: _builtins.int | None = ...,
+        cumulative_time_sec: _builtins.float | None = ...,
+        restart_used: Global___RestartChoice.ValueType | None = ...,
+        step_size: _builtins.float | None = ...,
+        primal_weight: _builtins.float | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["cumulative_kkt_matrix_passes", b"cumulative_kkt_matrix_passes", "cumulative_rejected_steps", b"cumulative_rejected_steps", "cumulative_time_sec", b"cumulative_time_sec", "iteration_number", b"iteration_number", "primal_weight", b"primal_weight", "restart_used", b"restart_used", "step_size", b"step_size"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["convergence_information", b"convergence_information", "cumulative_kkt_matrix_passes", b"cumulative_kkt_matrix_passes", "cumulative_rejected_steps", b"cumulative_rejected_steps", "cumulative_time_sec", b"cumulative_time_sec", "infeasibility_information", b"infeasibility_information", "iteration_number", b"iteration_number", "point_metadata", b"point_metadata", "primal_weight", b"primal_weight", "restart_used", b"restart_used", "step_size", b"step_size"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["cumulative_kkt_matrix_passes", b"cumulative_kkt_matrix_passes", "cumulative_rejected_steps", b"cumulative_rejected_steps", "cumulative_time_sec", b"cumulative_time_sec", "iteration_number", b"iteration_number", "primal_weight", b"primal_weight", "restart_used", b"restart_used", "step_size", b"step_size"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["convergence_information", b"convergence_information", "cumulative_kkt_matrix_passes", b"cumulative_kkt_matrix_passes", "cumulative_rejected_steps", b"cumulative_rejected_steps", "cumulative_time_sec", b"cumulative_time_sec", "infeasibility_information", b"infeasibility_information", "iteration_number", b"iteration_number", "point_metadata", b"point_metadata", "primal_weight", b"primal_weight", "restart_used", b"restart_used", "step_size", b"step_size"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-global___IterationStats = IterationStats
+Global___IterationStats: _TypeAlias = IterationStats  # noqa: Y015
 
-@typing_extensions.final
-class FeasibilityPolishingDetails(google.protobuf.message.Message):
+@_typing.final
+class FeasibilityPolishingDetails(_message.Message):
     """Details about one primal feasibility or dual feasibility polishing phase
     within a solve with `use_feasibility_polishing`. See `SolveLog` for
     descriptions of the fields with the same name.
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    POLISHING_PHASE_TYPE_FIELD_NUMBER: builtins.int
-    MAIN_ITERATION_COUNT_FIELD_NUMBER: builtins.int
-    PARAMS_FIELD_NUMBER: builtins.int
-    TERMINATION_REASON_FIELD_NUMBER: builtins.int
-    ITERATION_COUNT_FIELD_NUMBER: builtins.int
-    SOLVE_TIME_SEC_FIELD_NUMBER: builtins.int
-    SOLUTION_STATS_FIELD_NUMBER: builtins.int
-    SOLUTION_TYPE_FIELD_NUMBER: builtins.int
-    ITERATION_STATS_FIELD_NUMBER: builtins.int
-    polishing_phase_type: global___PolishingPhaseType.ValueType
-    main_iteration_count: builtins.int
+    POLISHING_PHASE_TYPE_FIELD_NUMBER: _builtins.int
+    MAIN_ITERATION_COUNT_FIELD_NUMBER: _builtins.int
+    PARAMS_FIELD_NUMBER: _builtins.int
+    TERMINATION_REASON_FIELD_NUMBER: _builtins.int
+    ITERATION_COUNT_FIELD_NUMBER: _builtins.int
+    SOLVE_TIME_SEC_FIELD_NUMBER: _builtins.int
+    SOLUTION_STATS_FIELD_NUMBER: _builtins.int
+    SOLUTION_TYPE_FIELD_NUMBER: _builtins.int
+    ITERATION_STATS_FIELD_NUMBER: _builtins.int
+    polishing_phase_type: Global___PolishingPhaseType.ValueType
+    main_iteration_count: _builtins.int
     """The iteration count for the main iteration when this feasibility polishing
     phase was triggered.
     """
-    @property
-    def params(self) -> ortools.pdlp.solvers_pb2.PrimalDualHybridGradientParams: ...
-    termination_reason: global___TerminationReason.ValueType
-    iteration_count: builtins.int
-    solve_time_sec: builtins.float
-    @property
-    def solution_stats(self) -> global___IterationStats: ...
-    solution_type: global___PointType.ValueType
-    @property
-    def iteration_stats(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___IterationStats]: ...
+    termination_reason: Global___TerminationReason.ValueType
+    iteration_count: _builtins.int
+    solve_time_sec: _builtins.float
+    solution_type: Global___PointType.ValueType
+    @_builtins.property
+    def params(self) -> _solvers_pb2.PrimalDualHybridGradientParams: ...
+    @_builtins.property
+    def solution_stats(self) -> Global___IterationStats: ...
+    @_builtins.property
+    def iteration_stats(self) -> _containers.RepeatedCompositeFieldContainer[Global___IterationStats]: ...
     def __init__(
         self,
         *,
-        polishing_phase_type: global___PolishingPhaseType.ValueType | None = ...,
-        main_iteration_count: builtins.int | None = ...,
-        params: ortools.pdlp.solvers_pb2.PrimalDualHybridGradientParams | None = ...,
-        termination_reason: global___TerminationReason.ValueType | None = ...,
-        iteration_count: builtins.int | None = ...,
-        solve_time_sec: builtins.float | None = ...,
-        solution_stats: global___IterationStats | None = ...,
-        solution_type: global___PointType.ValueType | None = ...,
-        iteration_stats: collections.abc.Iterable[global___IterationStats] | None = ...,
+        polishing_phase_type: Global___PolishingPhaseType.ValueType | None = ...,
+        main_iteration_count: _builtins.int | None = ...,
+        params: _solvers_pb2.PrimalDualHybridGradientParams | None = ...,
+        termination_reason: Global___TerminationReason.ValueType | None = ...,
+        iteration_count: _builtins.int | None = ...,
+        solve_time_sec: _builtins.float | None = ...,
+        solution_stats: Global___IterationStats | None = ...,
+        solution_type: Global___PointType.ValueType | None = ...,
+        iteration_stats: _abc.Iterable[Global___IterationStats] | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["iteration_count", b"iteration_count", "main_iteration_count", b"main_iteration_count", "params", b"params", "polishing_phase_type", b"polishing_phase_type", "solution_stats", b"solution_stats", "solution_type", b"solution_type", "solve_time_sec", b"solve_time_sec", "termination_reason", b"termination_reason"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["iteration_count", b"iteration_count", "iteration_stats", b"iteration_stats", "main_iteration_count", b"main_iteration_count", "params", b"params", "polishing_phase_type", b"polishing_phase_type", "solution_stats", b"solution_stats", "solution_type", b"solution_type", "solve_time_sec", b"solve_time_sec", "termination_reason", b"termination_reason"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["iteration_count", b"iteration_count", "main_iteration_count", b"main_iteration_count", "params", b"params", "polishing_phase_type", b"polishing_phase_type", "solution_stats", b"solution_stats", "solution_type", b"solution_type", "solve_time_sec", b"solve_time_sec", "termination_reason", b"termination_reason"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["iteration_count", b"iteration_count", "iteration_stats", b"iteration_stats", "main_iteration_count", b"main_iteration_count", "params", b"params", "polishing_phase_type", b"polishing_phase_type", "solution_stats", b"solution_stats", "solution_type", b"solution_type", "solve_time_sec", b"solve_time_sec", "termination_reason", b"termination_reason"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-global___FeasibilityPolishingDetails = FeasibilityPolishingDetails
+Global___FeasibilityPolishingDetails: _TypeAlias = FeasibilityPolishingDetails  # noqa: Y015
 
-@typing_extensions.final
-class SolveLog(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class SolveLog(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
-    INSTANCE_NAME_FIELD_NUMBER: builtins.int
-    PARAMS_FIELD_NUMBER: builtins.int
-    TERMINATION_REASON_FIELD_NUMBER: builtins.int
-    TERMINATION_STRING_FIELD_NUMBER: builtins.int
-    ITERATION_COUNT_FIELD_NUMBER: builtins.int
-    PREPROCESSING_TIME_SEC_FIELD_NUMBER: builtins.int
-    SOLVE_TIME_SEC_FIELD_NUMBER: builtins.int
-    SOLUTION_STATS_FIELD_NUMBER: builtins.int
-    SOLUTION_TYPE_FIELD_NUMBER: builtins.int
-    ITERATION_STATS_FIELD_NUMBER: builtins.int
-    ORIGINAL_PROBLEM_STATS_FIELD_NUMBER: builtins.int
-    PREPROCESSED_PROBLEM_STATS_FIELD_NUMBER: builtins.int
-    FEASIBILITY_POLISHING_DETAILS_FIELD_NUMBER: builtins.int
-    instance_name: builtins.str
+    INSTANCE_NAME_FIELD_NUMBER: _builtins.int
+    PARAMS_FIELD_NUMBER: _builtins.int
+    TERMINATION_REASON_FIELD_NUMBER: _builtins.int
+    TERMINATION_STRING_FIELD_NUMBER: _builtins.int
+    ITERATION_COUNT_FIELD_NUMBER: _builtins.int
+    PREPROCESSING_TIME_SEC_FIELD_NUMBER: _builtins.int
+    SOLVE_TIME_SEC_FIELD_NUMBER: _builtins.int
+    SOLUTION_STATS_FIELD_NUMBER: _builtins.int
+    SOLUTION_TYPE_FIELD_NUMBER: _builtins.int
+    ITERATION_STATS_FIELD_NUMBER: _builtins.int
+    ORIGINAL_PROBLEM_STATS_FIELD_NUMBER: _builtins.int
+    PREPROCESSED_PROBLEM_STATS_FIELD_NUMBER: _builtins.int
+    FEASIBILITY_POLISHING_DETAILS_FIELD_NUMBER: _builtins.int
+    instance_name: _builtins.str
     """The name of the optimization problem."""
-    @property
-    def params(self) -> ortools.pdlp.solvers_pb2.PrimalDualHybridGradientParams:
-        """If solved with PDLP, the parameters for this solve."""
-    termination_reason: global___TerminationReason.ValueType
+    termination_reason: Global___TerminationReason.ValueType
     """The reason that the solve terminated."""
-    termination_string: builtins.str
+    termination_string: _builtins.str
     """Optional extra information about the termination reason."""
-    iteration_count: builtins.int
+    iteration_count: _builtins.int
     """The total number of iterations during the solve. For a solve with
     `use_feasibility_polishing` this count includes the iterations from
     the feasibility polishing phases.
     """
-    preprocessing_time_sec: builtins.float
+    preprocessing_time_sec: _builtins.float
     """Time for preprocessing (everything before iteration 0). This is also
     included in `solve_time_sec`.
     """
-    solve_time_sec: builtins.float
+    solve_time_sec: _builtins.float
     """The runtime of the solve. Note: This should not be used for comparing
     methods unless care is taken to control for noise in runtime measurement.
     For a solve with `use_feasibility_polishing` this count includes the
     iterations from the feasibility polishing phases.
     """
-    @property
-    def solution_stats(self) -> global___IterationStats:
-        """The `IterationStats` for the final iteration of the solver. For a solve
-        with `use_feasibility_polishing`, the work metrics (iteration_count,
-        cumulative_kkt_matrix_passes, etc.) will include the work done in the
-        feasibility polishing phases.
-        NOTE: Regardless of preprocessing (i.e. scaling or presolve) the optimality
-        or infeasibility information is evaluated with respect to the original
-        problem.
-        """
-    solution_type: global___PointType.ValueType
+    solution_type: Global___PointType.ValueType
     """The type of the output point that the solver returned. The quality of the
     point is reported in the corresponding entry of
     solution_stats.convergence_information and/or
@@ -751,8 +757,23 @@ class SolveLog(google.protobuf.message.Message):
     or TERMINATION_REASON_PRIMAL_OR_DUAL_INFEASIBLE, the solution may not
     satisfy the optimality or infeasibility conditions.
     """
-    @property
-    def iteration_stats(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___IterationStats]:
+    @_builtins.property
+    def params(self) -> _solvers_pb2.PrimalDualHybridGradientParams:
+        """If solved with PDLP, the parameters for this solve."""
+
+    @_builtins.property
+    def solution_stats(self) -> Global___IterationStats:
+        """The `IterationStats` for the final iteration of the solver. For a solve
+        with `use_feasibility_polishing`, the work metrics (iteration_count,
+        cumulative_kkt_matrix_passes, etc.) will include the work done in the
+        feasibility polishing phases.
+        NOTE: Regardless of preprocessing (i.e. scaling or presolve) the optimality
+        or infeasibility information is evaluated with respect to the original
+        problem.
+        """
+
+    @_builtins.property
+    def iteration_stats(self) -> _containers.RepeatedCompositeFieldContainer[Global___IterationStats]:
         """A history of iteration stats for the solve. The iteration_number fields
         should be in increasing order. The frequency at which these stats should be
         recorded is not specified. This field is "more" optional than the others
@@ -762,35 +783,41 @@ class SolveLog(google.protobuf.message.Message):
         only reflect the work done in the main iterations (not the feasibility
         polishing phases).
         """
-    @property
-    def original_problem_stats(self) -> global___QuadraticProgramStats:
+
+    @_builtins.property
+    def original_problem_stats(self) -> Global___QuadraticProgramStats:
         """Statistics of the original problem."""
-    @property
-    def preprocessed_problem_stats(self) -> global___QuadraticProgramStats:
+
+    @_builtins.property
+    def preprocessed_problem_stats(self) -> Global___QuadraticProgramStats:
         """Statistics of the problem after preprocessing."""
-    @property
-    def feasibility_polishing_details(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___FeasibilityPolishingDetails]:
+
+    @_builtins.property
+    def feasibility_polishing_details(self) -> _containers.RepeatedCompositeFieldContainer[Global___FeasibilityPolishingDetails]:
         """If solving with `use_feasibility_polishing`, details about the primal and
         dual feasibility polishing phases.
         """
+
     def __init__(
         self,
         *,
-        instance_name: builtins.str | None = ...,
-        params: ortools.pdlp.solvers_pb2.PrimalDualHybridGradientParams | None = ...,
-        termination_reason: global___TerminationReason.ValueType | None = ...,
-        termination_string: builtins.str | None = ...,
-        iteration_count: builtins.int | None = ...,
-        preprocessing_time_sec: builtins.float | None = ...,
-        solve_time_sec: builtins.float | None = ...,
-        solution_stats: global___IterationStats | None = ...,
-        solution_type: global___PointType.ValueType | None = ...,
-        iteration_stats: collections.abc.Iterable[global___IterationStats] | None = ...,
-        original_problem_stats: global___QuadraticProgramStats | None = ...,
-        preprocessed_problem_stats: global___QuadraticProgramStats | None = ...,
-        feasibility_polishing_details: collections.abc.Iterable[global___FeasibilityPolishingDetails] | None = ...,
+        instance_name: _builtins.str | None = ...,
+        params: _solvers_pb2.PrimalDualHybridGradientParams | None = ...,
+        termination_reason: Global___TerminationReason.ValueType | None = ...,
+        termination_string: _builtins.str | None = ...,
+        iteration_count: _builtins.int | None = ...,
+        preprocessing_time_sec: _builtins.float | None = ...,
+        solve_time_sec: _builtins.float | None = ...,
+        solution_stats: Global___IterationStats | None = ...,
+        solution_type: Global___PointType.ValueType | None = ...,
+        iteration_stats: _abc.Iterable[Global___IterationStats] | None = ...,
+        original_problem_stats: Global___QuadraticProgramStats | None = ...,
+        preprocessed_problem_stats: Global___QuadraticProgramStats | None = ...,
+        feasibility_polishing_details: _abc.Iterable[Global___FeasibilityPolishingDetails] | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["instance_name", b"instance_name", "iteration_count", b"iteration_count", "original_problem_stats", b"original_problem_stats", "params", b"params", "preprocessed_problem_stats", b"preprocessed_problem_stats", "preprocessing_time_sec", b"preprocessing_time_sec", "solution_stats", b"solution_stats", "solution_type", b"solution_type", "solve_time_sec", b"solve_time_sec", "termination_reason", b"termination_reason", "termination_string", b"termination_string"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["feasibility_polishing_details", b"feasibility_polishing_details", "instance_name", b"instance_name", "iteration_count", b"iteration_count", "iteration_stats", b"iteration_stats", "original_problem_stats", b"original_problem_stats", "params", b"params", "preprocessed_problem_stats", b"preprocessed_problem_stats", "preprocessing_time_sec", b"preprocessing_time_sec", "solution_stats", b"solution_stats", "solution_type", b"solution_type", "solve_time_sec", b"solve_time_sec", "termination_reason", b"termination_reason", "termination_string", b"termination_string"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["instance_name", b"instance_name", "iteration_count", b"iteration_count", "original_problem_stats", b"original_problem_stats", "params", b"params", "preprocessed_problem_stats", b"preprocessed_problem_stats", "preprocessing_time_sec", b"preprocessing_time_sec", "solution_stats", b"solution_stats", "solution_type", b"solution_type", "solve_time_sec", b"solve_time_sec", "termination_reason", b"termination_reason", "termination_string", b"termination_string"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["feasibility_polishing_details", b"feasibility_polishing_details", "instance_name", b"instance_name", "iteration_count", b"iteration_count", "iteration_stats", b"iteration_stats", "original_problem_stats", b"original_problem_stats", "params", b"params", "preprocessed_problem_stats", b"preprocessed_problem_stats", "preprocessing_time_sec", b"preprocessing_time_sec", "solution_stats", b"solution_stats", "solution_type", b"solution_type", "solve_time_sec", b"solve_time_sec", "termination_reason", b"termination_reason", "termination_string", b"termination_string"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-global___SolveLog = SolveLog
+Global___SolveLog: _TypeAlias = SolveLog  # noqa: Y015

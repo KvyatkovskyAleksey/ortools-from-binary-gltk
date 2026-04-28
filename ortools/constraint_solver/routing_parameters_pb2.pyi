@@ -5,44 +5,48 @@ Protocol buffer used to parametrize the routing library, in particular the
 search parameters such as first solution heuristics and local search
 neighborhoods.
 """
-import builtins
-import google.protobuf.descriptor
-import google.protobuf.duration_pb2
-import google.protobuf.internal.enum_type_wrapper
-import google.protobuf.message
-import ortools.constraint_solver.routing_enums_pb2
-import ortools.constraint_solver.solver_parameters_pb2
-import ortools.sat.sat_parameters_pb2
-import ortools.util.optional_boolean_pb2
+
+from collections import abc as _abc
+from google.protobuf import descriptor as _descriptor
+from google.protobuf import duration_pb2 as _duration_pb2
+from google.protobuf import message as _message
+from google.protobuf.internal import containers as _containers
+from google.protobuf.internal import enum_type_wrapper as _enum_type_wrapper
+from ortools.constraint_solver import routing_enums_pb2 as _routing_enums_pb2
+from ortools.constraint_solver import routing_ils_pb2 as _routing_ils_pb2
+from ortools.constraint_solver import solver_parameters_pb2 as _solver_parameters_pb2
+from ortools.sat import sat_parameters_pb2 as _sat_parameters_pb2
+from ortools.util import optional_boolean_pb2 as _optional_boolean_pb2
+import builtins as _builtins
 import sys
-import typing
+import typing as _typing
 
 if sys.version_info >= (3, 10):
-    import typing as typing_extensions
+    from typing import TypeAlias as _TypeAlias
 else:
-    import typing_extensions
+    from typing_extensions import TypeAlias as _TypeAlias
 
-DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
+DESCRIPTOR: _descriptor.FileDescriptor
 
-@typing_extensions.final
-class RoutingSearchParameters(google.protobuf.message.Message):
+@_typing.final
+class RoutingSearchParameters(_message.Message):
     """Parameters defining the search used to solve vehicle routing problems.
 
     If a parameter is unset (or, equivalently, set to its default value),
     then the routing library will pick its preferred value for that parameter
     automatically: this should be the case for most parameters.
     To see those "default" parameters, call GetDefaultRoutingSearchParameters().
-    Next ID: 58
+    Next ID: 68
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
     class _PairInsertionStrategy:
-        ValueType = typing.NewType("ValueType", builtins.int)
-        V: typing_extensions.TypeAlias = ValueType
+        ValueType = _typing.NewType("ValueType", _builtins.int)
+        V: _TypeAlias = ValueType  # noqa: Y015
 
-    class _PairInsertionStrategyEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[RoutingSearchParameters._PairInsertionStrategy.ValueType], builtins.type):
-        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    class _PairInsertionStrategyEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[RoutingSearchParameters._PairInsertionStrategy.ValueType], _builtins.type):
+        DESCRIPTOR: _descriptor.EnumDescriptor
         AUTOMATIC: RoutingSearchParameters._PairInsertionStrategy.ValueType  # 0
         """Let the solver decide the set of positions and its ordering."""
         BEST_PICKUP_THEN_BEST_DELIVERY: RoutingSearchParameters._PairInsertionStrategy.ValueType  # 1
@@ -77,12 +81,67 @@ class RoutingSearchParameters(google.protobuf.message.Message):
     Order by increasing by cost(pickup) + cost(delivery).
     """
 
-    class _SchedulingSolver:
-        ValueType = typing.NewType("ValueType", builtins.int)
-        V: typing_extensions.TypeAlias = ValueType
+    class _InsertionSortingProperty:
+        ValueType = _typing.NewType("ValueType", _builtins.int)
+        V: _TypeAlias = ValueType  # noqa: Y015
 
-    class _SchedulingSolverEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[RoutingSearchParameters._SchedulingSolver.ValueType], builtins.type):
-        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    class _InsertionSortingPropertyEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[RoutingSearchParameters._InsertionSortingProperty.ValueType], _builtins.type):
+        DESCRIPTOR: _descriptor.EnumDescriptor
+        SORTING_PROPERTY_UNSPECIFIED: RoutingSearchParameters._InsertionSortingProperty.ValueType  # 0
+        """Invalid property."""
+        SORTING_PROPERTY_ALLOWED_VEHICLES: RoutingSearchParameters._InsertionSortingProperty.ValueType  # 1
+        """Selects nodes with the least number of allowed vehicles."""
+        SORTING_PROPERTY_PENALTY: RoutingSearchParameters._InsertionSortingProperty.ValueType  # 2
+        """Selects nodes with the highest penalty."""
+        SORTING_PROPERTY_PENALTY_OVER_ALLOWED_VEHICLES_RATIO: RoutingSearchParameters._InsertionSortingProperty.ValueType  # 3
+        """Selects nodes with the highest penalty / number of allowed vehicles
+        ratio.
+        """
+        SORTING_PROPERTY_HIGHEST_AVG_ARC_COST_TO_VEHICLE_START_ENDS: RoutingSearchParameters._InsertionSortingProperty.ValueType  # 4
+        """Selects nodes that are on average the farthest from vehicles."""
+        SORTING_PROPERTY_LOWEST_AVG_ARC_COST_TO_VEHICLE_START_ENDS: RoutingSearchParameters._InsertionSortingProperty.ValueType  # 5
+        """Selects nodes that are on average the closest to vehicles."""
+        SORTING_PROPERTY_LOWEST_MIN_ARC_COST_TO_VEHICLE_START_ENDS: RoutingSearchParameters._InsertionSortingProperty.ValueType  # 6
+        """Select nodes with the smallest distance to the closest vehicle."""
+        SORTING_PROPERTY_HIGHEST_DIMENSION_USAGE: RoutingSearchParameters._InsertionSortingProperty.ValueType  # 7
+        """Selects nodes that have a higher dimension usage on average, where the
+        usage is determined as the ratio of node demand over vehicle capacity.
+        Currently, this property only supports unary dimensions.
+        """
+
+    class InsertionSortingProperty(_InsertionSortingProperty, metaclass=_InsertionSortingPropertyEnumTypeWrapper):
+        """Properties used to select in which order nodes or node pairs are considered
+        in insertion heuristics.
+        """
+
+    SORTING_PROPERTY_UNSPECIFIED: RoutingSearchParameters.InsertionSortingProperty.ValueType  # 0
+    """Invalid property."""
+    SORTING_PROPERTY_ALLOWED_VEHICLES: RoutingSearchParameters.InsertionSortingProperty.ValueType  # 1
+    """Selects nodes with the least number of allowed vehicles."""
+    SORTING_PROPERTY_PENALTY: RoutingSearchParameters.InsertionSortingProperty.ValueType  # 2
+    """Selects nodes with the highest penalty."""
+    SORTING_PROPERTY_PENALTY_OVER_ALLOWED_VEHICLES_RATIO: RoutingSearchParameters.InsertionSortingProperty.ValueType  # 3
+    """Selects nodes with the highest penalty / number of allowed vehicles
+    ratio.
+    """
+    SORTING_PROPERTY_HIGHEST_AVG_ARC_COST_TO_VEHICLE_START_ENDS: RoutingSearchParameters.InsertionSortingProperty.ValueType  # 4
+    """Selects nodes that are on average the farthest from vehicles."""
+    SORTING_PROPERTY_LOWEST_AVG_ARC_COST_TO_VEHICLE_START_ENDS: RoutingSearchParameters.InsertionSortingProperty.ValueType  # 5
+    """Selects nodes that are on average the closest to vehicles."""
+    SORTING_PROPERTY_LOWEST_MIN_ARC_COST_TO_VEHICLE_START_ENDS: RoutingSearchParameters.InsertionSortingProperty.ValueType  # 6
+    """Select nodes with the smallest distance to the closest vehicle."""
+    SORTING_PROPERTY_HIGHEST_DIMENSION_USAGE: RoutingSearchParameters.InsertionSortingProperty.ValueType  # 7
+    """Selects nodes that have a higher dimension usage on average, where the
+    usage is determined as the ratio of node demand over vehicle capacity.
+    Currently, this property only supports unary dimensions.
+    """
+
+    class _SchedulingSolver:
+        ValueType = _typing.NewType("ValueType", _builtins.int)
+        V: _TypeAlias = ValueType  # noqa: Y015
+
+    class _SchedulingSolverEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[RoutingSearchParameters._SchedulingSolver.ValueType], _builtins.type):
+        DESCRIPTOR: _descriptor.EnumDescriptor
         SCHEDULING_UNSET: RoutingSearchParameters._SchedulingSolver.ValueType  # 0
         SCHEDULING_GLOP: RoutingSearchParameters._SchedulingSolver.ValueType  # 1
         SCHEDULING_CP_SAT: RoutingSearchParameters._SchedulingSolver.ValueType  # 2
@@ -96,49 +155,53 @@ class RoutingSearchParameters(google.protobuf.message.Message):
     SCHEDULING_GLOP: RoutingSearchParameters.SchedulingSolver.ValueType  # 1
     SCHEDULING_CP_SAT: RoutingSearchParameters.SchedulingSolver.ValueType  # 2
 
-    @typing_extensions.final
-    class LocalSearchNeighborhoodOperators(google.protobuf.message.Message):
+    @_typing.final
+    class LocalSearchNeighborhoodOperators(_message.Message):
         """Local search neighborhood operators used to build a solutions neighborhood.
-        Next ID: 35
+        Next ID: 39
         """
 
-        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+        DESCRIPTOR: _descriptor.Descriptor
 
-        USE_RELOCATE_FIELD_NUMBER: builtins.int
-        USE_RELOCATE_PAIR_FIELD_NUMBER: builtins.int
-        USE_LIGHT_RELOCATE_PAIR_FIELD_NUMBER: builtins.int
-        USE_RELOCATE_NEIGHBORS_FIELD_NUMBER: builtins.int
-        USE_RELOCATE_SUBTRIP_FIELD_NUMBER: builtins.int
-        USE_EXCHANGE_FIELD_NUMBER: builtins.int
-        USE_EXCHANGE_PAIR_FIELD_NUMBER: builtins.int
-        USE_EXCHANGE_SUBTRIP_FIELD_NUMBER: builtins.int
-        USE_CROSS_FIELD_NUMBER: builtins.int
-        USE_CROSS_EXCHANGE_FIELD_NUMBER: builtins.int
-        USE_RELOCATE_EXPENSIVE_CHAIN_FIELD_NUMBER: builtins.int
-        USE_TWO_OPT_FIELD_NUMBER: builtins.int
-        USE_OR_OPT_FIELD_NUMBER: builtins.int
-        USE_LIN_KERNIGHAN_FIELD_NUMBER: builtins.int
-        USE_TSP_OPT_FIELD_NUMBER: builtins.int
-        USE_MAKE_ACTIVE_FIELD_NUMBER: builtins.int
-        USE_RELOCATE_AND_MAKE_ACTIVE_FIELD_NUMBER: builtins.int
-        USE_MAKE_INACTIVE_FIELD_NUMBER: builtins.int
-        USE_MAKE_CHAIN_INACTIVE_FIELD_NUMBER: builtins.int
-        USE_SWAP_ACTIVE_FIELD_NUMBER: builtins.int
-        USE_EXTENDED_SWAP_ACTIVE_FIELD_NUMBER: builtins.int
-        USE_SHORTEST_PATH_SWAP_ACTIVE_FIELD_NUMBER: builtins.int
-        USE_NODE_PAIR_SWAP_ACTIVE_FIELD_NUMBER: builtins.int
-        USE_PATH_LNS_FIELD_NUMBER: builtins.int
-        USE_FULL_PATH_LNS_FIELD_NUMBER: builtins.int
-        USE_TSP_LNS_FIELD_NUMBER: builtins.int
-        USE_INACTIVE_LNS_FIELD_NUMBER: builtins.int
-        USE_GLOBAL_CHEAPEST_INSERTION_PATH_LNS_FIELD_NUMBER: builtins.int
-        USE_LOCAL_CHEAPEST_INSERTION_PATH_LNS_FIELD_NUMBER: builtins.int
-        USE_RELOCATE_PATH_GLOBAL_CHEAPEST_INSERTION_INSERT_UNPERFORMED_FIELD_NUMBER: builtins.int
-        USE_GLOBAL_CHEAPEST_INSERTION_EXPENSIVE_CHAIN_LNS_FIELD_NUMBER: builtins.int
-        USE_LOCAL_CHEAPEST_INSERTION_EXPENSIVE_CHAIN_LNS_FIELD_NUMBER: builtins.int
-        USE_GLOBAL_CHEAPEST_INSERTION_CLOSE_NODES_LNS_FIELD_NUMBER: builtins.int
-        USE_LOCAL_CHEAPEST_INSERTION_CLOSE_NODES_LNS_FIELD_NUMBER: builtins.int
-        use_relocate: ortools.util.optional_boolean_pb2.OptionalBoolean.ValueType
+        USE_RELOCATE_FIELD_NUMBER: _builtins.int
+        USE_RELOCATE_PAIR_FIELD_NUMBER: _builtins.int
+        USE_LIGHT_RELOCATE_PAIR_FIELD_NUMBER: _builtins.int
+        USE_RELOCATE_NEIGHBORS_FIELD_NUMBER: _builtins.int
+        USE_RELOCATE_SUBTRIP_FIELD_NUMBER: _builtins.int
+        USE_EXCHANGE_FIELD_NUMBER: _builtins.int
+        USE_EXCHANGE_PAIR_FIELD_NUMBER: _builtins.int
+        USE_EXCHANGE_SUBTRIP_FIELD_NUMBER: _builtins.int
+        USE_CROSS_FIELD_NUMBER: _builtins.int
+        USE_CROSS_EXCHANGE_FIELD_NUMBER: _builtins.int
+        USE_RELOCATE_EXPENSIVE_CHAIN_FIELD_NUMBER: _builtins.int
+        USE_TWO_OPT_FIELD_NUMBER: _builtins.int
+        USE_OR_OPT_FIELD_NUMBER: _builtins.int
+        USE_LIN_KERNIGHAN_FIELD_NUMBER: _builtins.int
+        USE_TSP_OPT_FIELD_NUMBER: _builtins.int
+        USE_MAKE_ACTIVE_FIELD_NUMBER: _builtins.int
+        USE_RELOCATE_AND_MAKE_ACTIVE_FIELD_NUMBER: _builtins.int
+        USE_EXCHANGE_AND_MAKE_ACTIVE_FIELD_NUMBER: _builtins.int
+        USE_EXCHANGE_PATH_START_ENDS_AND_MAKE_ACTIVE_FIELD_NUMBER: _builtins.int
+        USE_MAKE_INACTIVE_FIELD_NUMBER: _builtins.int
+        USE_MAKE_CHAIN_INACTIVE_FIELD_NUMBER: _builtins.int
+        USE_SWAP_ACTIVE_FIELD_NUMBER: _builtins.int
+        USE_SWAP_ACTIVE_CHAIN_FIELD_NUMBER: _builtins.int
+        USE_EXTENDED_SWAP_ACTIVE_FIELD_NUMBER: _builtins.int
+        USE_SHORTEST_PATH_SWAP_ACTIVE_FIELD_NUMBER: _builtins.int
+        USE_SHORTEST_PATH_TWO_OPT_FIELD_NUMBER: _builtins.int
+        USE_NODE_PAIR_SWAP_ACTIVE_FIELD_NUMBER: _builtins.int
+        USE_PATH_LNS_FIELD_NUMBER: _builtins.int
+        USE_FULL_PATH_LNS_FIELD_NUMBER: _builtins.int
+        USE_TSP_LNS_FIELD_NUMBER: _builtins.int
+        USE_INACTIVE_LNS_FIELD_NUMBER: _builtins.int
+        USE_GLOBAL_CHEAPEST_INSERTION_PATH_LNS_FIELD_NUMBER: _builtins.int
+        USE_LOCAL_CHEAPEST_INSERTION_PATH_LNS_FIELD_NUMBER: _builtins.int
+        USE_RELOCATE_PATH_GLOBAL_CHEAPEST_INSERTION_INSERT_UNPERFORMED_FIELD_NUMBER: _builtins.int
+        USE_GLOBAL_CHEAPEST_INSERTION_EXPENSIVE_CHAIN_LNS_FIELD_NUMBER: _builtins.int
+        USE_LOCAL_CHEAPEST_INSERTION_EXPENSIVE_CHAIN_LNS_FIELD_NUMBER: _builtins.int
+        USE_GLOBAL_CHEAPEST_INSERTION_CLOSE_NODES_LNS_FIELD_NUMBER: _builtins.int
+        USE_LOCAL_CHEAPEST_INSERTION_CLOSE_NODES_LNS_FIELD_NUMBER: _builtins.int
+        use_relocate: _optional_boolean_pb2.OptionalBoolean.ValueType
         """--- Inter-route operators ---
         Operator which moves a single node to another position.
         Possible neighbors for the path 1 -> 2 -> 3 -> 4 -> 5
@@ -149,7 +212,7 @@ class RoutingSearchParameters(google.protobuf.message.Message):
           1 ->  2  ->  4  -> [3] -> 5
           1 -> [4] ->  2  ->  3  -> 5
         """
-        use_relocate_pair: ortools.util.optional_boolean_pb2.OptionalBoolean.ValueType
+        use_relocate_pair: _optional_boolean_pb2.OptionalBoolean.ValueType
         """Operator which moves a pair of pickup and delivery nodes to another
         position where the first node of the pair must be before the second node
         on the same path. Compared to the light_relocate_pair operator, tries all
@@ -160,7 +223,7 @@ class RoutingSearchParameters(google.protobuf.message.Message):
           1 -> [A] ->  2  -> [B] -> 3
           1 ->  2  -> [A] -> [B] -> 3
         """
-        use_light_relocate_pair: ortools.util.optional_boolean_pb2.OptionalBoolean.ValueType
+        use_light_relocate_pair: _optional_boolean_pb2.OptionalBoolean.ValueType
         """Operator which moves a pair of pickup and delivery nodes after another
         pair.
         Possible neighbors for paths 1 -> A -> B -> 2, 3 -> C -> D -> 4 (where
@@ -169,7 +232,7 @@ class RoutingSearchParameters(google.protobuf.message.Message):
           1 -> 2, 3 -> C -> [A] -> D -> [B] -> 4
           1 -> A -> [C] -> B -> [D] -> 2, 3 -> 4
         """
-        use_relocate_neighbors: ortools.util.optional_boolean_pb2.OptionalBoolean.ValueType
+        use_relocate_neighbors: _optional_boolean_pb2.OptionalBoolean.ValueType
         """Relocate neighborhood which moves chains of neighbors.
         The operator starts by relocating a node n after a node m, then continues
         moving nodes which were after n as long as the "cost" added is less than
@@ -193,7 +256,7 @@ class RoutingSearchParameters(google.protobuf.message.Message):
         This operator is extremely useful to move chains of nodes which are
         located at the same place (for instance nodes part of a same stop).
         """
-        use_relocate_subtrip: ortools.util.optional_boolean_pb2.OptionalBoolean.ValueType
+        use_relocate_subtrip: _optional_boolean_pb2.OptionalBoolean.ValueType
         """Relocate neighborhood that moves subpaths all pickup and delivery
         pairs have both pickup and delivery inside the subpath or both outside
         the subpath. For instance, for given paths:
@@ -209,7 +272,7 @@ class RoutingSearchParameters(google.protobuf.message.Message):
         0 -> 5 -> 6 -> 8
         7 -> A -> B -> A' -> B' -> 9
         """
-        use_exchange: ortools.util.optional_boolean_pb2.OptionalBoolean.ValueType
+        use_exchange: _optional_boolean_pb2.OptionalBoolean.ValueType
         """Operator which exchanges the positions of two nodes.
         Possible neighbors for the path 1 -> 2 -> 3 -> 4 -> 5
         (where (1, 5) are first and last nodes of the path and can therefore not
@@ -218,7 +281,7 @@ class RoutingSearchParameters(google.protobuf.message.Message):
           1 -> [4] ->  3  -> [2] -> 5
           1 ->  2  -> [4] -> [3] -> 5
         """
-        use_exchange_pair: ortools.util.optional_boolean_pb2.OptionalBoolean.ValueType
+        use_exchange_pair: _optional_boolean_pb2.OptionalBoolean.ValueType
         """Operator which exchanges the positions of two pair of nodes. Pairs
         correspond to the pickup and delivery pairs defined in the routing model.
         Possible neighbor for the paths
@@ -227,11 +290,11 @@ class RoutingSearchParameters(google.protobuf.message.Message):
         therefore not be moved, and (A, B) and (C,D) are pairs of nodes):
           1 -> [C] ->  [D] -> 2 -> 3, 4 -> [A] -> [B] -> 5
         """
-        use_exchange_subtrip: ortools.util.optional_boolean_pb2.OptionalBoolean.ValueType
+        use_exchange_subtrip: _optional_boolean_pb2.OptionalBoolean.ValueType
         """Operator which exchanges subtrips associated to two pairs of nodes,
         see use_relocate_subtrip for a definition of subtrips.
         """
-        use_cross: ortools.util.optional_boolean_pb2.OptionalBoolean.ValueType
+        use_cross: _optional_boolean_pb2.OptionalBoolean.ValueType
         """Operator which cross exchanges the starting chains of 2 paths, including
         exchanging the whole paths.
         First and last nodes are not moved.
@@ -242,9 +305,9 @@ class RoutingSearchParameters(google.protobuf.message.Message):
           1 -> [7] -> 4 -> 5       6 -> [2 -> 3] -> 8
           1 -> [7] -> 5            6 -> [2 -> 3 -> 4] -> 8
         """
-        use_cross_exchange: ortools.util.optional_boolean_pb2.OptionalBoolean.ValueType
+        use_cross_exchange: _optional_boolean_pb2.OptionalBoolean.ValueType
         """Not implemented yet. TODO(b/68128619): Implement."""
-        use_relocate_expensive_chain: ortools.util.optional_boolean_pb2.OptionalBoolean.ValueType
+        use_relocate_expensive_chain: _optional_boolean_pb2.OptionalBoolean.ValueType
         """Operator which detects the relocate_expensive_chain_num_arcs_to_consider
         most expensive arcs on a path, and moves the chain resulting from cutting
         pairs of arcs among these to another position.
@@ -256,7 +319,7 @@ class RoutingSearchParameters(google.protobuf.message.Message):
           1 -> 2      3 -> [B -> C] -> A -> D -> 4
           1 -> 2      3 -> A -> D -> [B -> C] -> 4
         """
-        use_two_opt: ortools.util.optional_boolean_pb2.OptionalBoolean.ValueType
+        use_two_opt: _optional_boolean_pb2.OptionalBoolean.ValueType
         """--- Intra-route operators ---
         Operator which reverses a subchain of a path. It is called TwoOpt
         because it breaks two arcs on the path; resulting paths are called
@@ -268,7 +331,7 @@ class RoutingSearchParameters(google.protobuf.message.Message):
           1 -> [4 -> 3  -> 2] -> 5
           1 ->  2 -> [4 -> 3] -> 5
         """
-        use_or_opt: ortools.util.optional_boolean_pb2.OptionalBoolean.ValueType
+        use_or_opt: _optional_boolean_pb2.OptionalBoolean.ValueType
         """Operator which moves sub-chains of a path of length 1, 2 and 3 to another
         position in the same path.
         When the length of the sub-chain is 1, the operator simply moves a node
@@ -281,13 +344,13 @@ class RoutingSearchParameters(google.protobuf.message.Message):
         The OR_OPT operator is a limited version of 3-Opt (breaks 3 arcs on a
         path).
         """
-        use_lin_kernighan: ortools.util.optional_boolean_pb2.OptionalBoolean.ValueType
+        use_lin_kernighan: _optional_boolean_pb2.OptionalBoolean.ValueType
         """Lin-Kernighan operator.
         While the accumulated local gain is positive, performs a 2-OPT or a 3-OPT
         move followed by a series of 2-OPT moves. Returns a neighbor for which
         the global gain is positive.
         """
-        use_tsp_opt: ortools.util.optional_boolean_pb2.OptionalBoolean.ValueType
+        use_tsp_opt: _optional_boolean_pb2.OptionalBoolean.ValueType
         """Sliding TSP operator.
         Uses an exact dynamic programming algorithm to solve the TSP
         corresponding to path sub-chains.
@@ -295,7 +358,7 @@ class RoutingSearchParameters(google.protobuf.message.Message):
         nodes A, 2, 3, 4, 5, where A is a merger of nodes 1 and 6 such that
         cost(A,i) = cost(1,i) and cost(i,A) = cost(i,6).
         """
-        use_make_active: ortools.util.optional_boolean_pb2.OptionalBoolean.ValueType
+        use_make_active: _optional_boolean_pb2.OptionalBoolean.ValueType
         """--- Operators on inactive nodes ---
         Operator which inserts an inactive node into a path.
         Possible neighbors for the path 1 -> 2 -> 3 -> 4 with 5 inactive
@@ -304,7 +367,7 @@ class RoutingSearchParameters(google.protobuf.message.Message):
           1 ->  2  -> [5] ->  3  -> 4
           1 ->  2  ->  3  -> [5] -> 4
         """
-        use_relocate_and_make_active: ortools.util.optional_boolean_pb2.OptionalBoolean.ValueType
+        use_relocate_and_make_active: _optional_boolean_pb2.OptionalBoolean.ValueType
         """Operator which relocates a node while making an inactive one active.
         As of 3/2017, the operator is limited to two kinds of moves:
         - Relocating a node and replacing it by an inactive node.
@@ -316,14 +379,33 @@ class RoutingSearchParameters(google.protobuf.message.Message):
           (where 1,2 and 5,6 are first and last nodes of paths) is:
           1 -> 4 -> 3 -> 5, 2 -> 6.
         """
-        use_make_inactive: ortools.util.optional_boolean_pb2.OptionalBoolean.ValueType
+        use_exchange_and_make_active: _optional_boolean_pb2.OptionalBoolean.ValueType
+        """Operator which exchanges two nodes and inserts an inactive node.
+        Possible neighbors for paths 0 -> 2 -> 4, 1 -> 3 -> 6 and 5 inactive are:
+        0 -> 3 -> 4, 1 -> 5 -> 2 -> 6
+        0 -> 3 -> 5 -> 4, 1 -> 2 -> 6
+        0 -> 5 -> 3 -> 4, 1 -> 2 -> 6
+        0 -> 3 -> 4, 1 -> 2 -> 5 -> 6
+        """
+        use_exchange_path_start_ends_and_make_active: _optional_boolean_pb2.OptionalBoolean.ValueType
+        """Operator which exchanges the first and last nodes of two paths and makes
+        a node active.
+        Possible neighbors for paths 0 -> 1 -> 2 -> 7, 6 -> 3 -> 4 -> 8
+        and 5 inactive are:
+        0 -> 5 -> 3 -> 4 -> 7, 6 -> 1 -> 2 -> 8
+        0 -> 3 -> 4 -> 7, 6 -> 1 -> 5 -> 2 -> 8
+        0 -> 3 -> 4 -> 7, 6 -> 1 -> 2 -> 5 -> 8
+        0 -> 3 -> 5 -> 4 -> 7, 6 -> 1 -> 2 -> 8
+        0 -> 3 -> 4 -> 5 -> 7, 6 -> 1 -> 2 -> 8
+        """
+        use_make_inactive: _optional_boolean_pb2.OptionalBoolean.ValueType
         """Operator which makes path nodes inactive.
         Possible neighbors for the path 1 -> 2 -> 3 -> 4 (where 1 and 4 are first
         and last nodes of the path) are:
           1 -> 3 -> 4 with 2 inactive
           1 -> 2 -> 4 with 3 inactive
         """
-        use_make_chain_inactive: ortools.util.optional_boolean_pb2.OptionalBoolean.ValueType
+        use_make_chain_inactive: _optional_boolean_pb2.OptionalBoolean.ValueType
         """Operator which makes a "chain" of path nodes inactive.
         Possible neighbors for the path 1 -> 2 -> 3 -> 4 (where 1 and 4 are first
         and last nodes of the path) are:
@@ -331,14 +413,22 @@ class RoutingSearchParameters(google.protobuf.message.Message):
           1 -> 2 -> 4 with 3 inactive
           1 -> 4 with 2 and 3 inactive
         """
-        use_swap_active: ortools.util.optional_boolean_pb2.OptionalBoolean.ValueType
+        use_swap_active: _optional_boolean_pb2.OptionalBoolean.ValueType
         """Operator which replaces an active node by an inactive one.
         Possible neighbors for the path 1 -> 2 -> 3 -> 4 with 5 inactive
         (where 1 and 4 are first and last nodes of the path) are:
           1 -> [5] ->  3  -> 4 with 2 inactive
           1 ->  2  -> [5] -> 4 with 3 inactive
         """
-        use_extended_swap_active: ortools.util.optional_boolean_pb2.OptionalBoolean.ValueType
+        use_swap_active_chain: _optional_boolean_pb2.OptionalBoolean.ValueType
+        """Operator which replaces a chain of active nodes by an inactive one.
+        Possible neighbors for the path 1 -> 2 -> 3 -> 4 with 5 inactive
+        (where 1 and 4 are first and last nodes of the path) are:
+          1 -> [5] ->  3  -> 4 with 2 inactive
+          1 ->  2  -> [5] -> 4 with 3 inactive
+          1 -> [5] -> 4 with 2 and 3 inactive
+        """
+        use_extended_swap_active: _optional_boolean_pb2.OptionalBoolean.ValueType
         """Operator which makes an inactive node active and an active one inactive.
         It is similar to SwapActiveOperator excepts that it tries to insert the
         inactive node in all possible positions instead of just the position of
@@ -350,7 +440,7 @@ class RoutingSearchParameters(google.protobuf.message.Message):
           1 -> [5] ->  2  -> 4 with 3 inactive
           1 ->  2  -> [5] -> 4 with 3 inactive
         """
-        use_shortest_path_swap_active: ortools.util.optional_boolean_pb2.OptionalBoolean.ValueType
+        use_shortest_path_swap_active: _optional_boolean_pb2.OptionalBoolean.ValueType
         """Swaps active nodes from node alternatives in sequence. Considers chains
         of nodes with alternatives, builds a DAG from the chain, each "layer" of
         the DAG being composed of the set of alternatives of the node at a given
@@ -358,7 +448,11 @@ class RoutingSearchParameters(google.protobuf.message.Message):
         from the shortest path starting from the node before the chain (source),
         through the DAG to the node following the chain.
         """
-        use_node_pair_swap_active: ortools.util.optional_boolean_pb2.OptionalBoolean.ValueType
+        use_shortest_path_two_opt: _optional_boolean_pb2.OptionalBoolean.ValueType
+        """Similar to use_two_opt but returns the shortest path on the DAG of node
+        alternatives of the reversed chain (cf. use_shortest_path_swap_active).
+        """
+        use_node_pair_swap_active: _optional_boolean_pb2.OptionalBoolean.ValueType
         """Operator which makes an inactive node active and an active pair of nodes
         inactive OR makes an inactive pair of nodes active and an active node
         inactive.
@@ -371,7 +465,7 @@ class RoutingSearchParameters(google.protobuf.message.Message):
         of nodes) are:
           1 -> [4] -> [5] -> 3 with 2 inactive
         """
-        use_path_lns: ortools.util.optional_boolean_pb2.OptionalBoolean.ValueType
+        use_path_lns: _optional_boolean_pb2.OptionalBoolean.ValueType
         """--- Large neighborhood search operators ---
         Operator which relaxes two sub-chains of three consecutive arcs each.
         Each sub-chain is defined by a start node and the next three arcs. Those
@@ -381,9 +475,9 @@ class RoutingSearchParameters(google.protobuf.message.Message):
         Note that the two sub-chains can be part of the same path; they even may
         overlap.
         """
-        use_full_path_lns: ortools.util.optional_boolean_pb2.OptionalBoolean.ValueType
+        use_full_path_lns: _optional_boolean_pb2.OptionalBoolean.ValueType
         """Operator which relaxes one entire path and all inactive nodes."""
-        use_tsp_lns: ortools.util.optional_boolean_pb2.OptionalBoolean.ValueType
+        use_tsp_lns: _optional_boolean_pb2.OptionalBoolean.ValueType
         """TSP-base LNS.
         Randomly merges consecutive nodes until n "meta"-nodes remain and solves
         the corresponding TSP.
@@ -391,97 +485,102 @@ class RoutingSearchParameters(google.protobuf.message.Message):
         limits. To force diversification, the operator iteratively forces each
         node to serve as base of a meta-node.
         """
-        use_inactive_lns: ortools.util.optional_boolean_pb2.OptionalBoolean.ValueType
+        use_inactive_lns: _optional_boolean_pb2.OptionalBoolean.ValueType
         """Operator which relaxes all inactive nodes and one sub-chain of six
         consecutive arcs. That way the path can be improved by inserting inactive
         nodes or swapping arcs.
         """
-        use_global_cheapest_insertion_path_lns: ortools.util.optional_boolean_pb2.OptionalBoolean.ValueType
+        use_global_cheapest_insertion_path_lns: _optional_boolean_pb2.OptionalBoolean.ValueType
         """--- LNS-like large neighborhood search operators using heuristics ---
         Operator which makes all nodes on a route unperformed, and reinserts them
         using the GlobalCheapestInsertion heuristic.
         """
-        use_local_cheapest_insertion_path_lns: ortools.util.optional_boolean_pb2.OptionalBoolean.ValueType
+        use_local_cheapest_insertion_path_lns: _optional_boolean_pb2.OptionalBoolean.ValueType
         """Same as above but using LocalCheapestInsertion as a heuristic."""
-        use_relocate_path_global_cheapest_insertion_insert_unperformed: ortools.util.optional_boolean_pb2.OptionalBoolean.ValueType
+        use_relocate_path_global_cheapest_insertion_insert_unperformed: _optional_boolean_pb2.OptionalBoolean.ValueType
         """The following operator relocates an entire route to an empty path and
         then tries to insert the unperformed nodes using the global cheapest
         insertion heuristic.
         """
-        use_global_cheapest_insertion_expensive_chain_lns: ortools.util.optional_boolean_pb2.OptionalBoolean.ValueType
+        use_global_cheapest_insertion_expensive_chain_lns: _optional_boolean_pb2.OptionalBoolean.ValueType
         """This operator finds heuristic_expensive_chain_lns_num_arcs_to_consider
         most expensive arcs on a route, makes the nodes in between pairs of these
         expensive arcs unperformed, and reinserts them using the
         GlobalCheapestInsertion heuristic.
         """
-        use_local_cheapest_insertion_expensive_chain_lns: ortools.util.optional_boolean_pb2.OptionalBoolean.ValueType
+        use_local_cheapest_insertion_expensive_chain_lns: _optional_boolean_pb2.OptionalBoolean.ValueType
         """Same as above but using LocalCheapestInsertion as a heuristic for
         insertion.
         """
-        use_global_cheapest_insertion_close_nodes_lns: ortools.util.optional_boolean_pb2.OptionalBoolean.ValueType
+        use_global_cheapest_insertion_close_nodes_lns: _optional_boolean_pb2.OptionalBoolean.ValueType
         """The following operator makes a node and its
         heuristic_close_nodes_lns_num_nodes closest neighbors unperformed along
         with each of their corresponding performed pickup/delivery pairs, and
         then reinserts them using the GlobalCheapestInsertion heuristic.
         """
-        use_local_cheapest_insertion_close_nodes_lns: ortools.util.optional_boolean_pb2.OptionalBoolean.ValueType
+        use_local_cheapest_insertion_close_nodes_lns: _optional_boolean_pb2.OptionalBoolean.ValueType
         """Same as above, but insertion positions for nodes are determined by the
         LocalCheapestInsertion heuristic.
         """
         def __init__(
             self,
             *,
-            use_relocate: ortools.util.optional_boolean_pb2.OptionalBoolean.ValueType = ...,
-            use_relocate_pair: ortools.util.optional_boolean_pb2.OptionalBoolean.ValueType = ...,
-            use_light_relocate_pair: ortools.util.optional_boolean_pb2.OptionalBoolean.ValueType = ...,
-            use_relocate_neighbors: ortools.util.optional_boolean_pb2.OptionalBoolean.ValueType = ...,
-            use_relocate_subtrip: ortools.util.optional_boolean_pb2.OptionalBoolean.ValueType = ...,
-            use_exchange: ortools.util.optional_boolean_pb2.OptionalBoolean.ValueType = ...,
-            use_exchange_pair: ortools.util.optional_boolean_pb2.OptionalBoolean.ValueType = ...,
-            use_exchange_subtrip: ortools.util.optional_boolean_pb2.OptionalBoolean.ValueType = ...,
-            use_cross: ortools.util.optional_boolean_pb2.OptionalBoolean.ValueType = ...,
-            use_cross_exchange: ortools.util.optional_boolean_pb2.OptionalBoolean.ValueType = ...,
-            use_relocate_expensive_chain: ortools.util.optional_boolean_pb2.OptionalBoolean.ValueType = ...,
-            use_two_opt: ortools.util.optional_boolean_pb2.OptionalBoolean.ValueType = ...,
-            use_or_opt: ortools.util.optional_boolean_pb2.OptionalBoolean.ValueType = ...,
-            use_lin_kernighan: ortools.util.optional_boolean_pb2.OptionalBoolean.ValueType = ...,
-            use_tsp_opt: ortools.util.optional_boolean_pb2.OptionalBoolean.ValueType = ...,
-            use_make_active: ortools.util.optional_boolean_pb2.OptionalBoolean.ValueType = ...,
-            use_relocate_and_make_active: ortools.util.optional_boolean_pb2.OptionalBoolean.ValueType = ...,
-            use_make_inactive: ortools.util.optional_boolean_pb2.OptionalBoolean.ValueType = ...,
-            use_make_chain_inactive: ortools.util.optional_boolean_pb2.OptionalBoolean.ValueType = ...,
-            use_swap_active: ortools.util.optional_boolean_pb2.OptionalBoolean.ValueType = ...,
-            use_extended_swap_active: ortools.util.optional_boolean_pb2.OptionalBoolean.ValueType = ...,
-            use_shortest_path_swap_active: ortools.util.optional_boolean_pb2.OptionalBoolean.ValueType = ...,
-            use_node_pair_swap_active: ortools.util.optional_boolean_pb2.OptionalBoolean.ValueType = ...,
-            use_path_lns: ortools.util.optional_boolean_pb2.OptionalBoolean.ValueType = ...,
-            use_full_path_lns: ortools.util.optional_boolean_pb2.OptionalBoolean.ValueType = ...,
-            use_tsp_lns: ortools.util.optional_boolean_pb2.OptionalBoolean.ValueType = ...,
-            use_inactive_lns: ortools.util.optional_boolean_pb2.OptionalBoolean.ValueType = ...,
-            use_global_cheapest_insertion_path_lns: ortools.util.optional_boolean_pb2.OptionalBoolean.ValueType = ...,
-            use_local_cheapest_insertion_path_lns: ortools.util.optional_boolean_pb2.OptionalBoolean.ValueType = ...,
-            use_relocate_path_global_cheapest_insertion_insert_unperformed: ortools.util.optional_boolean_pb2.OptionalBoolean.ValueType = ...,
-            use_global_cheapest_insertion_expensive_chain_lns: ortools.util.optional_boolean_pb2.OptionalBoolean.ValueType = ...,
-            use_local_cheapest_insertion_expensive_chain_lns: ortools.util.optional_boolean_pb2.OptionalBoolean.ValueType = ...,
-            use_global_cheapest_insertion_close_nodes_lns: ortools.util.optional_boolean_pb2.OptionalBoolean.ValueType = ...,
-            use_local_cheapest_insertion_close_nodes_lns: ortools.util.optional_boolean_pb2.OptionalBoolean.ValueType = ...,
+            use_relocate: _optional_boolean_pb2.OptionalBoolean.ValueType = ...,
+            use_relocate_pair: _optional_boolean_pb2.OptionalBoolean.ValueType = ...,
+            use_light_relocate_pair: _optional_boolean_pb2.OptionalBoolean.ValueType = ...,
+            use_relocate_neighbors: _optional_boolean_pb2.OptionalBoolean.ValueType = ...,
+            use_relocate_subtrip: _optional_boolean_pb2.OptionalBoolean.ValueType = ...,
+            use_exchange: _optional_boolean_pb2.OptionalBoolean.ValueType = ...,
+            use_exchange_pair: _optional_boolean_pb2.OptionalBoolean.ValueType = ...,
+            use_exchange_subtrip: _optional_boolean_pb2.OptionalBoolean.ValueType = ...,
+            use_cross: _optional_boolean_pb2.OptionalBoolean.ValueType = ...,
+            use_cross_exchange: _optional_boolean_pb2.OptionalBoolean.ValueType = ...,
+            use_relocate_expensive_chain: _optional_boolean_pb2.OptionalBoolean.ValueType = ...,
+            use_two_opt: _optional_boolean_pb2.OptionalBoolean.ValueType = ...,
+            use_or_opt: _optional_boolean_pb2.OptionalBoolean.ValueType = ...,
+            use_lin_kernighan: _optional_boolean_pb2.OptionalBoolean.ValueType = ...,
+            use_tsp_opt: _optional_boolean_pb2.OptionalBoolean.ValueType = ...,
+            use_make_active: _optional_boolean_pb2.OptionalBoolean.ValueType = ...,
+            use_relocate_and_make_active: _optional_boolean_pb2.OptionalBoolean.ValueType = ...,
+            use_exchange_and_make_active: _optional_boolean_pb2.OptionalBoolean.ValueType = ...,
+            use_exchange_path_start_ends_and_make_active: _optional_boolean_pb2.OptionalBoolean.ValueType = ...,
+            use_make_inactive: _optional_boolean_pb2.OptionalBoolean.ValueType = ...,
+            use_make_chain_inactive: _optional_boolean_pb2.OptionalBoolean.ValueType = ...,
+            use_swap_active: _optional_boolean_pb2.OptionalBoolean.ValueType = ...,
+            use_swap_active_chain: _optional_boolean_pb2.OptionalBoolean.ValueType = ...,
+            use_extended_swap_active: _optional_boolean_pb2.OptionalBoolean.ValueType = ...,
+            use_shortest_path_swap_active: _optional_boolean_pb2.OptionalBoolean.ValueType = ...,
+            use_shortest_path_two_opt: _optional_boolean_pb2.OptionalBoolean.ValueType = ...,
+            use_node_pair_swap_active: _optional_boolean_pb2.OptionalBoolean.ValueType = ...,
+            use_path_lns: _optional_boolean_pb2.OptionalBoolean.ValueType = ...,
+            use_full_path_lns: _optional_boolean_pb2.OptionalBoolean.ValueType = ...,
+            use_tsp_lns: _optional_boolean_pb2.OptionalBoolean.ValueType = ...,
+            use_inactive_lns: _optional_boolean_pb2.OptionalBoolean.ValueType = ...,
+            use_global_cheapest_insertion_path_lns: _optional_boolean_pb2.OptionalBoolean.ValueType = ...,
+            use_local_cheapest_insertion_path_lns: _optional_boolean_pb2.OptionalBoolean.ValueType = ...,
+            use_relocate_path_global_cheapest_insertion_insert_unperformed: _optional_boolean_pb2.OptionalBoolean.ValueType = ...,
+            use_global_cheapest_insertion_expensive_chain_lns: _optional_boolean_pb2.OptionalBoolean.ValueType = ...,
+            use_local_cheapest_insertion_expensive_chain_lns: _optional_boolean_pb2.OptionalBoolean.ValueType = ...,
+            use_global_cheapest_insertion_close_nodes_lns: _optional_boolean_pb2.OptionalBoolean.ValueType = ...,
+            use_local_cheapest_insertion_close_nodes_lns: _optional_boolean_pb2.OptionalBoolean.ValueType = ...,
         ) -> None: ...
-        def ClearField(self, field_name: typing_extensions.Literal["use_cross", b"use_cross", "use_cross_exchange", b"use_cross_exchange", "use_exchange", b"use_exchange", "use_exchange_pair", b"use_exchange_pair", "use_exchange_subtrip", b"use_exchange_subtrip", "use_extended_swap_active", b"use_extended_swap_active", "use_full_path_lns", b"use_full_path_lns", "use_global_cheapest_insertion_close_nodes_lns", b"use_global_cheapest_insertion_close_nodes_lns", "use_global_cheapest_insertion_expensive_chain_lns", b"use_global_cheapest_insertion_expensive_chain_lns", "use_global_cheapest_insertion_path_lns", b"use_global_cheapest_insertion_path_lns", "use_inactive_lns", b"use_inactive_lns", "use_light_relocate_pair", b"use_light_relocate_pair", "use_lin_kernighan", b"use_lin_kernighan", "use_local_cheapest_insertion_close_nodes_lns", b"use_local_cheapest_insertion_close_nodes_lns", "use_local_cheapest_insertion_expensive_chain_lns", b"use_local_cheapest_insertion_expensive_chain_lns", "use_local_cheapest_insertion_path_lns", b"use_local_cheapest_insertion_path_lns", "use_make_active", b"use_make_active", "use_make_chain_inactive", b"use_make_chain_inactive", "use_make_inactive", b"use_make_inactive", "use_node_pair_swap_active", b"use_node_pair_swap_active", "use_or_opt", b"use_or_opt", "use_path_lns", b"use_path_lns", "use_relocate", b"use_relocate", "use_relocate_and_make_active", b"use_relocate_and_make_active", "use_relocate_expensive_chain", b"use_relocate_expensive_chain", "use_relocate_neighbors", b"use_relocate_neighbors", "use_relocate_pair", b"use_relocate_pair", "use_relocate_path_global_cheapest_insertion_insert_unperformed", b"use_relocate_path_global_cheapest_insertion_insert_unperformed", "use_relocate_subtrip", b"use_relocate_subtrip", "use_shortest_path_swap_active", b"use_shortest_path_swap_active", "use_swap_active", b"use_swap_active", "use_tsp_lns", b"use_tsp_lns", "use_tsp_opt", b"use_tsp_opt", "use_two_opt", b"use_two_opt"]) -> None: ...
+        _ClearFieldArgType: _TypeAlias = _typing.Literal["use_cross", b"use_cross", "use_cross_exchange", b"use_cross_exchange", "use_exchange", b"use_exchange", "use_exchange_and_make_active", b"use_exchange_and_make_active", "use_exchange_pair", b"use_exchange_pair", "use_exchange_path_start_ends_and_make_active", b"use_exchange_path_start_ends_and_make_active", "use_exchange_subtrip", b"use_exchange_subtrip", "use_extended_swap_active", b"use_extended_swap_active", "use_full_path_lns", b"use_full_path_lns", "use_global_cheapest_insertion_close_nodes_lns", b"use_global_cheapest_insertion_close_nodes_lns", "use_global_cheapest_insertion_expensive_chain_lns", b"use_global_cheapest_insertion_expensive_chain_lns", "use_global_cheapest_insertion_path_lns", b"use_global_cheapest_insertion_path_lns", "use_inactive_lns", b"use_inactive_lns", "use_light_relocate_pair", b"use_light_relocate_pair", "use_lin_kernighan", b"use_lin_kernighan", "use_local_cheapest_insertion_close_nodes_lns", b"use_local_cheapest_insertion_close_nodes_lns", "use_local_cheapest_insertion_expensive_chain_lns", b"use_local_cheapest_insertion_expensive_chain_lns", "use_local_cheapest_insertion_path_lns", b"use_local_cheapest_insertion_path_lns", "use_make_active", b"use_make_active", "use_make_chain_inactive", b"use_make_chain_inactive", "use_make_inactive", b"use_make_inactive", "use_node_pair_swap_active", b"use_node_pair_swap_active", "use_or_opt", b"use_or_opt", "use_path_lns", b"use_path_lns", "use_relocate", b"use_relocate", "use_relocate_and_make_active", b"use_relocate_and_make_active", "use_relocate_expensive_chain", b"use_relocate_expensive_chain", "use_relocate_neighbors", b"use_relocate_neighbors", "use_relocate_pair", b"use_relocate_pair", "use_relocate_path_global_cheapest_insertion_insert_unperformed", b"use_relocate_path_global_cheapest_insertion_insert_unperformed", "use_relocate_subtrip", b"use_relocate_subtrip", "use_shortest_path_swap_active", b"use_shortest_path_swap_active", "use_shortest_path_two_opt", b"use_shortest_path_two_opt", "use_swap_active", b"use_swap_active", "use_swap_active_chain", b"use_swap_active_chain", "use_tsp_lns", b"use_tsp_lns", "use_tsp_opt", b"use_tsp_opt", "use_two_opt", b"use_two_opt"]  # noqa: Y015
+        def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-    @typing_extensions.final
-    class ImprovementSearchLimitParameters(google.protobuf.message.Message):
+    @_typing.final
+    class ImprovementSearchLimitParameters(_message.Message):
         """Parameters required for the improvement search limit."""
 
-        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+        DESCRIPTOR: _descriptor.Descriptor
 
-        IMPROVEMENT_RATE_COEFFICIENT_FIELD_NUMBER: builtins.int
-        IMPROVEMENT_RATE_SOLUTIONS_DISTANCE_FIELD_NUMBER: builtins.int
-        improvement_rate_coefficient: builtins.float
+        IMPROVEMENT_RATE_COEFFICIENT_FIELD_NUMBER: _builtins.int
+        IMPROVEMENT_RATE_SOLUTIONS_DISTANCE_FIELD_NUMBER: _builtins.int
+        improvement_rate_coefficient: _builtins.float
         """Parameter that regulates exchange rate between objective improvement and
         number of neighbors spent. The smaller the value, the sooner the limit
         stops the search. Must be positive.
         """
-        improvement_rate_solutions_distance: builtins.int
+        improvement_rate_solutions_distance: _builtins.int
         """Parameter that specifies the distance between improvements taken into
         consideration for calculating the improvement rate.
         Example: For 5 objective improvements = (10, 8, 6, 4, 2), and the
@@ -491,76 +590,85 @@ class RoutingSearchParameters(google.protobuf.message.Message):
         def __init__(
             self,
             *,
-            improvement_rate_coefficient: builtins.float = ...,
-            improvement_rate_solutions_distance: builtins.int = ...,
+            improvement_rate_coefficient: _builtins.float = ...,
+            improvement_rate_solutions_distance: _builtins.int = ...,
         ) -> None: ...
-        def ClearField(self, field_name: typing_extensions.Literal["improvement_rate_coefficient", b"improvement_rate_coefficient", "improvement_rate_solutions_distance", b"improvement_rate_solutions_distance"]) -> None: ...
+        _ClearFieldArgType: _TypeAlias = _typing.Literal["improvement_rate_coefficient", b"improvement_rate_coefficient", "improvement_rate_solutions_distance", b"improvement_rate_solutions_distance"]  # noqa: Y015
+        def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-    FIRST_SOLUTION_STRATEGY_FIELD_NUMBER: builtins.int
-    USE_UNFILTERED_FIRST_SOLUTION_STRATEGY_FIELD_NUMBER: builtins.int
-    SAVINGS_NEIGHBORS_RATIO_FIELD_NUMBER: builtins.int
-    SAVINGS_MAX_MEMORY_USAGE_BYTES_FIELD_NUMBER: builtins.int
-    SAVINGS_ADD_REVERSE_ARCS_FIELD_NUMBER: builtins.int
-    SAVINGS_ARC_COEFFICIENT_FIELD_NUMBER: builtins.int
-    SAVINGS_PARALLEL_ROUTES_FIELD_NUMBER: builtins.int
-    CHEAPEST_INSERTION_FARTHEST_SEEDS_RATIO_FIELD_NUMBER: builtins.int
-    CHEAPEST_INSERTION_FIRST_SOLUTION_NEIGHBORS_RATIO_FIELD_NUMBER: builtins.int
-    CHEAPEST_INSERTION_FIRST_SOLUTION_MIN_NEIGHBORS_FIELD_NUMBER: builtins.int
-    CHEAPEST_INSERTION_LS_OPERATOR_NEIGHBORS_RATIO_FIELD_NUMBER: builtins.int
-    CHEAPEST_INSERTION_LS_OPERATOR_MIN_NEIGHBORS_FIELD_NUMBER: builtins.int
-    CHEAPEST_INSERTION_FIRST_SOLUTION_USE_NEIGHBORS_RATIO_FOR_INITIALIZATION_FIELD_NUMBER: builtins.int
-    CHEAPEST_INSERTION_ADD_UNPERFORMED_ENTRIES_FIELD_NUMBER: builtins.int
-    LOCAL_CHEAPEST_INSERTION_PICKUP_DELIVERY_STRATEGY_FIELD_NUMBER: builtins.int
-    LOCAL_CHEAPEST_COST_INSERTION_PICKUP_DELIVERY_STRATEGY_FIELD_NUMBER: builtins.int
-    CHRISTOFIDES_USE_MINIMUM_MATCHING_FIELD_NUMBER: builtins.int
-    LOCAL_SEARCH_OPERATORS_FIELD_NUMBER: builtins.int
-    LS_OPERATOR_NEIGHBORS_RATIO_FIELD_NUMBER: builtins.int
-    LS_OPERATOR_MIN_NEIGHBORS_FIELD_NUMBER: builtins.int
-    USE_MULTI_ARMED_BANDIT_CONCATENATE_OPERATORS_FIELD_NUMBER: builtins.int
-    MULTI_ARMED_BANDIT_COMPOUND_OPERATOR_MEMORY_COEFFICIENT_FIELD_NUMBER: builtins.int
-    MULTI_ARMED_BANDIT_COMPOUND_OPERATOR_EXPLORATION_COEFFICIENT_FIELD_NUMBER: builtins.int
-    RELOCATE_EXPENSIVE_CHAIN_NUM_ARCS_TO_CONSIDER_FIELD_NUMBER: builtins.int
-    HEURISTIC_EXPENSIVE_CHAIN_LNS_NUM_ARCS_TO_CONSIDER_FIELD_NUMBER: builtins.int
-    HEURISTIC_CLOSE_NODES_LNS_NUM_NODES_FIELD_NUMBER: builtins.int
-    LOCAL_SEARCH_METAHEURISTIC_FIELD_NUMBER: builtins.int
-    GUIDED_LOCAL_SEARCH_LAMBDA_COEFFICIENT_FIELD_NUMBER: builtins.int
-    GUIDED_LOCAL_SEARCH_RESET_PENALTIES_ON_NEW_BEST_SOLUTION_FIELD_NUMBER: builtins.int
-    USE_DEPTH_FIRST_SEARCH_FIELD_NUMBER: builtins.int
-    USE_CP_FIELD_NUMBER: builtins.int
-    USE_CP_SAT_FIELD_NUMBER: builtins.int
-    USE_GENERALIZED_CP_SAT_FIELD_NUMBER: builtins.int
-    SAT_PARAMETERS_FIELD_NUMBER: builtins.int
-    REPORT_INTERMEDIATE_CP_SAT_SOLUTIONS_FIELD_NUMBER: builtins.int
-    FALLBACK_TO_CP_SAT_SIZE_THRESHOLD_FIELD_NUMBER: builtins.int
-    CONTINUOUS_SCHEDULING_SOLVER_FIELD_NUMBER: builtins.int
-    MIXED_INTEGER_SCHEDULING_SOLVER_FIELD_NUMBER: builtins.int
-    DISABLE_SCHEDULING_BEWARE_THIS_MAY_DEGRADE_PERFORMANCE_FIELD_NUMBER: builtins.int
-    OPTIMIZATION_STEP_FIELD_NUMBER: builtins.int
-    NUMBER_OF_SOLUTIONS_TO_COLLECT_FIELD_NUMBER: builtins.int
-    SOLUTION_LIMIT_FIELD_NUMBER: builtins.int
-    TIME_LIMIT_FIELD_NUMBER: builtins.int
-    LNS_TIME_LIMIT_FIELD_NUMBER: builtins.int
-    SECONDARY_LS_TIME_LIMIT_RATIO_FIELD_NUMBER: builtins.int
-    IMPROVEMENT_LIMIT_PARAMETERS_FIELD_NUMBER: builtins.int
-    USE_FULL_PROPAGATION_FIELD_NUMBER: builtins.int
-    LOG_SEARCH_FIELD_NUMBER: builtins.int
-    LOG_COST_SCALING_FACTOR_FIELD_NUMBER: builtins.int
-    LOG_COST_OFFSET_FIELD_NUMBER: builtins.int
-    LOG_TAG_FIELD_NUMBER: builtins.int
-    first_solution_strategy: ortools.constraint_solver.routing_enums_pb2.FirstSolutionStrategy.Value.ValueType
+    FIRST_SOLUTION_STRATEGY_FIELD_NUMBER: _builtins.int
+    USE_UNFILTERED_FIRST_SOLUTION_STRATEGY_FIELD_NUMBER: _builtins.int
+    SAVINGS_NEIGHBORS_RATIO_FIELD_NUMBER: _builtins.int
+    SAVINGS_MAX_MEMORY_USAGE_BYTES_FIELD_NUMBER: _builtins.int
+    SAVINGS_ADD_REVERSE_ARCS_FIELD_NUMBER: _builtins.int
+    SAVINGS_ARC_COEFFICIENT_FIELD_NUMBER: _builtins.int
+    CHEAPEST_INSERTION_FARTHEST_SEEDS_RATIO_FIELD_NUMBER: _builtins.int
+    CHEAPEST_INSERTION_FIRST_SOLUTION_NEIGHBORS_RATIO_FIELD_NUMBER: _builtins.int
+    CHEAPEST_INSERTION_FIRST_SOLUTION_MIN_NEIGHBORS_FIELD_NUMBER: _builtins.int
+    CHEAPEST_INSERTION_LS_OPERATOR_NEIGHBORS_RATIO_FIELD_NUMBER: _builtins.int
+    CHEAPEST_INSERTION_LS_OPERATOR_MIN_NEIGHBORS_FIELD_NUMBER: _builtins.int
+    CHEAPEST_INSERTION_FIRST_SOLUTION_USE_NEIGHBORS_RATIO_FOR_INITIALIZATION_FIELD_NUMBER: _builtins.int
+    CHEAPEST_INSERTION_ADD_UNPERFORMED_ENTRIES_FIELD_NUMBER: _builtins.int
+    LOCAL_CHEAPEST_INSERTION_PICKUP_DELIVERY_STRATEGY_FIELD_NUMBER: _builtins.int
+    LOCAL_CHEAPEST_COST_INSERTION_PICKUP_DELIVERY_STRATEGY_FIELD_NUMBER: _builtins.int
+    LOCAL_CHEAPEST_INSERTION_SORTING_PROPERTIES_FIELD_NUMBER: _builtins.int
+    CHRISTOFIDES_USE_MINIMUM_MATCHING_FIELD_NUMBER: _builtins.int
+    FIRST_SOLUTION_OPTIMIZATION_PERIOD_FIELD_NUMBER: _builtins.int
+    LOCAL_SEARCH_OPERATORS_FIELD_NUMBER: _builtins.int
+    LS_OPERATOR_NEIGHBORS_RATIO_FIELD_NUMBER: _builtins.int
+    LS_OPERATOR_MIN_NEIGHBORS_FIELD_NUMBER: _builtins.int
+    USE_MULTI_ARMED_BANDIT_CONCATENATE_OPERATORS_FIELD_NUMBER: _builtins.int
+    MULTI_ARMED_BANDIT_COMPOUND_OPERATOR_MEMORY_COEFFICIENT_FIELD_NUMBER: _builtins.int
+    MULTI_ARMED_BANDIT_COMPOUND_OPERATOR_EXPLORATION_COEFFICIENT_FIELD_NUMBER: _builtins.int
+    MAX_SWAP_ACTIVE_CHAIN_SIZE_FIELD_NUMBER: _builtins.int
+    RELOCATE_EXPENSIVE_CHAIN_NUM_ARCS_TO_CONSIDER_FIELD_NUMBER: _builtins.int
+    HEURISTIC_EXPENSIVE_CHAIN_LNS_NUM_ARCS_TO_CONSIDER_FIELD_NUMBER: _builtins.int
+    HEURISTIC_CLOSE_NODES_LNS_NUM_NODES_FIELD_NUMBER: _builtins.int
+    LOCAL_SEARCH_METAHEURISTIC_FIELD_NUMBER: _builtins.int
+    LOCAL_SEARCH_METAHEURISTICS_FIELD_NUMBER: _builtins.int
+    NUM_MAX_LOCAL_OPTIMA_BEFORE_METAHEURISTIC_SWITCH_FIELD_NUMBER: _builtins.int
+    GUIDED_LOCAL_SEARCH_LAMBDA_COEFFICIENT_FIELD_NUMBER: _builtins.int
+    GUIDED_LOCAL_SEARCH_RESET_PENALTIES_ON_NEW_BEST_SOLUTION_FIELD_NUMBER: _builtins.int
+    GUIDED_LOCAL_SEARCH_PENALIZE_WITH_VEHICLE_CLASSES_FIELD_NUMBER: _builtins.int
+    USE_GUIDED_LOCAL_SEARCH_PENALTIES_IN_LOCAL_SEARCH_OPERATORS_FIELD_NUMBER: _builtins.int
+    USE_DEPTH_FIRST_SEARCH_FIELD_NUMBER: _builtins.int
+    USE_CP_FIELD_NUMBER: _builtins.int
+    USE_CP_SAT_FIELD_NUMBER: _builtins.int
+    USE_GENERALIZED_CP_SAT_FIELD_NUMBER: _builtins.int
+    SAT_PARAMETERS_FIELD_NUMBER: _builtins.int
+    REPORT_INTERMEDIATE_CP_SAT_SOLUTIONS_FIELD_NUMBER: _builtins.int
+    FALLBACK_TO_CP_SAT_SIZE_THRESHOLD_FIELD_NUMBER: _builtins.int
+    CONTINUOUS_SCHEDULING_SOLVER_FIELD_NUMBER: _builtins.int
+    MIXED_INTEGER_SCHEDULING_SOLVER_FIELD_NUMBER: _builtins.int
+    DISABLE_SCHEDULING_BEWARE_THIS_MAY_DEGRADE_PERFORMANCE_FIELD_NUMBER: _builtins.int
+    OPTIMIZATION_STEP_FIELD_NUMBER: _builtins.int
+    NUMBER_OF_SOLUTIONS_TO_COLLECT_FIELD_NUMBER: _builtins.int
+    SOLUTION_LIMIT_FIELD_NUMBER: _builtins.int
+    TIME_LIMIT_FIELD_NUMBER: _builtins.int
+    LNS_TIME_LIMIT_FIELD_NUMBER: _builtins.int
+    SECONDARY_LS_TIME_LIMIT_RATIO_FIELD_NUMBER: _builtins.int
+    IMPROVEMENT_LIMIT_PARAMETERS_FIELD_NUMBER: _builtins.int
+    USE_FULL_PROPAGATION_FIELD_NUMBER: _builtins.int
+    LOG_SEARCH_FIELD_NUMBER: _builtins.int
+    LOG_COST_SCALING_FACTOR_FIELD_NUMBER: _builtins.int
+    LOG_COST_OFFSET_FIELD_NUMBER: _builtins.int
+    LOG_TAG_FIELD_NUMBER: _builtins.int
+    USE_ITERATED_LOCAL_SEARCH_FIELD_NUMBER: _builtins.int
+    ITERATED_LOCAL_SEARCH_PARAMETERS_FIELD_NUMBER: _builtins.int
+    first_solution_strategy: _routing_enums_pb2.FirstSolutionStrategy.Value.ValueType
     """First solution strategies, used as starting point of local search."""
-    use_unfiltered_first_solution_strategy: builtins.bool
+    use_unfiltered_first_solution_strategy: _builtins.bool
     """--- Advanced first solutions strategy settings ---
     Don't touch these unless you know what you are doing.
 
     Use filtered version of first solution strategy if available.
     """
-    savings_neighbors_ratio: builtins.float
+    savings_neighbors_ratio: _builtins.float
     """Parameters specific to the Savings first solution heuristic.
     Ratio (in ]0, 1]) of neighbors to consider for each node when constructing
     the savings. If unspecified, its value is considered to be 1.0.
     """
-    savings_max_memory_usage_bytes: builtins.float
+    savings_max_memory_usage_bytes: _builtins.float
     """The number of neighbors considered for each node in the Savings heuristic
     is chosen so that the space used to store the savings doesn't exceed
     savings_max_memory_usage_bytes, which must be in ]0, 1e10].
@@ -568,25 +676,23 @@ class RoutingSearchParameters(google.protobuf.message.Message):
     are specified, the number of neighbors considered for each node will be the
     minimum of the two numbers determined by these parameters.
     """
-    savings_add_reverse_arcs: builtins.bool
+    savings_add_reverse_arcs: _builtins.bool
     """Add savings related to reverse arcs when finding the nearest neighbors
     of the nodes.
     """
-    savings_arc_coefficient: builtins.float
+    savings_arc_coefficient: _builtins.float
     """Coefficient of the cost of the arc for which the saving value is being
     computed:
     Saving(a-->b) = Cost(a-->end) + Cost(start-->b)
                     - savings_arc_coefficient * Cost(a-->b)
     This parameter must be greater than 0, and its default value is 1.
     """
-    savings_parallel_routes: builtins.bool
-    """When true, the routes are built in parallel, sequentially otherwise."""
-    cheapest_insertion_farthest_seeds_ratio: builtins.float
+    cheapest_insertion_farthest_seeds_ratio: _builtins.float
     """Ratio (between 0 and 1) of available vehicles in the model on which
     farthest nodes of the model are inserted as seeds in the
     GlobalCheapestInsertion first solution heuristic.
     """
-    cheapest_insertion_first_solution_neighbors_ratio: builtins.float
+    cheapest_insertion_first_solution_neighbors_ratio: _builtins.float
     """Ratio (in ]0, 1]) of closest non start/end nodes to consider as neighbors
     for each node when creating new insertions in the parallel/sequential
     cheapest insertion heuristic.
@@ -603,59 +709,68 @@ class RoutingSearchParameters(google.protobuf.message.Message):
     Neighbors ratio and minimum number of neighbors for the first solution
     heuristic.
     """
-    cheapest_insertion_first_solution_min_neighbors: builtins.int
-    cheapest_insertion_ls_operator_neighbors_ratio: builtins.float
+    cheapest_insertion_first_solution_min_neighbors: _builtins.int
+    cheapest_insertion_ls_operator_neighbors_ratio: _builtins.float
     """Neighbors ratio and minimum number of neighbors for the heuristic when used
     in a local search operator (see
     local_search_operators.use_global_cheapest_insertion_path_lns and
     local_search_operators.use_global_cheapest_insertion_chain_lns below).
     """
-    cheapest_insertion_ls_operator_min_neighbors: builtins.int
-    cheapest_insertion_first_solution_use_neighbors_ratio_for_initialization: builtins.bool
+    cheapest_insertion_ls_operator_min_neighbors: _builtins.int
+    cheapest_insertion_first_solution_use_neighbors_ratio_for_initialization: _builtins.bool
     """Whether or not to only consider closest neighbors when initializing the
     assignment for the first solution.
     """
-    cheapest_insertion_add_unperformed_entries: builtins.bool
+    cheapest_insertion_add_unperformed_entries: _builtins.bool
     """Whether or not to consider entries making the nodes/pairs unperformed in
     the GlobalCheapestInsertion heuristic.
     """
-    local_cheapest_insertion_pickup_delivery_strategy: global___RoutingSearchParameters.PairInsertionStrategy.ValueType
+    local_cheapest_insertion_pickup_delivery_strategy: Global___RoutingSearchParameters.PairInsertionStrategy.ValueType
     """Choice of insertion strategy for pickup/delivery pairs, used in local
     cheapest insertion, both first solution heuristic and LNS.
     """
-    local_cheapest_cost_insertion_pickup_delivery_strategy: global___RoutingSearchParameters.PairInsertionStrategy.ValueType
+    local_cheapest_cost_insertion_pickup_delivery_strategy: Global___RoutingSearchParameters.PairInsertionStrategy.ValueType
     """Choice of insertion strategy for pickup/delivery pairs, used in local
     cheapest cost insertion, both first solution heuristic and LNS.
     """
-    christofides_use_minimum_matching: builtins.bool
+    christofides_use_minimum_matching: _builtins.bool
     """If true use minimum matching instead of minimal matching in the
     Christofides algorithm.
     """
-    @property
-    def local_search_operators(self) -> global___RoutingSearchParameters.LocalSearchNeighborhoodOperators: ...
-    ls_operator_neighbors_ratio: builtins.float
+    first_solution_optimization_period: _builtins.int
+    """If non zero, a period p indicates that every p node insertions or additions
+    to a path, an optimization of the current partial solution will be
+    performed. As of 12/2023:
+    - this requires that a secondary routing model has been passed to the main
+      one,
+    - this is only supported by LOCAL_CHEAPEST_INSERTION and
+    LOCAL_CHEAPEST_COST_INSERTION.
+    """
+    ls_operator_neighbors_ratio: _builtins.float
     """Neighbors ratio and minimum number of neighbors considered in local
     search operators (see cheapest_insertion_first_solution_neighbors_ratio
     and cheapest_insertion_first_solution_min_neighbors for more information).
     """
-    ls_operator_min_neighbors: builtins.int
-    use_multi_armed_bandit_concatenate_operators: builtins.bool
+    ls_operator_min_neighbors: _builtins.int
+    use_multi_armed_bandit_concatenate_operators: _builtins.bool
     """If true, the solver will use multi-armed bandit concatenate operators. It
     dynamically chooses the next neighbor operator in order to get the best
     objective improvement.
     """
-    multi_armed_bandit_compound_operator_memory_coefficient: builtins.float
+    multi_armed_bandit_compound_operator_memory_coefficient: _builtins.float
     """Memory coefficient related to the multi-armed bandit compound operator.
     Sets how much the objective improvement of previous accepted neighbors
     influence the current average improvement.
     This parameter should be between 0 and 1.
     """
-    multi_armed_bandit_compound_operator_exploration_coefficient: builtins.float
+    multi_armed_bandit_compound_operator_exploration_coefficient: _builtins.float
     """Positive parameter defining the exploration coefficient of the multi-armed
     bandit compound operator. Sets how often we explore rarely used and
     unsuccessful in the past operators
     """
-    relocate_expensive_chain_num_arcs_to_consider: builtins.int
+    max_swap_active_chain_size: _builtins.int
+    """Maximum size of the chain to make inactive in SwapActiveChainOperator."""
+    relocate_expensive_chain_num_arcs_to_consider: _builtins.int
     """Number of expensive arcs to consider cutting in the RelocateExpensiveChain
     neighborhood operator (see
     LocalSearchNeighborhoodOperators.use_relocate_expensive_chain()).
@@ -664,91 +779,88 @@ class RoutingSearchParameters(google.protobuf.message.Message):
     relocate_expensive_chain_num_arcs_to_consider = K is around
     K*(K-1)/2 * number_of_routes * number_of_nodes.
     """
-    heuristic_expensive_chain_lns_num_arcs_to_consider: builtins.int
+    heuristic_expensive_chain_lns_num_arcs_to_consider: _builtins.int
     """Number of expensive arcs to consider cutting in the
     FilteredHeuristicExpensiveChainLNSOperator operator.
     """
-    heuristic_close_nodes_lns_num_nodes: builtins.int
+    heuristic_close_nodes_lns_num_nodes: _builtins.int
     """Number of closest nodes to consider for each node during the destruction
     phase of the FilteredHeuristicCloseNodesLNSOperator.
     """
-    local_search_metaheuristic: ortools.constraint_solver.routing_enums_pb2.LocalSearchMetaheuristic.Value.ValueType
+    local_search_metaheuristic: _routing_enums_pb2.LocalSearchMetaheuristic.Value.ValueType
     """Local search metaheuristics used to guide the search."""
-    guided_local_search_lambda_coefficient: builtins.float
+    num_max_local_optima_before_metaheuristic_switch: _builtins.int
+    guided_local_search_lambda_coefficient: _builtins.float
     """These are advanced settings which should not be modified unless you know
     what you are doing.
     Lambda coefficient used to penalize arc costs when GUIDED_LOCAL_SEARCH is
     used. Must be positive.
     """
-    guided_local_search_reset_penalties_on_new_best_solution: builtins.bool
+    guided_local_search_reset_penalties_on_new_best_solution: _builtins.bool
     """Whether to reset penalties when a new best solution is found. The effect is
     that a greedy descent is started before the next penalization phase.
     """
-    use_depth_first_search: builtins.bool
+    guided_local_search_penalize_with_vehicle_classes: _builtins.bool
+    """When an arc leaving a vehicle start or arriving at a vehicle end is
+    penalized, this field controls whether to penalize all other equivalent
+    arcs with starts or ends in the same vehicle class.
+    """
+    use_guided_local_search_penalties_in_local_search_operators: _builtins.bool
+    """Whether to consider arc penalties in cost functions used in local search
+    operators using arc costs.
+    """
+    use_depth_first_search: _builtins.bool
     """--- Search control ---
 
     If true, the solver should use depth-first search rather than local search
     to solve the problem.
     """
-    use_cp: ortools.util.optional_boolean_pb2.OptionalBoolean.ValueType
+    use_cp: _optional_boolean_pb2.OptionalBoolean.ValueType
     """If true, use the CP solver to find a solution. Either local or depth-first
     search will be used depending on the value of use_depth_first_search. Will
     be run before the CP-SAT solver (cf. use_cp_sat).
     """
-    use_cp_sat: ortools.util.optional_boolean_pb2.OptionalBoolean.ValueType
+    use_cp_sat: _optional_boolean_pb2.OptionalBoolean.ValueType
     """If true, use the CP-SAT solver to find a solution. If use_cp is also true,
     the CP-SAT solver will be run after the CP solver if there is time
     remaining and will use the CP solution as a hint for the CP-SAT search.
     As of 5/2019, only TSP models can be solved.
     """
-    use_generalized_cp_sat: ortools.util.optional_boolean_pb2.OptionalBoolean.ValueType
+    use_generalized_cp_sat: _optional_boolean_pb2.OptionalBoolean.ValueType
     """If true, use the CP-SAT solver to find a solution on generalized routing
     model. If use_cp is also true, the CP-SAT solver will be run after the CP
     solver if there is time remaining and will use the CP solution as a hint
     for the CP-SAT search.
     """
-    @property
-    def sat_parameters(self) -> ortools.sat.sat_parameters_pb2.SatParameters:
-        """If use_cp_sat or use_generalized_cp_sat is true, contains the SAT algorithm
-        parameters which will be used.
-        """
-    report_intermediate_cp_sat_solutions: builtins.bool
+    report_intermediate_cp_sat_solutions: _builtins.bool
     """If use_cp_sat or use_generalized_cp_sat is true, will report intermediate
     solutions found by CP-SAT to solution listeners.
     """
-    fallback_to_cp_sat_size_threshold: builtins.int
+    fallback_to_cp_sat_size_threshold: _builtins.int
     """If model.Size() is less than the threshold and that no solution has been
     found, attempt a pass with CP-SAT.
     """
-    continuous_scheduling_solver: global___RoutingSearchParameters.SchedulingSolver.ValueType
-    mixed_integer_scheduling_solver: global___RoutingSearchParameters.SchedulingSolver.ValueType
-    disable_scheduling_beware_this_may_degrade_performance: builtins.bool
+    continuous_scheduling_solver: Global___RoutingSearchParameters.SchedulingSolver.ValueType
+    mixed_integer_scheduling_solver: Global___RoutingSearchParameters.SchedulingSolver.ValueType
+    disable_scheduling_beware_this_may_degrade_performance: _builtins.bool
     """Setting this to true completely disables the LP and MIP scheduling in the
     solver. This overrides the 2 SchedulingSolver options above.
     """
-    optimization_step: builtins.float
+    optimization_step: _builtins.float
     """Minimum step by which the solution must be improved in local search. 0
     means "unspecified". If this value is fractional, it will get rounded to
     the nearest integer.
     """
-    number_of_solutions_to_collect: builtins.int
+    number_of_solutions_to_collect: _builtins.int
     """Number of solutions to collect during the search. Corresponds to the best
     solutions found during the search. 0 means "unspecified".
     """
-    solution_limit: builtins.int
+    solution_limit: _builtins.int
     """-- Search limits --
     Limit to the number of solutions generated during the search. 0 means
     "unspecified".
     """
-    @property
-    def time_limit(self) -> google.protobuf.duration_pb2.Duration:
-        """Limit to the time spent in the search."""
-    @property
-    def lns_time_limit(self) -> google.protobuf.duration_pb2.Duration:
-        """Limit to the time spent in the completion search for each local search
-        neighbor.
-        """
-    secondary_ls_time_limit_ratio: builtins.float
+    secondary_ls_time_limit_ratio: _builtins.float
     """Ratio of the overall time limit spent in a secondary LS phase with only
     intra-route and insertion operators, meant to "cleanup" the current
     solution before stopping the search.
@@ -756,12 +868,7 @@ class RoutingSearchParameters(google.protobuf.message.Message):
     the max time allocated for this second phase (e.g.
     Duration max_secondary_ls_time_limit).
     """
-    @property
-    def improvement_limit_parameters(self) -> global___RoutingSearchParameters.ImprovementSearchLimitParameters:
-        """The improvement search limit is added to the solver if the following
-        parameters are set.
-        """
-    use_full_propagation: builtins.bool
+    use_full_propagation: _builtins.bool
     """--- Propagation control ---
     These are advanced settings which should not be modified unless you know
     what you are doing.
@@ -773,7 +880,7 @@ class RoutingSearchParameters(google.protobuf.message.Message):
     Changing this setting to true will slow down the search in most cases and
     increase memory consumption in all cases.
     """
-    log_search: builtins.bool
+    log_search: _builtins.bool
     """--- Miscellaneous ---
     Some of these are advanced settings which should not be modified unless you
     know what you are doing.
@@ -788,106 +895,171 @@ class RoutingSearchParameters(google.protobuf.message.Message):
     search neighbors accepted, the total memory used and the percentage of the
     search done.
     """
-    log_cost_scaling_factor: builtins.float
+    log_cost_scaling_factor: _builtins.float
     """In logs, cost values will be scaled and offset by the given values in the
     following way: log_cost_scaling_factor * (cost + log_cost_offset)
     """
-    log_cost_offset: builtins.float
-    log_tag: builtins.str
+    log_cost_offset: _builtins.float
+    log_tag: _builtins.str
     """In logs, this tag will be appended to each line corresponding to a new
     solution. Useful to sort out logs when several solves are run in parallel.
     """
+    use_iterated_local_search: _builtins.bool
+    """Whether the solver should use an Iterated Local Search approach to solve
+    the problem.
+    """
+    @_builtins.property
+    def local_cheapest_insertion_sorting_properties(self) -> _containers.RepeatedScalarFieldContainer[Global___RoutingSearchParameters.InsertionSortingProperty.ValueType]:
+        """The properties used to sort insertion entries in the local cheapest
+        insertion heuristic, in *decreasing* order of priority. The properties
+        listed here are applied hierarchically, from highest to lowest priority.
+        When no properties are provided
+               (SORTING_PROPERTY_ALLOWED_VEHICLES, SORTING_PROPERTY_PENALTY)
+        is used by default.
+        """
+
+    @_builtins.property
+    def local_search_operators(self) -> Global___RoutingSearchParameters.LocalSearchNeighborhoodOperators: ...
+    @_builtins.property
+    def local_search_metaheuristics(self) -> _containers.RepeatedScalarFieldContainer[_routing_enums_pb2.LocalSearchMetaheuristic.Value.ValueType]:
+        """Local search metaheuristics alternatively used to guide the search. Every
+        num_max_local_optima_before_metaheuristic_switch local minima found by a
+        metaheurisitic, the solver will switch to the next metaheuristic. Cannot be
+        defined if local_search_metaheuristic is different from UNSET or AUTOMATIC.
+        """
+
+    @_builtins.property
+    def sat_parameters(self) -> _sat_parameters_pb2.SatParameters:
+        """If use_cp_sat or use_generalized_cp_sat is true, contains the SAT algorithm
+        parameters which will be used.
+        """
+
+    @_builtins.property
+    def time_limit(self) -> _duration_pb2.Duration:
+        """Limit to the time spent in the search."""
+
+    @_builtins.property
+    def lns_time_limit(self) -> _duration_pb2.Duration:
+        """Limit to the time spent in the completion search for each local search
+        neighbor.
+        """
+
+    @_builtins.property
+    def improvement_limit_parameters(self) -> Global___RoutingSearchParameters.ImprovementSearchLimitParameters:
+        """The improvement search limit is added to the solver if the following
+        parameters are set.
+        """
+
+    @_builtins.property
+    def iterated_local_search_parameters(self) -> _routing_ils_pb2.IteratedLocalSearchParameters:
+        """Iterated Local Search parameters."""
+
     def __init__(
         self,
         *,
-        first_solution_strategy: ortools.constraint_solver.routing_enums_pb2.FirstSolutionStrategy.Value.ValueType = ...,
-        use_unfiltered_first_solution_strategy: builtins.bool = ...,
-        savings_neighbors_ratio: builtins.float = ...,
-        savings_max_memory_usage_bytes: builtins.float = ...,
-        savings_add_reverse_arcs: builtins.bool = ...,
-        savings_arc_coefficient: builtins.float = ...,
-        savings_parallel_routes: builtins.bool = ...,
-        cheapest_insertion_farthest_seeds_ratio: builtins.float = ...,
-        cheapest_insertion_first_solution_neighbors_ratio: builtins.float = ...,
-        cheapest_insertion_first_solution_min_neighbors: builtins.int = ...,
-        cheapest_insertion_ls_operator_neighbors_ratio: builtins.float = ...,
-        cheapest_insertion_ls_operator_min_neighbors: builtins.int = ...,
-        cheapest_insertion_first_solution_use_neighbors_ratio_for_initialization: builtins.bool = ...,
-        cheapest_insertion_add_unperformed_entries: builtins.bool = ...,
-        local_cheapest_insertion_pickup_delivery_strategy: global___RoutingSearchParameters.PairInsertionStrategy.ValueType = ...,
-        local_cheapest_cost_insertion_pickup_delivery_strategy: global___RoutingSearchParameters.PairInsertionStrategy.ValueType = ...,
-        christofides_use_minimum_matching: builtins.bool = ...,
-        local_search_operators: global___RoutingSearchParameters.LocalSearchNeighborhoodOperators | None = ...,
-        ls_operator_neighbors_ratio: builtins.float = ...,
-        ls_operator_min_neighbors: builtins.int = ...,
-        use_multi_armed_bandit_concatenate_operators: builtins.bool = ...,
-        multi_armed_bandit_compound_operator_memory_coefficient: builtins.float = ...,
-        multi_armed_bandit_compound_operator_exploration_coefficient: builtins.float = ...,
-        relocate_expensive_chain_num_arcs_to_consider: builtins.int = ...,
-        heuristic_expensive_chain_lns_num_arcs_to_consider: builtins.int = ...,
-        heuristic_close_nodes_lns_num_nodes: builtins.int = ...,
-        local_search_metaheuristic: ortools.constraint_solver.routing_enums_pb2.LocalSearchMetaheuristic.Value.ValueType = ...,
-        guided_local_search_lambda_coefficient: builtins.float = ...,
-        guided_local_search_reset_penalties_on_new_best_solution: builtins.bool = ...,
-        use_depth_first_search: builtins.bool = ...,
-        use_cp: ortools.util.optional_boolean_pb2.OptionalBoolean.ValueType = ...,
-        use_cp_sat: ortools.util.optional_boolean_pb2.OptionalBoolean.ValueType = ...,
-        use_generalized_cp_sat: ortools.util.optional_boolean_pb2.OptionalBoolean.ValueType = ...,
-        sat_parameters: ortools.sat.sat_parameters_pb2.SatParameters | None = ...,
-        report_intermediate_cp_sat_solutions: builtins.bool = ...,
-        fallback_to_cp_sat_size_threshold: builtins.int = ...,
-        continuous_scheduling_solver: global___RoutingSearchParameters.SchedulingSolver.ValueType = ...,
-        mixed_integer_scheduling_solver: global___RoutingSearchParameters.SchedulingSolver.ValueType = ...,
-        disable_scheduling_beware_this_may_degrade_performance: builtins.bool | None = ...,
-        optimization_step: builtins.float = ...,
-        number_of_solutions_to_collect: builtins.int = ...,
-        solution_limit: builtins.int = ...,
-        time_limit: google.protobuf.duration_pb2.Duration | None = ...,
-        lns_time_limit: google.protobuf.duration_pb2.Duration | None = ...,
-        secondary_ls_time_limit_ratio: builtins.float = ...,
-        improvement_limit_parameters: global___RoutingSearchParameters.ImprovementSearchLimitParameters | None = ...,
-        use_full_propagation: builtins.bool = ...,
-        log_search: builtins.bool = ...,
-        log_cost_scaling_factor: builtins.float = ...,
-        log_cost_offset: builtins.float = ...,
-        log_tag: builtins.str = ...,
+        first_solution_strategy: _routing_enums_pb2.FirstSolutionStrategy.Value.ValueType = ...,
+        use_unfiltered_first_solution_strategy: _builtins.bool = ...,
+        savings_neighbors_ratio: _builtins.float = ...,
+        savings_max_memory_usage_bytes: _builtins.float = ...,
+        savings_add_reverse_arcs: _builtins.bool = ...,
+        savings_arc_coefficient: _builtins.float = ...,
+        cheapest_insertion_farthest_seeds_ratio: _builtins.float = ...,
+        cheapest_insertion_first_solution_neighbors_ratio: _builtins.float = ...,
+        cheapest_insertion_first_solution_min_neighbors: _builtins.int = ...,
+        cheapest_insertion_ls_operator_neighbors_ratio: _builtins.float = ...,
+        cheapest_insertion_ls_operator_min_neighbors: _builtins.int = ...,
+        cheapest_insertion_first_solution_use_neighbors_ratio_for_initialization: _builtins.bool = ...,
+        cheapest_insertion_add_unperformed_entries: _builtins.bool = ...,
+        local_cheapest_insertion_pickup_delivery_strategy: Global___RoutingSearchParameters.PairInsertionStrategy.ValueType = ...,
+        local_cheapest_cost_insertion_pickup_delivery_strategy: Global___RoutingSearchParameters.PairInsertionStrategy.ValueType = ...,
+        local_cheapest_insertion_sorting_properties: _abc.Iterable[Global___RoutingSearchParameters.InsertionSortingProperty.ValueType] | None = ...,
+        christofides_use_minimum_matching: _builtins.bool = ...,
+        first_solution_optimization_period: _builtins.int = ...,
+        local_search_operators: Global___RoutingSearchParameters.LocalSearchNeighborhoodOperators | None = ...,
+        ls_operator_neighbors_ratio: _builtins.float = ...,
+        ls_operator_min_neighbors: _builtins.int = ...,
+        use_multi_armed_bandit_concatenate_operators: _builtins.bool = ...,
+        multi_armed_bandit_compound_operator_memory_coefficient: _builtins.float = ...,
+        multi_armed_bandit_compound_operator_exploration_coefficient: _builtins.float = ...,
+        max_swap_active_chain_size: _builtins.int = ...,
+        relocate_expensive_chain_num_arcs_to_consider: _builtins.int = ...,
+        heuristic_expensive_chain_lns_num_arcs_to_consider: _builtins.int = ...,
+        heuristic_close_nodes_lns_num_nodes: _builtins.int = ...,
+        local_search_metaheuristic: _routing_enums_pb2.LocalSearchMetaheuristic.Value.ValueType = ...,
+        local_search_metaheuristics: _abc.Iterable[_routing_enums_pb2.LocalSearchMetaheuristic.Value.ValueType] | None = ...,
+        num_max_local_optima_before_metaheuristic_switch: _builtins.int = ...,
+        guided_local_search_lambda_coefficient: _builtins.float = ...,
+        guided_local_search_reset_penalties_on_new_best_solution: _builtins.bool = ...,
+        guided_local_search_penalize_with_vehicle_classes: _builtins.bool = ...,
+        use_guided_local_search_penalties_in_local_search_operators: _builtins.bool = ...,
+        use_depth_first_search: _builtins.bool = ...,
+        use_cp: _optional_boolean_pb2.OptionalBoolean.ValueType = ...,
+        use_cp_sat: _optional_boolean_pb2.OptionalBoolean.ValueType = ...,
+        use_generalized_cp_sat: _optional_boolean_pb2.OptionalBoolean.ValueType = ...,
+        sat_parameters: _sat_parameters_pb2.SatParameters | None = ...,
+        report_intermediate_cp_sat_solutions: _builtins.bool = ...,
+        fallback_to_cp_sat_size_threshold: _builtins.int = ...,
+        continuous_scheduling_solver: Global___RoutingSearchParameters.SchedulingSolver.ValueType = ...,
+        mixed_integer_scheduling_solver: Global___RoutingSearchParameters.SchedulingSolver.ValueType = ...,
+        disable_scheduling_beware_this_may_degrade_performance: _builtins.bool | None = ...,
+        optimization_step: _builtins.float = ...,
+        number_of_solutions_to_collect: _builtins.int = ...,
+        solution_limit: _builtins.int = ...,
+        time_limit: _duration_pb2.Duration | None = ...,
+        lns_time_limit: _duration_pb2.Duration | None = ...,
+        secondary_ls_time_limit_ratio: _builtins.float = ...,
+        improvement_limit_parameters: Global___RoutingSearchParameters.ImprovementSearchLimitParameters | None = ...,
+        use_full_propagation: _builtins.bool = ...,
+        log_search: _builtins.bool = ...,
+        log_cost_scaling_factor: _builtins.float = ...,
+        log_cost_offset: _builtins.float = ...,
+        log_tag: _builtins.str = ...,
+        use_iterated_local_search: _builtins.bool = ...,
+        iterated_local_search_parameters: _routing_ils_pb2.IteratedLocalSearchParameters | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["_disable_scheduling_beware_this_may_degrade_performance", b"_disable_scheduling_beware_this_may_degrade_performance", "disable_scheduling_beware_this_may_degrade_performance", b"disable_scheduling_beware_this_may_degrade_performance", "improvement_limit_parameters", b"improvement_limit_parameters", "lns_time_limit", b"lns_time_limit", "local_search_operators", b"local_search_operators", "sat_parameters", b"sat_parameters", "time_limit", b"time_limit"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["_disable_scheduling_beware_this_may_degrade_performance", b"_disable_scheduling_beware_this_may_degrade_performance", "cheapest_insertion_add_unperformed_entries", b"cheapest_insertion_add_unperformed_entries", "cheapest_insertion_farthest_seeds_ratio", b"cheapest_insertion_farthest_seeds_ratio", "cheapest_insertion_first_solution_min_neighbors", b"cheapest_insertion_first_solution_min_neighbors", "cheapest_insertion_first_solution_neighbors_ratio", b"cheapest_insertion_first_solution_neighbors_ratio", "cheapest_insertion_first_solution_use_neighbors_ratio_for_initialization", b"cheapest_insertion_first_solution_use_neighbors_ratio_for_initialization", "cheapest_insertion_ls_operator_min_neighbors", b"cheapest_insertion_ls_operator_min_neighbors", "cheapest_insertion_ls_operator_neighbors_ratio", b"cheapest_insertion_ls_operator_neighbors_ratio", "christofides_use_minimum_matching", b"christofides_use_minimum_matching", "continuous_scheduling_solver", b"continuous_scheduling_solver", "disable_scheduling_beware_this_may_degrade_performance", b"disable_scheduling_beware_this_may_degrade_performance", "fallback_to_cp_sat_size_threshold", b"fallback_to_cp_sat_size_threshold", "first_solution_strategy", b"first_solution_strategy", "guided_local_search_lambda_coefficient", b"guided_local_search_lambda_coefficient", "guided_local_search_reset_penalties_on_new_best_solution", b"guided_local_search_reset_penalties_on_new_best_solution", "heuristic_close_nodes_lns_num_nodes", b"heuristic_close_nodes_lns_num_nodes", "heuristic_expensive_chain_lns_num_arcs_to_consider", b"heuristic_expensive_chain_lns_num_arcs_to_consider", "improvement_limit_parameters", b"improvement_limit_parameters", "lns_time_limit", b"lns_time_limit", "local_cheapest_cost_insertion_pickup_delivery_strategy", b"local_cheapest_cost_insertion_pickup_delivery_strategy", "local_cheapest_insertion_pickup_delivery_strategy", b"local_cheapest_insertion_pickup_delivery_strategy", "local_search_metaheuristic", b"local_search_metaheuristic", "local_search_operators", b"local_search_operators", "log_cost_offset", b"log_cost_offset", "log_cost_scaling_factor", b"log_cost_scaling_factor", "log_search", b"log_search", "log_tag", b"log_tag", "ls_operator_min_neighbors", b"ls_operator_min_neighbors", "ls_operator_neighbors_ratio", b"ls_operator_neighbors_ratio", "mixed_integer_scheduling_solver", b"mixed_integer_scheduling_solver", "multi_armed_bandit_compound_operator_exploration_coefficient", b"multi_armed_bandit_compound_operator_exploration_coefficient", "multi_armed_bandit_compound_operator_memory_coefficient", b"multi_armed_bandit_compound_operator_memory_coefficient", "number_of_solutions_to_collect", b"number_of_solutions_to_collect", "optimization_step", b"optimization_step", "relocate_expensive_chain_num_arcs_to_consider", b"relocate_expensive_chain_num_arcs_to_consider", "report_intermediate_cp_sat_solutions", b"report_intermediate_cp_sat_solutions", "sat_parameters", b"sat_parameters", "savings_add_reverse_arcs", b"savings_add_reverse_arcs", "savings_arc_coefficient", b"savings_arc_coefficient", "savings_max_memory_usage_bytes", b"savings_max_memory_usage_bytes", "savings_neighbors_ratio", b"savings_neighbors_ratio", "savings_parallel_routes", b"savings_parallel_routes", "secondary_ls_time_limit_ratio", b"secondary_ls_time_limit_ratio", "solution_limit", b"solution_limit", "time_limit", b"time_limit", "use_cp", b"use_cp", "use_cp_sat", b"use_cp_sat", "use_depth_first_search", b"use_depth_first_search", "use_full_propagation", b"use_full_propagation", "use_generalized_cp_sat", b"use_generalized_cp_sat", "use_multi_armed_bandit_concatenate_operators", b"use_multi_armed_bandit_concatenate_operators", "use_unfiltered_first_solution_strategy", b"use_unfiltered_first_solution_strategy"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing_extensions.Literal["_disable_scheduling_beware_this_may_degrade_performance", b"_disable_scheduling_beware_this_may_degrade_performance"]) -> typing_extensions.Literal["disable_scheduling_beware_this_may_degrade_performance"] | None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["_disable_scheduling_beware_this_may_degrade_performance", b"_disable_scheduling_beware_this_may_degrade_performance", "disable_scheduling_beware_this_may_degrade_performance", b"disable_scheduling_beware_this_may_degrade_performance", "improvement_limit_parameters", b"improvement_limit_parameters", "iterated_local_search_parameters", b"iterated_local_search_parameters", "lns_time_limit", b"lns_time_limit", "local_search_operators", b"local_search_operators", "sat_parameters", b"sat_parameters", "time_limit", b"time_limit"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["_disable_scheduling_beware_this_may_degrade_performance", b"_disable_scheduling_beware_this_may_degrade_performance", "cheapest_insertion_add_unperformed_entries", b"cheapest_insertion_add_unperformed_entries", "cheapest_insertion_farthest_seeds_ratio", b"cheapest_insertion_farthest_seeds_ratio", "cheapest_insertion_first_solution_min_neighbors", b"cheapest_insertion_first_solution_min_neighbors", "cheapest_insertion_first_solution_neighbors_ratio", b"cheapest_insertion_first_solution_neighbors_ratio", "cheapest_insertion_first_solution_use_neighbors_ratio_for_initialization", b"cheapest_insertion_first_solution_use_neighbors_ratio_for_initialization", "cheapest_insertion_ls_operator_min_neighbors", b"cheapest_insertion_ls_operator_min_neighbors", "cheapest_insertion_ls_operator_neighbors_ratio", b"cheapest_insertion_ls_operator_neighbors_ratio", "christofides_use_minimum_matching", b"christofides_use_minimum_matching", "continuous_scheduling_solver", b"continuous_scheduling_solver", "disable_scheduling_beware_this_may_degrade_performance", b"disable_scheduling_beware_this_may_degrade_performance", "fallback_to_cp_sat_size_threshold", b"fallback_to_cp_sat_size_threshold", "first_solution_optimization_period", b"first_solution_optimization_period", "first_solution_strategy", b"first_solution_strategy", "guided_local_search_lambda_coefficient", b"guided_local_search_lambda_coefficient", "guided_local_search_penalize_with_vehicle_classes", b"guided_local_search_penalize_with_vehicle_classes", "guided_local_search_reset_penalties_on_new_best_solution", b"guided_local_search_reset_penalties_on_new_best_solution", "heuristic_close_nodes_lns_num_nodes", b"heuristic_close_nodes_lns_num_nodes", "heuristic_expensive_chain_lns_num_arcs_to_consider", b"heuristic_expensive_chain_lns_num_arcs_to_consider", "improvement_limit_parameters", b"improvement_limit_parameters", "iterated_local_search_parameters", b"iterated_local_search_parameters", "lns_time_limit", b"lns_time_limit", "local_cheapest_cost_insertion_pickup_delivery_strategy", b"local_cheapest_cost_insertion_pickup_delivery_strategy", "local_cheapest_insertion_pickup_delivery_strategy", b"local_cheapest_insertion_pickup_delivery_strategy", "local_cheapest_insertion_sorting_properties", b"local_cheapest_insertion_sorting_properties", "local_search_metaheuristic", b"local_search_metaheuristic", "local_search_metaheuristics", b"local_search_metaheuristics", "local_search_operators", b"local_search_operators", "log_cost_offset", b"log_cost_offset", "log_cost_scaling_factor", b"log_cost_scaling_factor", "log_search", b"log_search", "log_tag", b"log_tag", "ls_operator_min_neighbors", b"ls_operator_min_neighbors", "ls_operator_neighbors_ratio", b"ls_operator_neighbors_ratio", "max_swap_active_chain_size", b"max_swap_active_chain_size", "mixed_integer_scheduling_solver", b"mixed_integer_scheduling_solver", "multi_armed_bandit_compound_operator_exploration_coefficient", b"multi_armed_bandit_compound_operator_exploration_coefficient", "multi_armed_bandit_compound_operator_memory_coefficient", b"multi_armed_bandit_compound_operator_memory_coefficient", "num_max_local_optima_before_metaheuristic_switch", b"num_max_local_optima_before_metaheuristic_switch", "number_of_solutions_to_collect", b"number_of_solutions_to_collect", "optimization_step", b"optimization_step", "relocate_expensive_chain_num_arcs_to_consider", b"relocate_expensive_chain_num_arcs_to_consider", "report_intermediate_cp_sat_solutions", b"report_intermediate_cp_sat_solutions", "sat_parameters", b"sat_parameters", "savings_add_reverse_arcs", b"savings_add_reverse_arcs", "savings_arc_coefficient", b"savings_arc_coefficient", "savings_max_memory_usage_bytes", b"savings_max_memory_usage_bytes", "savings_neighbors_ratio", b"savings_neighbors_ratio", "secondary_ls_time_limit_ratio", b"secondary_ls_time_limit_ratio", "solution_limit", b"solution_limit", "time_limit", b"time_limit", "use_cp", b"use_cp", "use_cp_sat", b"use_cp_sat", "use_depth_first_search", b"use_depth_first_search", "use_full_propagation", b"use_full_propagation", "use_generalized_cp_sat", b"use_generalized_cp_sat", "use_guided_local_search_penalties_in_local_search_operators", b"use_guided_local_search_penalties_in_local_search_operators", "use_iterated_local_search", b"use_iterated_local_search", "use_multi_armed_bandit_concatenate_operators", b"use_multi_armed_bandit_concatenate_operators", "use_unfiltered_first_solution_strategy", b"use_unfiltered_first_solution_strategy"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    _WhichOneofReturnType__disable_scheduling_beware_this_may_degrade_performance: _TypeAlias = _typing.Literal["disable_scheduling_beware_this_may_degrade_performance"]  # noqa: Y015
+    _WhichOneofArgType__disable_scheduling_beware_this_may_degrade_performance: _TypeAlias = _typing.Literal["_disable_scheduling_beware_this_may_degrade_performance", b"_disable_scheduling_beware_this_may_degrade_performance"]  # noqa: Y015
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__disable_scheduling_beware_this_may_degrade_performance) -> _WhichOneofReturnType__disable_scheduling_beware_this_may_degrade_performance | None: ...
 
-global___RoutingSearchParameters = RoutingSearchParameters
+Global___RoutingSearchParameters: _TypeAlias = RoutingSearchParameters  # noqa: Y015
 
-@typing_extensions.final
-class RoutingModelParameters(google.protobuf.message.Message):
+@_typing.final
+class RoutingModelParameters(_message.Message):
     """Parameters which have to be set when creating a RoutingModel."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    SOLVER_PARAMETERS_FIELD_NUMBER: builtins.int
-    REDUCE_VEHICLE_COST_MODEL_FIELD_NUMBER: builtins.int
-    MAX_CALLBACK_CACHE_SIZE_FIELD_NUMBER: builtins.int
-    @property
-    def solver_parameters(self) -> ortools.constraint_solver.solver_parameters_pb2.ConstraintSolverParameters:
-        """Parameters to use in the underlying constraint solver."""
-    reduce_vehicle_cost_model: builtins.bool
+    SOLVER_PARAMETERS_FIELD_NUMBER: _builtins.int
+    REDUCE_VEHICLE_COST_MODEL_FIELD_NUMBER: _builtins.int
+    MAX_CALLBACK_CACHE_SIZE_FIELD_NUMBER: _builtins.int
+    reduce_vehicle_cost_model: _builtins.bool
     """Advanced settings.
     If set to true reduction of the underlying constraint model will be
     attempted when all vehicles have exactly the same cost structure. This can
     result in significant speedups.
     """
-    max_callback_cache_size: builtins.int
+    max_callback_cache_size: _builtins.int
     """Cache callback calls if the number of nodes in the model is less or equal
     to this value.
     """
+    @_builtins.property
+    def solver_parameters(self) -> _solver_parameters_pb2.ConstraintSolverParameters:
+        """Parameters to use in the underlying constraint solver."""
+
     def __init__(
         self,
         *,
-        solver_parameters: ortools.constraint_solver.solver_parameters_pb2.ConstraintSolverParameters | None = ...,
-        reduce_vehicle_cost_model: builtins.bool = ...,
-        max_callback_cache_size: builtins.int = ...,
+        solver_parameters: _solver_parameters_pb2.ConstraintSolverParameters | None = ...,
+        reduce_vehicle_cost_model: _builtins.bool = ...,
+        max_callback_cache_size: _builtins.int = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["solver_parameters", b"solver_parameters"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["max_callback_cache_size", b"max_callback_cache_size", "reduce_vehicle_cost_model", b"reduce_vehicle_cost_model", "solver_parameters", b"solver_parameters"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["solver_parameters", b"solver_parameters"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["max_callback_cache_size", b"max_callback_cache_size", "reduce_vehicle_cost_model", b"reduce_vehicle_cost_model", "solver_parameters", b"solver_parameters"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-global___RoutingModelParameters = RoutingModelParameters
+Global___RoutingModelParameters: _TypeAlias = RoutingModelParameters  # noqa: Y015

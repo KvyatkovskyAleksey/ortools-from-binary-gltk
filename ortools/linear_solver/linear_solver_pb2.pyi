@@ -16,29 +16,30 @@ take integer values.
 Check ./linear_solver.h and Wikipedia for more detail:
   http://en.wikipedia.org/wiki/Linear_programming
 """
-import builtins
-import collections.abc
-import google.protobuf.descriptor
-import google.protobuf.internal.containers
-import google.protobuf.internal.enum_type_wrapper
-import google.protobuf.message
-import ortools.util.optional_boolean_pb2
+
+from collections import abc as _abc
+from google.protobuf import descriptor as _descriptor
+from google.protobuf import message as _message
+from google.protobuf.internal import containers as _containers
+from google.protobuf.internal import enum_type_wrapper as _enum_type_wrapper
+from ortools.util import optional_boolean_pb2 as _optional_boolean_pb2
+import builtins as _builtins
 import sys
-import typing
+import typing as _typing
 
 if sys.version_info >= (3, 10):
-    import typing as typing_extensions
+    from typing import TypeAlias as _TypeAlias
 else:
-    import typing_extensions
+    from typing_extensions import TypeAlias as _TypeAlias
 
-DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
+DESCRIPTOR: _descriptor.FileDescriptor
 
 class _MPSolverResponseStatus:
-    ValueType = typing.NewType("ValueType", builtins.int)
-    V: typing_extensions.TypeAlias = ValueType
+    ValueType = _typing.NewType("ValueType", _builtins.int)
+    V: _TypeAlias = ValueType  # noqa: Y015
 
-class _MPSolverResponseStatusEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_MPSolverResponseStatus.ValueType], builtins.type):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+class _MPSolverResponseStatusEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[_MPSolverResponseStatus.ValueType], _builtins.type):
+    DESCRIPTOR: _descriptor.EnumDescriptor
     MPSOLVER_OPTIMAL: _MPSolverResponseStatus.ValueType  # 0
     """The solver found the proven optimal solution. This is what should be
     returned in most cases.
@@ -201,10 +202,10 @@ was requested via SolverClient::SolveMipRemotely() with an underlying
 solver that doesn't support cancellation. status_str should contain a
 description of the issue.
 """
-global___MPSolverResponseStatus = MPSolverResponseStatus
+Global___MPSolverResponseStatus: _TypeAlias = MPSolverResponseStatus  # noqa: Y015
 
-@typing_extensions.final
-class MPVariableProto(google.protobuf.message.Message):
+@_typing.final
+class MPVariableProto(_message.Message):
     """A variable is always constrained in the form:
        lower_bound <= x <= upper_bound
     where lower_bound and upper_bound:
@@ -220,43 +221,45 @@ class MPVariableProto(google.protobuf.message.Message):
      - Whether the variable is integer.
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    LOWER_BOUND_FIELD_NUMBER: builtins.int
-    UPPER_BOUND_FIELD_NUMBER: builtins.int
-    OBJECTIVE_COEFFICIENT_FIELD_NUMBER: builtins.int
-    IS_INTEGER_FIELD_NUMBER: builtins.int
-    NAME_FIELD_NUMBER: builtins.int
-    BRANCHING_PRIORITY_FIELD_NUMBER: builtins.int
-    lower_bound: builtins.float
+    LOWER_BOUND_FIELD_NUMBER: _builtins.int
+    UPPER_BOUND_FIELD_NUMBER: _builtins.int
+    OBJECTIVE_COEFFICIENT_FIELD_NUMBER: _builtins.int
+    IS_INTEGER_FIELD_NUMBER: _builtins.int
+    NAME_FIELD_NUMBER: _builtins.int
+    BRANCHING_PRIORITY_FIELD_NUMBER: _builtins.int
+    lower_bound: _builtins.float
     """lower_bound must be <= upper_bound."""
-    upper_bound: builtins.float
-    objective_coefficient: builtins.float
+    upper_bound: _builtins.float
+    objective_coefficient: _builtins.float
     """The coefficient of the variable in the objective. Must be finite."""
-    is_integer: builtins.bool
+    is_integer: _builtins.bool
     """True if the variable is constrained to be integer.
     Ignored if MPModelProto::solver_type is *LINEAR_PROGRAMMING*.
     """
-    name: builtins.str
+    name: _builtins.str
     """The name of the variable."""
-    branching_priority: builtins.int
+    branching_priority: _builtins.int
     def __init__(
         self,
         *,
-        lower_bound: builtins.float | None = ...,
-        upper_bound: builtins.float | None = ...,
-        objective_coefficient: builtins.float | None = ...,
-        is_integer: builtins.bool | None = ...,
-        name: builtins.str | None = ...,
-        branching_priority: builtins.int | None = ...,
+        lower_bound: _builtins.float | None = ...,
+        upper_bound: _builtins.float | None = ...,
+        objective_coefficient: _builtins.float | None = ...,
+        is_integer: _builtins.bool | None = ...,
+        name: _builtins.str | None = ...,
+        branching_priority: _builtins.int | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["branching_priority", b"branching_priority", "is_integer", b"is_integer", "lower_bound", b"lower_bound", "name", b"name", "objective_coefficient", b"objective_coefficient", "upper_bound", b"upper_bound"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["branching_priority", b"branching_priority", "is_integer", b"is_integer", "lower_bound", b"lower_bound", "name", b"name", "objective_coefficient", b"objective_coefficient", "upper_bound", b"upper_bound"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["branching_priority", b"branching_priority", "is_integer", b"is_integer", "lower_bound", b"lower_bound", "name", b"name", "objective_coefficient", b"objective_coefficient", "upper_bound", b"upper_bound"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["branching_priority", b"branching_priority", "is_integer", b"is_integer", "lower_bound", b"lower_bound", "name", b"name", "objective_coefficient", b"objective_coefficient", "upper_bound", b"upper_bound"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-global___MPVariableProto = MPVariableProto
+Global___MPVariableProto: _TypeAlias = MPVariableProto  # noqa: Y015
 
-@typing_extensions.final
-class MPConstraintProto(google.protobuf.message.Message):
+@_typing.final
+class MPConstraintProto(_message.Message):
     """A linear constraint is always of the form:
     lower_bound <= sum of linear term elements <= upper_bound,
     where lower_bound and upper_bound:
@@ -270,112 +273,124 @@ class MPConstraintProto(google.protobuf.message.Message):
       upper_bound = +infinity. The constraint is free.
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    VAR_INDEX_FIELD_NUMBER: builtins.int
-    COEFFICIENT_FIELD_NUMBER: builtins.int
-    LOWER_BOUND_FIELD_NUMBER: builtins.int
-    UPPER_BOUND_FIELD_NUMBER: builtins.int
-    NAME_FIELD_NUMBER: builtins.int
-    IS_LAZY_FIELD_NUMBER: builtins.int
-    @property
-    def var_index(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]:
-        """var_index[i] is the variable index (w.r.t. to "variable" field of
-        MPModelProto) of the i-th linear term involved in this constraint, and
-        coefficient[i] is its coefficient. Only the terms with non-zero
-        coefficients need to appear. var_index may not contain duplicates.
-        """
-    @property
-    def coefficient(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.float]:
-        """Must be finite."""
-    lower_bound: builtins.float
+    VAR_INDEX_FIELD_NUMBER: _builtins.int
+    COEFFICIENT_FIELD_NUMBER: _builtins.int
+    LOWER_BOUND_FIELD_NUMBER: _builtins.int
+    UPPER_BOUND_FIELD_NUMBER: _builtins.int
+    NAME_FIELD_NUMBER: _builtins.int
+    IS_LAZY_FIELD_NUMBER: _builtins.int
+    lower_bound: _builtins.float
     """lower_bound must be <= upper_bound."""
-    upper_bound: builtins.float
-    name: builtins.str
+    upper_bound: _builtins.float
+    name: _builtins.str
     """The name of the constraint."""
-    is_lazy: builtins.bool
+    is_lazy: _builtins.bool
     """[Advanced usage: do not use this if you don't know what you're doing.]
     A lazy constraint is handled differently by the core solving engine, but
     it does not change the result. It may or may not impact the performance.
     For more info see: http://tinyurl.com/lazy-constraints.
     """
+    @_builtins.property
+    def var_index(self) -> _containers.RepeatedScalarFieldContainer[_builtins.int]:
+        """var_index[i] is the variable index (w.r.t. to "variable" field of
+        MPModelProto) of the i-th linear term involved in this constraint, and
+        coefficient[i] is its coefficient. Only the terms with non-zero
+        coefficients need to appear. var_index may not contain duplicates.
+        """
+
+    @_builtins.property
+    def coefficient(self) -> _containers.RepeatedScalarFieldContainer[_builtins.float]:
+        """Must be finite."""
+
     def __init__(
         self,
         *,
-        var_index: collections.abc.Iterable[builtins.int] | None = ...,
-        coefficient: collections.abc.Iterable[builtins.float] | None = ...,
-        lower_bound: builtins.float | None = ...,
-        upper_bound: builtins.float | None = ...,
-        name: builtins.str | None = ...,
-        is_lazy: builtins.bool | None = ...,
+        var_index: _abc.Iterable[_builtins.int] | None = ...,
+        coefficient: _abc.Iterable[_builtins.float] | None = ...,
+        lower_bound: _builtins.float | None = ...,
+        upper_bound: _builtins.float | None = ...,
+        name: _builtins.str | None = ...,
+        is_lazy: _builtins.bool | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["is_lazy", b"is_lazy", "lower_bound", b"lower_bound", "name", b"name", "upper_bound", b"upper_bound"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["coefficient", b"coefficient", "is_lazy", b"is_lazy", "lower_bound", b"lower_bound", "name", b"name", "upper_bound", b"upper_bound", "var_index", b"var_index"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["is_lazy", b"is_lazy", "lower_bound", b"lower_bound", "name", b"name", "upper_bound", b"upper_bound"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["coefficient", b"coefficient", "is_lazy", b"is_lazy", "lower_bound", b"lower_bound", "name", b"name", "upper_bound", b"upper_bound", "var_index", b"var_index"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-global___MPConstraintProto = MPConstraintProto
+Global___MPConstraintProto: _TypeAlias = MPConstraintProto  # noqa: Y015
 
-@typing_extensions.final
-class MPGeneralConstraintProto(google.protobuf.message.Message):
+@_typing.final
+class MPGeneralConstraintProto(_message.Message):
     """General constraints. See each individual proto type for more information."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    NAME_FIELD_NUMBER: builtins.int
-    INDICATOR_CONSTRAINT_FIELD_NUMBER: builtins.int
-    SOS_CONSTRAINT_FIELD_NUMBER: builtins.int
-    QUADRATIC_CONSTRAINT_FIELD_NUMBER: builtins.int
-    ABS_CONSTRAINT_FIELD_NUMBER: builtins.int
-    AND_CONSTRAINT_FIELD_NUMBER: builtins.int
-    OR_CONSTRAINT_FIELD_NUMBER: builtins.int
-    MIN_CONSTRAINT_FIELD_NUMBER: builtins.int
-    MAX_CONSTRAINT_FIELD_NUMBER: builtins.int
-    name: builtins.str
+    NAME_FIELD_NUMBER: _builtins.int
+    INDICATOR_CONSTRAINT_FIELD_NUMBER: _builtins.int
+    SOS_CONSTRAINT_FIELD_NUMBER: _builtins.int
+    QUADRATIC_CONSTRAINT_FIELD_NUMBER: _builtins.int
+    ABS_CONSTRAINT_FIELD_NUMBER: _builtins.int
+    AND_CONSTRAINT_FIELD_NUMBER: _builtins.int
+    OR_CONSTRAINT_FIELD_NUMBER: _builtins.int
+    MIN_CONSTRAINT_FIELD_NUMBER: _builtins.int
+    MAX_CONSTRAINT_FIELD_NUMBER: _builtins.int
+    name: _builtins.str
     """The name of the constraint."""
-    @property
-    def indicator_constraint(self) -> global___MPIndicatorConstraint: ...
-    @property
-    def sos_constraint(self) -> global___MPSosConstraint: ...
-    @property
-    def quadratic_constraint(self) -> global___MPQuadraticConstraint: ...
-    @property
-    def abs_constraint(self) -> global___MPAbsConstraint: ...
-    @property
-    def and_constraint(self) -> global___MPArrayConstraint:
+    @_builtins.property
+    def indicator_constraint(self) -> Global___MPIndicatorConstraint: ...
+    @_builtins.property
+    def sos_constraint(self) -> Global___MPSosConstraint: ...
+    @_builtins.property
+    def quadratic_constraint(self) -> Global___MPQuadraticConstraint: ...
+    @_builtins.property
+    def abs_constraint(self) -> Global___MPAbsConstraint: ...
+    @_builtins.property
+    def and_constraint(self) -> Global___MPArrayConstraint:
         """All variables in "and" constraints must be Boolean.
         resultant_var = and(var_1, var_2... var_n)
         """
-    @property
-    def or_constraint(self) -> global___MPArrayConstraint:
+
+    @_builtins.property
+    def or_constraint(self) -> Global___MPArrayConstraint:
         """All variables in "or" constraints must be Boolean.
         resultant_var = or(var_1, var_2... var_n)
         """
-    @property
-    def min_constraint(self) -> global___MPArrayWithConstantConstraint:
+
+    @_builtins.property
+    def min_constraint(self) -> Global___MPArrayWithConstantConstraint:
         """resultant_var = min(var_1, var_2, ..., constant)"""
-    @property
-    def max_constraint(self) -> global___MPArrayWithConstantConstraint:
+
+    @_builtins.property
+    def max_constraint(self) -> Global___MPArrayWithConstantConstraint:
         """resultant_var = max(var_1, var_2, ..., constant)"""
+
     def __init__(
         self,
         *,
-        name: builtins.str | None = ...,
-        indicator_constraint: global___MPIndicatorConstraint | None = ...,
-        sos_constraint: global___MPSosConstraint | None = ...,
-        quadratic_constraint: global___MPQuadraticConstraint | None = ...,
-        abs_constraint: global___MPAbsConstraint | None = ...,
-        and_constraint: global___MPArrayConstraint | None = ...,
-        or_constraint: global___MPArrayConstraint | None = ...,
-        min_constraint: global___MPArrayWithConstantConstraint | None = ...,
-        max_constraint: global___MPArrayWithConstantConstraint | None = ...,
+        name: _builtins.str | None = ...,
+        indicator_constraint: Global___MPIndicatorConstraint | None = ...,
+        sos_constraint: Global___MPSosConstraint | None = ...,
+        quadratic_constraint: Global___MPQuadraticConstraint | None = ...,
+        abs_constraint: Global___MPAbsConstraint | None = ...,
+        and_constraint: Global___MPArrayConstraint | None = ...,
+        or_constraint: Global___MPArrayConstraint | None = ...,
+        min_constraint: Global___MPArrayWithConstantConstraint | None = ...,
+        max_constraint: Global___MPArrayWithConstantConstraint | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["abs_constraint", b"abs_constraint", "and_constraint", b"and_constraint", "general_constraint", b"general_constraint", "indicator_constraint", b"indicator_constraint", "max_constraint", b"max_constraint", "min_constraint", b"min_constraint", "name", b"name", "or_constraint", b"or_constraint", "quadratic_constraint", b"quadratic_constraint", "sos_constraint", b"sos_constraint"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["abs_constraint", b"abs_constraint", "and_constraint", b"and_constraint", "general_constraint", b"general_constraint", "indicator_constraint", b"indicator_constraint", "max_constraint", b"max_constraint", "min_constraint", b"min_constraint", "name", b"name", "or_constraint", b"or_constraint", "quadratic_constraint", b"quadratic_constraint", "sos_constraint", b"sos_constraint"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing_extensions.Literal["general_constraint", b"general_constraint"]) -> typing_extensions.Literal["indicator_constraint", "sos_constraint", "quadratic_constraint", "abs_constraint", "and_constraint", "or_constraint", "min_constraint", "max_constraint"] | None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["abs_constraint", b"abs_constraint", "and_constraint", b"and_constraint", "general_constraint", b"general_constraint", "indicator_constraint", b"indicator_constraint", "max_constraint", b"max_constraint", "min_constraint", b"min_constraint", "name", b"name", "or_constraint", b"or_constraint", "quadratic_constraint", b"quadratic_constraint", "sos_constraint", b"sos_constraint"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["abs_constraint", b"abs_constraint", "and_constraint", b"and_constraint", "general_constraint", b"general_constraint", "indicator_constraint", b"indicator_constraint", "max_constraint", b"max_constraint", "min_constraint", b"min_constraint", "name", b"name", "or_constraint", b"or_constraint", "quadratic_constraint", b"quadratic_constraint", "sos_constraint", b"sos_constraint"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    _WhichOneofReturnType_general_constraint: _TypeAlias = _typing.Literal["indicator_constraint", "sos_constraint", "quadratic_constraint", "abs_constraint", "and_constraint", "or_constraint", "min_constraint", "max_constraint"]  # noqa: Y015
+    _WhichOneofArgType_general_constraint: _TypeAlias = _typing.Literal["general_constraint", b"general_constraint"]  # noqa: Y015
+    def WhichOneof(self, oneof_group: _WhichOneofArgType_general_constraint) -> _WhichOneofReturnType_general_constraint | None: ...
 
-global___MPGeneralConstraintProto = MPGeneralConstraintProto
+Global___MPGeneralConstraintProto: _TypeAlias = MPGeneralConstraintProto  # noqa: Y015
 
-@typing_extensions.final
-class MPIndicatorConstraint(google.protobuf.message.Message):
+@_typing.final
+class MPIndicatorConstraint(_message.Message):
     """Indicator constraints encode the activation or deactivation of linear
     constraints given the value of one Boolean variable in the model. For
     example:
@@ -385,47 +400,50 @@ class MPIndicatorConstraint(google.protobuf.message.Message):
     As of 2019/04, only SCIP, CP-SAT and Gurobi support this constraint type.
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    VAR_INDEX_FIELD_NUMBER: builtins.int
-    VAR_VALUE_FIELD_NUMBER: builtins.int
-    CONSTRAINT_FIELD_NUMBER: builtins.int
-    var_index: builtins.int
+    VAR_INDEX_FIELD_NUMBER: _builtins.int
+    VAR_VALUE_FIELD_NUMBER: _builtins.int
+    CONSTRAINT_FIELD_NUMBER: _builtins.int
+    var_index: _builtins.int
     """Variable index (w.r.t. the "variable" field of MPModelProto) of the Boolean
     variable used as indicator.
     """
-    var_value: builtins.int
+    var_value: _builtins.int
     """Value the above variable should take. Must be 0 or 1."""
-    @property
-    def constraint(self) -> global___MPConstraintProto:
+    @_builtins.property
+    def constraint(self) -> Global___MPConstraintProto:
         """The constraint activated by the indicator variable."""
+
     def __init__(
         self,
         *,
-        var_index: builtins.int | None = ...,
-        var_value: builtins.int | None = ...,
-        constraint: global___MPConstraintProto | None = ...,
+        var_index: _builtins.int | None = ...,
+        var_value: _builtins.int | None = ...,
+        constraint: Global___MPConstraintProto | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["constraint", b"constraint", "var_index", b"var_index", "var_value", b"var_value"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["constraint", b"constraint", "var_index", b"var_index", "var_value", b"var_value"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["constraint", b"constraint", "var_index", b"var_index", "var_value", b"var_value"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["constraint", b"constraint", "var_index", b"var_index", "var_value", b"var_value"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-global___MPIndicatorConstraint = MPIndicatorConstraint
+Global___MPIndicatorConstraint: _TypeAlias = MPIndicatorConstraint  # noqa: Y015
 
-@typing_extensions.final
-class MPSosConstraint(google.protobuf.message.Message):
+@_typing.final
+class MPSosConstraint(_message.Message):
     """Special Ordered Set (SOS) constraints of type 1 or 2.
     See https://en.wikipedia.org/wiki/Special_ordered_set
     As of 2019/04, only SCIP and Gurobi support this constraint type.
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
     class _Type:
-        ValueType = typing.NewType("ValueType", builtins.int)
-        V: typing_extensions.TypeAlias = ValueType
+        ValueType = _typing.NewType("ValueType", _builtins.int)
+        V: _TypeAlias = ValueType  # noqa: Y015
 
-    class _TypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[MPSosConstraint._Type.ValueType], builtins.type):
-        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    class _TypeEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[MPSosConstraint._Type.ValueType], _builtins.type):
+        DESCRIPTOR: _descriptor.EnumDescriptor
         SOS1_DEFAULT: MPSosConstraint._Type.ValueType  # 0
         """At most one variable in `var_index` must be non-zero."""
         SOS2: MPSosConstraint._Type.ValueType  # 1
@@ -443,17 +461,18 @@ class MPSosConstraint(google.protobuf.message.Message):
     https://en.wikipedia.org/wiki/Special_ordered_set#Types_of_SOS
     """
 
-    TYPE_FIELD_NUMBER: builtins.int
-    VAR_INDEX_FIELD_NUMBER: builtins.int
-    WEIGHT_FIELD_NUMBER: builtins.int
-    type: global___MPSosConstraint.Type.ValueType
-    @property
-    def var_index(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]:
+    TYPE_FIELD_NUMBER: _builtins.int
+    VAR_INDEX_FIELD_NUMBER: _builtins.int
+    WEIGHT_FIELD_NUMBER: _builtins.int
+    type: Global___MPSosConstraint.Type.ValueType
+    @_builtins.property
+    def var_index(self) -> _containers.RepeatedScalarFieldContainer[_builtins.int]:
         """Variable index (w.r.t. the "variable" field of MPModelProto) of the
         variables in the SOS.
         """
-    @property
-    def weight(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.float]:
+
+    @_builtins.property
+    def weight(self) -> _containers.RepeatedScalarFieldContainer[_builtins.float]:
         """Optional: SOS weights. If non-empty, must be of the same size as
         "var_index", and strictly increasing. If empty and required by the
         underlying solver, the 1..n sequence will be given as weights.
@@ -465,20 +484,23 @@ class MPSosConstraint(google.protobuf.message.Message):
         (weights are strictly monotonous, so the "cutoff" average weight
         corresponds to a "cutoff" index in the var_index sequence).
         """
+
     def __init__(
         self,
         *,
-        type: global___MPSosConstraint.Type.ValueType | None = ...,
-        var_index: collections.abc.Iterable[builtins.int] | None = ...,
-        weight: collections.abc.Iterable[builtins.float] | None = ...,
+        type: Global___MPSosConstraint.Type.ValueType | None = ...,
+        var_index: _abc.Iterable[_builtins.int] | None = ...,
+        weight: _abc.Iterable[_builtins.float] | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["type", b"type"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["type", b"type", "var_index", b"var_index", "weight", b"weight"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["type", b"type"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["type", b"type", "var_index", b"var_index", "weight", b"weight"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-global___MPSosConstraint = MPSosConstraint
+Global___MPSosConstraint: _TypeAlias = MPSosConstraint  # noqa: Y015
 
-@typing_extensions.final
-class MPQuadraticConstraint(google.protobuf.message.Message):
+@_typing.final
+class MPQuadraticConstraint(_message.Message):
     """Quadratic constraints of the form lb <= sum a_i x_i + sum b_ij x_i x_j <= ub,
     where a, b, lb and ub are constants, and x are the model's variables.
     Quadratic matrices that are Positive Semi-Definite, Second-Order Cones or
@@ -488,27 +510,32 @@ class MPQuadraticConstraint(google.protobuf.message.Message):
     https://www.gurobi.com/documentation/9.0/refman/constraints.html#subsubsection:QuadraticConstraints
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    VAR_INDEX_FIELD_NUMBER: builtins.int
-    COEFFICIENT_FIELD_NUMBER: builtins.int
-    QVAR1_INDEX_FIELD_NUMBER: builtins.int
-    QVAR2_INDEX_FIELD_NUMBER: builtins.int
-    QCOEFFICIENT_FIELD_NUMBER: builtins.int
-    LOWER_BOUND_FIELD_NUMBER: builtins.int
-    UPPER_BOUND_FIELD_NUMBER: builtins.int
-    @property
-    def var_index(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]:
+    VAR_INDEX_FIELD_NUMBER: _builtins.int
+    COEFFICIENT_FIELD_NUMBER: _builtins.int
+    QVAR1_INDEX_FIELD_NUMBER: _builtins.int
+    QVAR2_INDEX_FIELD_NUMBER: _builtins.int
+    QCOEFFICIENT_FIELD_NUMBER: _builtins.int
+    LOWER_BOUND_FIELD_NUMBER: _builtins.int
+    UPPER_BOUND_FIELD_NUMBER: _builtins.int
+    lower_bound: _builtins.float
+    """lower_bound must be <= upper_bound."""
+    upper_bound: _builtins.float
+    @_builtins.property
+    def var_index(self) -> _containers.RepeatedScalarFieldContainer[_builtins.int]:
         """Sparse representation of linear terms in the quadratic constraint, where
         term i is var_index[i] * coefficient[i].
         `var_index` are variable indices w.r.t the "variable" field in
         MPModelProto, and should be unique.
         """
-    @property
-    def coefficient(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.float]:
+
+    @_builtins.property
+    def coefficient(self) -> _containers.RepeatedScalarFieldContainer[_builtins.float]:
         """Must be finite."""
-    @property
-    def qvar1_index(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]:
+
+    @_builtins.property
+    def qvar1_index(self) -> _containers.RepeatedScalarFieldContainer[_builtins.int]:
         """Sparse representation of quadratic terms in the quadratic constraint, where
         term i is qvar1_index[i] * qvar2_index[i] * qcoefficient[i].
         `qvar1_index` and `qvar2_index` are variable indices w.r.t the "variable"
@@ -517,109 +544,118 @@ class MPQuadraticConstraint(google.protobuf.message.Message):
         If the same unordered pair (qvar1_index, qvar2_index) appears several
         times, the sum of all of the associated coefficients will be applied.
         """
-    @property
-    def qvar2_index(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    @property
-    def qcoefficient(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.float]:
+
+    @_builtins.property
+    def qvar2_index(self) -> _containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    @_builtins.property
+    def qcoefficient(self) -> _containers.RepeatedScalarFieldContainer[_builtins.float]:
         """Must be finite."""
-    lower_bound: builtins.float
-    """lower_bound must be <= upper_bound."""
-    upper_bound: builtins.float
+
     def __init__(
         self,
         *,
-        var_index: collections.abc.Iterable[builtins.int] | None = ...,
-        coefficient: collections.abc.Iterable[builtins.float] | None = ...,
-        qvar1_index: collections.abc.Iterable[builtins.int] | None = ...,
-        qvar2_index: collections.abc.Iterable[builtins.int] | None = ...,
-        qcoefficient: collections.abc.Iterable[builtins.float] | None = ...,
-        lower_bound: builtins.float | None = ...,
-        upper_bound: builtins.float | None = ...,
+        var_index: _abc.Iterable[_builtins.int] | None = ...,
+        coefficient: _abc.Iterable[_builtins.float] | None = ...,
+        qvar1_index: _abc.Iterable[_builtins.int] | None = ...,
+        qvar2_index: _abc.Iterable[_builtins.int] | None = ...,
+        qcoefficient: _abc.Iterable[_builtins.float] | None = ...,
+        lower_bound: _builtins.float | None = ...,
+        upper_bound: _builtins.float | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["lower_bound", b"lower_bound", "upper_bound", b"upper_bound"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["coefficient", b"coefficient", "lower_bound", b"lower_bound", "qcoefficient", b"qcoefficient", "qvar1_index", b"qvar1_index", "qvar2_index", b"qvar2_index", "upper_bound", b"upper_bound", "var_index", b"var_index"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["lower_bound", b"lower_bound", "upper_bound", b"upper_bound"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["coefficient", b"coefficient", "lower_bound", b"lower_bound", "qcoefficient", b"qcoefficient", "qvar1_index", b"qvar1_index", "qvar2_index", b"qvar2_index", "upper_bound", b"upper_bound", "var_index", b"var_index"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-global___MPQuadraticConstraint = MPQuadraticConstraint
+Global___MPQuadraticConstraint: _TypeAlias = MPQuadraticConstraint  # noqa: Y015
 
-@typing_extensions.final
-class MPAbsConstraint(google.protobuf.message.Message):
+@_typing.final
+class MPAbsConstraint(_message.Message):
     """Sets a variable's value to the absolute value of another variable."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    VAR_INDEX_FIELD_NUMBER: builtins.int
-    RESULTANT_VAR_INDEX_FIELD_NUMBER: builtins.int
-    var_index: builtins.int
+    VAR_INDEX_FIELD_NUMBER: _builtins.int
+    RESULTANT_VAR_INDEX_FIELD_NUMBER: _builtins.int
+    var_index: _builtins.int
     """Variable indices are relative to the "variable" field in MPModelProto.
     resultant_var = abs(var)
     """
-    resultant_var_index: builtins.int
+    resultant_var_index: _builtins.int
     def __init__(
         self,
         *,
-        var_index: builtins.int | None = ...,
-        resultant_var_index: builtins.int | None = ...,
+        var_index: _builtins.int | None = ...,
+        resultant_var_index: _builtins.int | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["resultant_var_index", b"resultant_var_index", "var_index", b"var_index"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["resultant_var_index", b"resultant_var_index", "var_index", b"var_index"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["resultant_var_index", b"resultant_var_index", "var_index", b"var_index"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["resultant_var_index", b"resultant_var_index", "var_index", b"var_index"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-global___MPAbsConstraint = MPAbsConstraint
+Global___MPAbsConstraint: _TypeAlias = MPAbsConstraint  # noqa: Y015
 
-@typing_extensions.final
-class MPArrayConstraint(google.protobuf.message.Message):
+@_typing.final
+class MPArrayConstraint(_message.Message):
     """Sets a variable's value equal to a function on a set of variables."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    VAR_INDEX_FIELD_NUMBER: builtins.int
-    RESULTANT_VAR_INDEX_FIELD_NUMBER: builtins.int
-    @property
-    def var_index(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]:
+    VAR_INDEX_FIELD_NUMBER: _builtins.int
+    RESULTANT_VAR_INDEX_FIELD_NUMBER: _builtins.int
+    resultant_var_index: _builtins.int
+    @_builtins.property
+    def var_index(self) -> _containers.RepeatedScalarFieldContainer[_builtins.int]:
         """Variable indices are relative to the "variable" field in MPModelProto."""
-    resultant_var_index: builtins.int
+
     def __init__(
         self,
         *,
-        var_index: collections.abc.Iterable[builtins.int] | None = ...,
-        resultant_var_index: builtins.int | None = ...,
+        var_index: _abc.Iterable[_builtins.int] | None = ...,
+        resultant_var_index: _builtins.int | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["resultant_var_index", b"resultant_var_index"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["resultant_var_index", b"resultant_var_index", "var_index", b"var_index"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["resultant_var_index", b"resultant_var_index"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["resultant_var_index", b"resultant_var_index", "var_index", b"var_index"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-global___MPArrayConstraint = MPArrayConstraint
+Global___MPArrayConstraint: _TypeAlias = MPArrayConstraint  # noqa: Y015
 
-@typing_extensions.final
-class MPArrayWithConstantConstraint(google.protobuf.message.Message):
+@_typing.final
+class MPArrayWithConstantConstraint(_message.Message):
     """Sets a variable's value equal to a function on a set of variables and,
     optionally, a constant.
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    VAR_INDEX_FIELD_NUMBER: builtins.int
-    CONSTANT_FIELD_NUMBER: builtins.int
-    RESULTANT_VAR_INDEX_FIELD_NUMBER: builtins.int
-    @property
-    def var_index(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]:
+    VAR_INDEX_FIELD_NUMBER: _builtins.int
+    CONSTANT_FIELD_NUMBER: _builtins.int
+    RESULTANT_VAR_INDEX_FIELD_NUMBER: _builtins.int
+    constant: _builtins.float
+    resultant_var_index: _builtins.int
+    @_builtins.property
+    def var_index(self) -> _containers.RepeatedScalarFieldContainer[_builtins.int]:
         """Variable indices are relative to the "variable" field in MPModelProto.
         resultant_var = f(var_1, var_2, ..., constant)
         """
-    constant: builtins.float
-    resultant_var_index: builtins.int
+
     def __init__(
         self,
         *,
-        var_index: collections.abc.Iterable[builtins.int] | None = ...,
-        constant: builtins.float | None = ...,
-        resultant_var_index: builtins.int | None = ...,
+        var_index: _abc.Iterable[_builtins.int] | None = ...,
+        constant: _builtins.float | None = ...,
+        resultant_var_index: _builtins.int | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["constant", b"constant", "resultant_var_index", b"resultant_var_index"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["constant", b"constant", "resultant_var_index", b"resultant_var_index", "var_index", b"var_index"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["constant", b"constant", "resultant_var_index", b"resultant_var_index"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["constant", b"constant", "resultant_var_index", b"resultant_var_index", "var_index", b"var_index"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-global___MPArrayWithConstantConstraint = MPArrayWithConstantConstraint
+Global___MPArrayWithConstantConstraint: _TypeAlias = MPArrayWithConstantConstraint  # noqa: Y015
 
-@typing_extensions.final
-class MPQuadraticObjective(google.protobuf.message.Message):
+@_typing.final
+class MPQuadraticObjective(_message.Message):
     """Quadratic part of a model's objective. Added with other objectives (such as
     linear), this creates the model's objective function to be optimized.
     Note: the linear part of the objective currently needs to be specified in the
@@ -627,13 +663,13 @@ class MPQuadraticObjective(google.protobuf.message.Message):
     dedicated linear array here, talk to or-core-team@
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    QVAR1_INDEX_FIELD_NUMBER: builtins.int
-    QVAR2_INDEX_FIELD_NUMBER: builtins.int
-    COEFFICIENT_FIELD_NUMBER: builtins.int
-    @property
-    def qvar1_index(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]:
+    QVAR1_INDEX_FIELD_NUMBER: _builtins.int
+    QVAR2_INDEX_FIELD_NUMBER: _builtins.int
+    COEFFICIENT_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def qvar1_index(self) -> _containers.RepeatedScalarFieldContainer[_builtins.int]:
         """Sparse representation of quadratic terms in the objective function, where
         term i is qvar1_index[i] * qvar2_index[i] * coefficient[i].
         `qvar1_index` and `qvar2_index` are variable indices w.r.t the "variable"
@@ -642,67 +678,71 @@ class MPQuadraticObjective(google.protobuf.message.Message):
         If the same unordered pair (qvar1_index, qvar2_index) appears several
         times, the sum of all of the associated coefficients will be applied.
         """
-    @property
-    def qvar2_index(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    @property
-    def coefficient(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.float]:
+
+    @_builtins.property
+    def qvar2_index(self) -> _containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    @_builtins.property
+    def coefficient(self) -> _containers.RepeatedScalarFieldContainer[_builtins.float]:
         """Must be finite."""
+
     def __init__(
         self,
         *,
-        qvar1_index: collections.abc.Iterable[builtins.int] | None = ...,
-        qvar2_index: collections.abc.Iterable[builtins.int] | None = ...,
-        coefficient: collections.abc.Iterable[builtins.float] | None = ...,
+        qvar1_index: _abc.Iterable[_builtins.int] | None = ...,
+        qvar2_index: _abc.Iterable[_builtins.int] | None = ...,
+        coefficient: _abc.Iterable[_builtins.float] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["coefficient", b"coefficient", "qvar1_index", b"qvar1_index", "qvar2_index", b"qvar2_index"]) -> None: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["coefficient", b"coefficient", "qvar1_index", b"qvar1_index", "qvar2_index", b"qvar2_index"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-global___MPQuadraticObjective = MPQuadraticObjective
+Global___MPQuadraticObjective: _TypeAlias = MPQuadraticObjective  # noqa: Y015
 
-@typing_extensions.final
-class PartialVariableAssignment(google.protobuf.message.Message):
+@_typing.final
+class PartialVariableAssignment(_message.Message):
     """This message encodes a partial (or full) assignment of the variables of a
     MPModelProto problem. The indices in var_index should be unique and valid
     variable indices of the associated problem.
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    VAR_INDEX_FIELD_NUMBER: builtins.int
-    VAR_VALUE_FIELD_NUMBER: builtins.int
-    @property
-    def var_index(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    @property
-    def var_value(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.float]: ...
+    VAR_INDEX_FIELD_NUMBER: _builtins.int
+    VAR_VALUE_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def var_index(self) -> _containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    @_builtins.property
+    def var_value(self) -> _containers.RepeatedScalarFieldContainer[_builtins.float]: ...
     def __init__(
         self,
         *,
-        var_index: collections.abc.Iterable[builtins.int] | None = ...,
-        var_value: collections.abc.Iterable[builtins.float] | None = ...,
+        var_index: _abc.Iterable[_builtins.int] | None = ...,
+        var_value: _abc.Iterable[_builtins.float] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["var_index", b"var_index", "var_value", b"var_value"]) -> None: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["var_index", b"var_index", "var_value", b"var_value"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-global___PartialVariableAssignment = PartialVariableAssignment
+Global___PartialVariableAssignment: _TypeAlias = PartialVariableAssignment  # noqa: Y015
 
-@typing_extensions.final
-class MPModelProto(google.protobuf.message.Message):
+@_typing.final
+class MPModelProto(_message.Message):
     """MPModelProto contains all the information for a Linear Programming model."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    @typing_extensions.final
-    class Annotation(google.protobuf.message.Message):
+    @_typing.final
+    class Annotation(_message.Message):
         """Annotations can be freely added by users who want to attach arbitrary
         payload to the model's variables or constraints.
         """
 
-        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+        DESCRIPTOR: _descriptor.Descriptor
 
         class _TargetType:
-            ValueType = typing.NewType("ValueType", builtins.int)
-            V: typing_extensions.TypeAlias = ValueType
+            ValueType = _typing.NewType("ValueType", _builtins.int)
+            V: _TypeAlias = ValueType  # noqa: Y015
 
-        class _TargetTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[MPModelProto.Annotation._TargetType.ValueType], builtins.type):
-            DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+        class _TargetTypeEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[MPModelProto.Annotation._TargetType.ValueType], _builtins.type):
+            DESCRIPTOR: _descriptor.EnumDescriptor
             VARIABLE_DEFAULT: MPModelProto.Annotation._TargetType.ValueType  # 0
             CONSTRAINT: MPModelProto.Annotation._TargetType.ValueType  # 1
             GENERAL_CONSTRAINT: MPModelProto.Annotation._TargetType.ValueType  # 2
@@ -716,69 +756,75 @@ class MPModelProto(google.protobuf.message.Message):
         CONSTRAINT: MPModelProto.Annotation.TargetType.ValueType  # 1
         GENERAL_CONSTRAINT: MPModelProto.Annotation.TargetType.ValueType  # 2
 
-        TARGET_TYPE_FIELD_NUMBER: builtins.int
-        TARGET_INDEX_FIELD_NUMBER: builtins.int
-        TARGET_NAME_FIELD_NUMBER: builtins.int
-        PAYLOAD_KEY_FIELD_NUMBER: builtins.int
-        PAYLOAD_VALUE_FIELD_NUMBER: builtins.int
-        target_type: global___MPModelProto.Annotation.TargetType.ValueType
-        target_index: builtins.int
+        TARGET_TYPE_FIELD_NUMBER: _builtins.int
+        TARGET_INDEX_FIELD_NUMBER: _builtins.int
+        TARGET_NAME_FIELD_NUMBER: _builtins.int
+        PAYLOAD_KEY_FIELD_NUMBER: _builtins.int
+        PAYLOAD_VALUE_FIELD_NUMBER: _builtins.int
+        target_type: Global___MPModelProto.Annotation.TargetType.ValueType
+        target_index: _builtins.int
         """If both `target_index` and `target_name` are set, they must point to the
         same entity.
         Index in the MPModelProto.
         """
-        target_name: builtins.str
+        target_name: _builtins.str
         """Alternate to index. Assumes uniqueness."""
-        payload_key: builtins.str
+        payload_key: _builtins.str
         """The payload is a (key, value) string pair. Depending on the use cases,
         one of the two may be omitted.
         """
-        payload_value: builtins.str
+        payload_value: _builtins.str
         def __init__(
             self,
             *,
-            target_type: global___MPModelProto.Annotation.TargetType.ValueType | None = ...,
-            target_index: builtins.int | None = ...,
-            target_name: builtins.str | None = ...,
-            payload_key: builtins.str | None = ...,
-            payload_value: builtins.str | None = ...,
+            target_type: Global___MPModelProto.Annotation.TargetType.ValueType | None = ...,
+            target_index: _builtins.int | None = ...,
+            target_name: _builtins.str | None = ...,
+            payload_key: _builtins.str | None = ...,
+            payload_value: _builtins.str | None = ...,
         ) -> None: ...
-        def HasField(self, field_name: typing_extensions.Literal["payload_key", b"payload_key", "payload_value", b"payload_value", "target_index", b"target_index", "target_name", b"target_name", "target_type", b"target_type"]) -> builtins.bool: ...
-        def ClearField(self, field_name: typing_extensions.Literal["payload_key", b"payload_key", "payload_value", b"payload_value", "target_index", b"target_index", "target_name", b"target_name", "target_type", b"target_type"]) -> None: ...
+        _HasFieldArgType: _TypeAlias = _typing.Literal["payload_key", b"payload_key", "payload_value", b"payload_value", "target_index", b"target_index", "target_name", b"target_name", "target_type", b"target_type"]  # noqa: Y015
+        def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+        _ClearFieldArgType: _TypeAlias = _typing.Literal["payload_key", b"payload_key", "payload_value", b"payload_value", "target_index", b"target_index", "target_name", b"target_name", "target_type", b"target_type"]  # noqa: Y015
+        def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-    VARIABLE_FIELD_NUMBER: builtins.int
-    CONSTRAINT_FIELD_NUMBER: builtins.int
-    GENERAL_CONSTRAINT_FIELD_NUMBER: builtins.int
-    MAXIMIZE_FIELD_NUMBER: builtins.int
-    OBJECTIVE_OFFSET_FIELD_NUMBER: builtins.int
-    QUADRATIC_OBJECTIVE_FIELD_NUMBER: builtins.int
-    NAME_FIELD_NUMBER: builtins.int
-    SOLUTION_HINT_FIELD_NUMBER: builtins.int
-    ANNOTATION_FIELD_NUMBER: builtins.int
-    @property
-    def variable(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___MPVariableProto]:
+    VARIABLE_FIELD_NUMBER: _builtins.int
+    CONSTRAINT_FIELD_NUMBER: _builtins.int
+    GENERAL_CONSTRAINT_FIELD_NUMBER: _builtins.int
+    MAXIMIZE_FIELD_NUMBER: _builtins.int
+    OBJECTIVE_OFFSET_FIELD_NUMBER: _builtins.int
+    QUADRATIC_OBJECTIVE_FIELD_NUMBER: _builtins.int
+    NAME_FIELD_NUMBER: _builtins.int
+    SOLUTION_HINT_FIELD_NUMBER: _builtins.int
+    ANNOTATION_FIELD_NUMBER: _builtins.int
+    maximize: _builtins.bool
+    """True if the problem is a maximization problem. Minimize by default."""
+    objective_offset: _builtins.float
+    """Offset for the objective function. Must be finite."""
+    name: _builtins.str
+    """Name of the model."""
+    @_builtins.property
+    def variable(self) -> _containers.RepeatedCompositeFieldContainer[Global___MPVariableProto]:
         """All the variables appearing in the model."""
-    @property
-    def constraint(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___MPConstraintProto]:
+
+    @_builtins.property
+    def constraint(self) -> _containers.RepeatedCompositeFieldContainer[Global___MPConstraintProto]:
         """All the constraints appearing in the model."""
-    @property
-    def general_constraint(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___MPGeneralConstraintProto]:
+
+    @_builtins.property
+    def general_constraint(self) -> _containers.RepeatedCompositeFieldContainer[Global___MPGeneralConstraintProto]:
         """All the general constraints appearing in the model. Note that not all
         solvers support all types of general constraints.
         """
-    maximize: builtins.bool
-    """True if the problem is a maximization problem. Minimize by default."""
-    objective_offset: builtins.float
-    """Offset for the objective function. Must be finite."""
-    @property
-    def quadratic_objective(self) -> global___MPQuadraticObjective:
+
+    @_builtins.property
+    def quadratic_objective(self) -> Global___MPQuadraticObjective:
         """Optionally, a quadratic objective.
         As of 2019/06, only SCIP and Gurobi support quadratic objectives.
         """
-    name: builtins.str
-    """Name of the model."""
-    @property
-    def solution_hint(self) -> global___PartialVariableAssignment:
+
+    @_builtins.property
+    def solution_hint(self) -> Global___PartialVariableAssignment:
         """Solution hint.
 
         If a feasible or almost-feasible solution to the problem is already known,
@@ -791,48 +837,53 @@ class MPModelProto(google.protobuf.message.Message):
         try to return a solution "close" to this assignment in case of multiple
         optimal solutions.
         """
-    @property
-    def annotation(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___MPModelProto.Annotation]: ...
+
+    @_builtins.property
+    def annotation(self) -> _containers.RepeatedCompositeFieldContainer[Global___MPModelProto.Annotation]: ...
     def __init__(
         self,
         *,
-        variable: collections.abc.Iterable[global___MPVariableProto] | None = ...,
-        constraint: collections.abc.Iterable[global___MPConstraintProto] | None = ...,
-        general_constraint: collections.abc.Iterable[global___MPGeneralConstraintProto] | None = ...,
-        maximize: builtins.bool | None = ...,
-        objective_offset: builtins.float | None = ...,
-        quadratic_objective: global___MPQuadraticObjective | None = ...,
-        name: builtins.str | None = ...,
-        solution_hint: global___PartialVariableAssignment | None = ...,
-        annotation: collections.abc.Iterable[global___MPModelProto.Annotation] | None = ...,
+        variable: _abc.Iterable[Global___MPVariableProto] | None = ...,
+        constraint: _abc.Iterable[Global___MPConstraintProto] | None = ...,
+        general_constraint: _abc.Iterable[Global___MPGeneralConstraintProto] | None = ...,
+        maximize: _builtins.bool | None = ...,
+        objective_offset: _builtins.float | None = ...,
+        quadratic_objective: Global___MPQuadraticObjective | None = ...,
+        name: _builtins.str | None = ...,
+        solution_hint: Global___PartialVariableAssignment | None = ...,
+        annotation: _abc.Iterable[Global___MPModelProto.Annotation] | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["maximize", b"maximize", "name", b"name", "objective_offset", b"objective_offset", "quadratic_objective", b"quadratic_objective", "solution_hint", b"solution_hint"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["annotation", b"annotation", "constraint", b"constraint", "general_constraint", b"general_constraint", "maximize", b"maximize", "name", b"name", "objective_offset", b"objective_offset", "quadratic_objective", b"quadratic_objective", "solution_hint", b"solution_hint", "variable", b"variable"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["maximize", b"maximize", "name", b"name", "objective_offset", b"objective_offset", "quadratic_objective", b"quadratic_objective", "solution_hint", b"solution_hint"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["annotation", b"annotation", "constraint", b"constraint", "general_constraint", b"general_constraint", "maximize", b"maximize", "name", b"name", "objective_offset", b"objective_offset", "quadratic_objective", b"quadratic_objective", "solution_hint", b"solution_hint", "variable", b"variable"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-global___MPModelProto = MPModelProto
+Global___MPModelProto: _TypeAlias = MPModelProto  # noqa: Y015
 
-@typing_extensions.final
-class OptionalDouble(google.protobuf.message.Message):
+@_typing.final
+class OptionalDouble(_message.Message):
     """To support 'unspecified' double value in proto3, the simplest is to wrap
     any double value in a nested message (has_XXX works for message fields).
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    VALUE_FIELD_NUMBER: builtins.int
-    value: builtins.float
+    VALUE_FIELD_NUMBER: _builtins.int
+    value: _builtins.float
     def __init__(
         self,
         *,
-        value: builtins.float | None = ...,
+        value: _builtins.float | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["value", b"value"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["value", b"value"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["value", b"value"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["value", b"value"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-global___OptionalDouble = OptionalDouble
+Global___OptionalDouble: _TypeAlias = OptionalDouble  # noqa: Y015
 
-@typing_extensions.final
-class MPSolverCommonParameters(google.protobuf.message.Message):
+@_typing.final
+class MPSolverCommonParameters(_message.Message):
     """MPSolverCommonParameters holds advanced usage parameters that apply to any of
     the solvers we support.
     All of the fields in this proto can have a value of unspecified. In this
@@ -841,14 +892,14 @@ class MPSolverCommonParameters(google.protobuf.message.Message):
     not defined yet.
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
     class _LPAlgorithmValues:
-        ValueType = typing.NewType("ValueType", builtins.int)
-        V: typing_extensions.TypeAlias = ValueType
+        ValueType = _typing.NewType("ValueType", _builtins.int)
+        V: _TypeAlias = ValueType  # noqa: Y015
 
-    class _LPAlgorithmValuesEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[MPSolverCommonParameters._LPAlgorithmValues.ValueType], builtins.type):
-        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    class _LPAlgorithmValuesEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[MPSolverCommonParameters._LPAlgorithmValues.ValueType], _builtins.type):
+        DESCRIPTOR: _descriptor.EnumDescriptor
         LP_ALGO_UNSPECIFIED: MPSolverCommonParameters._LPAlgorithmValues.ValueType  # 0
         LP_ALGO_DUAL: MPSolverCommonParameters._LPAlgorithmValues.ValueType  # 1
         """Dual simplex."""
@@ -866,14 +917,27 @@ class MPSolverCommonParameters(google.protobuf.message.Message):
     LP_ALGO_BARRIER: MPSolverCommonParameters.LPAlgorithmValues.ValueType  # 3
     """Barrier algorithm."""
 
-    RELATIVE_MIP_GAP_FIELD_NUMBER: builtins.int
-    PRIMAL_TOLERANCE_FIELD_NUMBER: builtins.int
-    DUAL_TOLERANCE_FIELD_NUMBER: builtins.int
-    LP_ALGORITHM_FIELD_NUMBER: builtins.int
-    PRESOLVE_FIELD_NUMBER: builtins.int
-    SCALING_FIELD_NUMBER: builtins.int
-    @property
-    def relative_mip_gap(self) -> global___OptionalDouble:
+    RELATIVE_MIP_GAP_FIELD_NUMBER: _builtins.int
+    PRIMAL_TOLERANCE_FIELD_NUMBER: _builtins.int
+    DUAL_TOLERANCE_FIELD_NUMBER: _builtins.int
+    LP_ALGORITHM_FIELD_NUMBER: _builtins.int
+    PRESOLVE_FIELD_NUMBER: _builtins.int
+    SCALING_FIELD_NUMBER: _builtins.int
+    lp_algorithm: Global___MPSolverCommonParameters.LPAlgorithmValues.ValueType
+    """Algorithm to solve linear programs.
+    Ask or-core-team@ if you want to know what this does exactly.
+    """
+    presolve: _optional_boolean_pb2.OptionalBoolean.ValueType
+    """Gurobi and SCIP enable presolve by default.
+    Ask or-core-team@ for other solvers.
+    """
+    scaling: _optional_boolean_pb2.OptionalBoolean.ValueType
+    """Enable automatic scaling of matrix coefficients and objective. Available
+    for Gurobi and GLOP.
+    Ask or-core-team@ if you want more details.
+    """
+    @_builtins.property
+    def relative_mip_gap(self) -> Global___OptionalDouble:
         """The solver stops if the relative MIP gap reaches this value or below.
         The relative MIP gap is an upper bound of the relative distance to the
         optimum, and it is defined as:
@@ -890,99 +954,95 @@ class MPSolverCommonParameters(google.protobuf.message.Message):
         and "dual bound" in SCIP, respectively.
         Ask or-core-team@ for other solvers.
         """
-    @property
-    def primal_tolerance(self) -> global___OptionalDouble:
+
+    @_builtins.property
+    def primal_tolerance(self) -> Global___OptionalDouble:
         """Tolerance for primal feasibility of basic solutions: this is the maximum
         allowed error in constraint satisfiability.
         For SCIP this includes integrality constraints. For Gurobi it does not, you
         need to set the custom parameter IntFeasTol.
         """
-    @property
-    def dual_tolerance(self) -> global___OptionalDouble:
+
+    @_builtins.property
+    def dual_tolerance(self) -> Global___OptionalDouble:
         """Tolerance for dual feasibility.
         For SCIP and Gurobi this is the feasibility tolerance for reduced costs in
         LP solution: reduced costs must all be smaller than this value in the
         improving direction in order for a model to be declared optimal.
         Not supported for other solvers.
         """
-    lp_algorithm: global___MPSolverCommonParameters.LPAlgorithmValues.ValueType
-    """Algorithm to solve linear programs.
-    Ask or-core-team@ if you want to know what this does exactly.
-    """
-    presolve: ortools.util.optional_boolean_pb2.OptionalBoolean.ValueType
-    """Gurobi and SCIP enable presolve by default.
-    Ask or-core-team@ for other solvers.
-    """
-    scaling: ortools.util.optional_boolean_pb2.OptionalBoolean.ValueType
-    """Enable automatic scaling of matrix coefficients and objective. Available
-    for Gurobi and GLOP.
-    Ask or-core-team@ if you want more details.
-    """
+
     def __init__(
         self,
         *,
-        relative_mip_gap: global___OptionalDouble | None = ...,
-        primal_tolerance: global___OptionalDouble | None = ...,
-        dual_tolerance: global___OptionalDouble | None = ...,
-        lp_algorithm: global___MPSolverCommonParameters.LPAlgorithmValues.ValueType | None = ...,
-        presolve: ortools.util.optional_boolean_pb2.OptionalBoolean.ValueType | None = ...,
-        scaling: ortools.util.optional_boolean_pb2.OptionalBoolean.ValueType | None = ...,
+        relative_mip_gap: Global___OptionalDouble | None = ...,
+        primal_tolerance: Global___OptionalDouble | None = ...,
+        dual_tolerance: Global___OptionalDouble | None = ...,
+        lp_algorithm: Global___MPSolverCommonParameters.LPAlgorithmValues.ValueType | None = ...,
+        presolve: _optional_boolean_pb2.OptionalBoolean.ValueType | None = ...,
+        scaling: _optional_boolean_pb2.OptionalBoolean.ValueType | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["dual_tolerance", b"dual_tolerance", "lp_algorithm", b"lp_algorithm", "presolve", b"presolve", "primal_tolerance", b"primal_tolerance", "relative_mip_gap", b"relative_mip_gap", "scaling", b"scaling"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["dual_tolerance", b"dual_tolerance", "lp_algorithm", b"lp_algorithm", "presolve", b"presolve", "primal_tolerance", b"primal_tolerance", "relative_mip_gap", b"relative_mip_gap", "scaling", b"scaling"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["dual_tolerance", b"dual_tolerance", "lp_algorithm", b"lp_algorithm", "presolve", b"presolve", "primal_tolerance", b"primal_tolerance", "relative_mip_gap", b"relative_mip_gap", "scaling", b"scaling"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["dual_tolerance", b"dual_tolerance", "lp_algorithm", b"lp_algorithm", "presolve", b"presolve", "primal_tolerance", b"primal_tolerance", "relative_mip_gap", b"relative_mip_gap", "scaling", b"scaling"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-global___MPSolverCommonParameters = MPSolverCommonParameters
+Global___MPSolverCommonParameters: _TypeAlias = MPSolverCommonParameters  # noqa: Y015
 
-@typing_extensions.final
-class MPModelDeltaProto(google.protobuf.message.Message):
+@_typing.final
+class MPModelDeltaProto(_message.Message):
     """Encodes a full MPModelProto by way of referencing to a "baseline"
     MPModelProto stored in a file, and a "delta" to apply to this model.
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    @typing_extensions.final
-    class VariableOverridesEntry(google.protobuf.message.Message):
-        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    @_typing.final
+    class VariableOverridesEntry(_message.Message):
+        DESCRIPTOR: _descriptor.Descriptor
 
-        KEY_FIELD_NUMBER: builtins.int
-        VALUE_FIELD_NUMBER: builtins.int
-        key: builtins.int
-        @property
-        def value(self) -> global___MPVariableProto: ...
+        KEY_FIELD_NUMBER: _builtins.int
+        VALUE_FIELD_NUMBER: _builtins.int
+        key: _builtins.int
+        @_builtins.property
+        def value(self) -> Global___MPVariableProto: ...
         def __init__(
             self,
             *,
-            key: builtins.int | None = ...,
-            value: global___MPVariableProto | None = ...,
+            key: _builtins.int | None = ...,
+            value: Global___MPVariableProto | None = ...,
         ) -> None: ...
-        def HasField(self, field_name: typing_extensions.Literal["key", b"key", "value", b"value"]) -> builtins.bool: ...
-        def ClearField(self, field_name: typing_extensions.Literal["key", b"key", "value", b"value"]) -> None: ...
+        _HasFieldArgType: _TypeAlias = _typing.Literal["key", b"key", "value", b"value"]  # noqa: Y015
+        def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+        _ClearFieldArgType: _TypeAlias = _typing.Literal["key", b"key", "value", b"value"]  # noqa: Y015
+        def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-    @typing_extensions.final
-    class ConstraintOverridesEntry(google.protobuf.message.Message):
-        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    @_typing.final
+    class ConstraintOverridesEntry(_message.Message):
+        DESCRIPTOR: _descriptor.Descriptor
 
-        KEY_FIELD_NUMBER: builtins.int
-        VALUE_FIELD_NUMBER: builtins.int
-        key: builtins.int
-        @property
-        def value(self) -> global___MPConstraintProto: ...
+        KEY_FIELD_NUMBER: _builtins.int
+        VALUE_FIELD_NUMBER: _builtins.int
+        key: _builtins.int
+        @_builtins.property
+        def value(self) -> Global___MPConstraintProto: ...
         def __init__(
             self,
             *,
-            key: builtins.int | None = ...,
-            value: global___MPConstraintProto | None = ...,
+            key: _builtins.int | None = ...,
+            value: Global___MPConstraintProto | None = ...,
         ) -> None: ...
-        def HasField(self, field_name: typing_extensions.Literal["key", b"key", "value", b"value"]) -> builtins.bool: ...
-        def ClearField(self, field_name: typing_extensions.Literal["key", b"key", "value", b"value"]) -> None: ...
+        _HasFieldArgType: _TypeAlias = _typing.Literal["key", b"key", "value", b"value"]  # noqa: Y015
+        def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+        _ClearFieldArgType: _TypeAlias = _typing.Literal["key", b"key", "value", b"value"]  # noqa: Y015
+        def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-    BASELINE_MODEL_FILE_PATH_FIELD_NUMBER: builtins.int
-    VARIABLE_OVERRIDES_FIELD_NUMBER: builtins.int
-    CONSTRAINT_OVERRIDES_FIELD_NUMBER: builtins.int
-    baseline_model_file_path: builtins.str
-    @property
-    def variable_overrides(self) -> google.protobuf.internal.containers.MessageMap[builtins.int, global___MPVariableProto]:
+    BASELINE_MODEL_FILE_PATH_FIELD_NUMBER: _builtins.int
+    VARIABLE_OVERRIDES_FIELD_NUMBER: _builtins.int
+    CONSTRAINT_OVERRIDES_FIELD_NUMBER: _builtins.int
+    baseline_model_file_path: _builtins.str
+    @_builtins.property
+    def variable_overrides(self) -> _containers.MessageMap[_builtins.int, Global___MPVariableProto]:
         """The variable protos listed here will override (via MergeFrom()) the ones
         in the baseline model: you only need to specify the fields that change.
         To add a new variable, add it with a new variable index (variable indices
@@ -991,8 +1051,9 @@ class MPModelDeltaProto(google.protobuf.message.Message):
         value, setting its objective coefficient to zero, and by nullifying all
         the terms involving it in the constraints.
         """
-    @property
-    def constraint_overrides(self) -> google.protobuf.internal.containers.MessageMap[builtins.int, global___MPConstraintProto]:
+
+    @_builtins.property
+    def constraint_overrides(self) -> _containers.MessageMap[_builtins.int, Global___MPConstraintProto]:
         """Constraints can be changed (or added) in the same way as variables, see
         above. It's mostly like applying MergeFrom(), except that:
         - the "var_index" and "coefficient" fields will be overridden like a map:
@@ -1001,30 +1062,33 @@ class MPModelDeltaProto(google.protobuf.message.Message):
           effectively neutralizing the constraint, the solver will implicitly
           remove all of the constraint's terms.
         """
+
     def __init__(
         self,
         *,
-        baseline_model_file_path: builtins.str | None = ...,
-        variable_overrides: collections.abc.Mapping[builtins.int, global___MPVariableProto] | None = ...,
-        constraint_overrides: collections.abc.Mapping[builtins.int, global___MPConstraintProto] | None = ...,
+        baseline_model_file_path: _builtins.str | None = ...,
+        variable_overrides: _abc.Mapping[_builtins.int, Global___MPVariableProto] | None = ...,
+        constraint_overrides: _abc.Mapping[_builtins.int, Global___MPConstraintProto] | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["baseline_model_file_path", b"baseline_model_file_path"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["baseline_model_file_path", b"baseline_model_file_path", "constraint_overrides", b"constraint_overrides", "variable_overrides", b"variable_overrides"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["baseline_model_file_path", b"baseline_model_file_path"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["baseline_model_file_path", b"baseline_model_file_path", "constraint_overrides", b"constraint_overrides", "variable_overrides", b"variable_overrides"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-global___MPModelDeltaProto = MPModelDeltaProto
+Global___MPModelDeltaProto: _TypeAlias = MPModelDeltaProto  # noqa: Y015
 
-@typing_extensions.final
-class MPModelRequest(google.protobuf.message.Message):
+@_typing.final
+class MPModelRequest(_message.Message):
     """Next id: 18."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
     class _SolverType:
-        ValueType = typing.NewType("ValueType", builtins.int)
-        V: typing_extensions.TypeAlias = ValueType
+        ValueType = _typing.NewType("ValueType", _builtins.int)
+        V: _TypeAlias = ValueType  # noqa: Y015
 
-    class _SolverTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[MPModelRequest._SolverType.ValueType], builtins.type):
-        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    class _SolverTypeEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[MPModelRequest._SolverType.ValueType], _builtins.type):
+        DESCRIPTOR: _descriptor.EnumDescriptor
         CLP_LINEAR_PROGRAMMING: MPModelRequest._SolverType.ValueType  # 0
         GLOP_LINEAR_PROGRAMMING: MPModelRequest._SolverType.ValueType  # 2
         """Recommended default for LP models."""
@@ -1107,19 +1171,16 @@ class MPModelRequest(google.protobuf.message.Message):
     """
     KNAPSACK_MIXED_INTEGER_PROGRAMMING: MPModelRequest.SolverType.ValueType  # 13
 
-    MODEL_FIELD_NUMBER: builtins.int
-    SOLVER_TYPE_FIELD_NUMBER: builtins.int
-    SOLVER_TIME_LIMIT_SECONDS_FIELD_NUMBER: builtins.int
-    ENABLE_INTERNAL_SOLVER_OUTPUT_FIELD_NUMBER: builtins.int
-    SOLVER_SPECIFIC_PARAMETERS_FIELD_NUMBER: builtins.int
-    IGNORE_SOLVER_SPECIFIC_PARAMETERS_FAILURE_FIELD_NUMBER: builtins.int
-    MODEL_DELTA_FIELD_NUMBER: builtins.int
-    POPULATE_ADDITIONAL_SOLUTIONS_UP_TO_FIELD_NUMBER: builtins.int
-    @property
-    def model(self) -> global___MPModelProto:
-        """The model to be optimized by the server."""
-    solver_type: global___MPModelRequest.SolverType.ValueType
-    solver_time_limit_seconds: builtins.float
+    MODEL_FIELD_NUMBER: _builtins.int
+    SOLVER_TYPE_FIELD_NUMBER: _builtins.int
+    SOLVER_TIME_LIMIT_SECONDS_FIELD_NUMBER: _builtins.int
+    ENABLE_INTERNAL_SOLVER_OUTPUT_FIELD_NUMBER: _builtins.int
+    SOLVER_SPECIFIC_PARAMETERS_FIELD_NUMBER: _builtins.int
+    IGNORE_SOLVER_SPECIFIC_PARAMETERS_FAILURE_FIELD_NUMBER: _builtins.int
+    MODEL_DELTA_FIELD_NUMBER: _builtins.int
+    POPULATE_ADDITIONAL_SOLUTIONS_UP_TO_FIELD_NUMBER: _builtins.int
+    solver_type: Global___MPModelRequest.SolverType.ValueType
+    solver_time_limit_seconds: _builtins.float
     """Maximum time to be spent by the solver to solve 'model'. If the server is
     busy and the RPC's deadline_left is less than this, it will immediately
     give up and return an error, without even trying to solve.
@@ -1130,13 +1191,13 @@ class MPModelRequest(google.protobuf.message.Message):
 
     If not specified, the time limit on the solver is the RPC's deadline_left.
     """
-    enable_internal_solver_output: builtins.bool
+    enable_internal_solver_output: _builtins.bool
     """If this is set, then EnableOutput() will be set on the internal MPSolver
     that solves the model.
     WARNING: if you set this on a request to prod servers, it will be rejected
     and yield the RPC Application Error code MPSOLVER_SOLVER_TYPE_UNAVAILABLE.
     """
-    solver_specific_parameters: builtins.str
+    solver_specific_parameters: _builtins.str
     """Advanced usage. Solver-specific parameters in the solver's own format,
     different for each solver. For example, if you use SCIP and you want to
     stop the solve earlier than the time limit if it reached a solution that is
@@ -1152,13 +1213,8 @@ class MPModelRequest(google.protobuf.message.Message):
     ignore_solver_specific_parameters_failure=true (in which case they are
     simply ignored).
     """
-    ignore_solver_specific_parameters_failure: builtins.bool
-    @property
-    def model_delta(self) -> global___MPModelDeltaProto:
-        """Advanced usage: model "delta". If used, "model" must be unset. See the
-        definition of MPModelDeltaProto.
-        """
-    populate_additional_solutions_up_to: builtins.int
+    ignore_solver_specific_parameters_failure: _builtins.bool
+    populate_additional_solutions_up_to: _builtins.int
     """Controls the recovery of additional solutions, if any, saved by the
     underlying solver back in the MPSolutionResponse.additional_solutions.
     The repeated field will be length
@@ -1167,122 +1223,140 @@ class MPModelRequest(google.protobuf.message.Message):
     These additional solutions may have a worse objective than the main
     solution returned in the response.
     """
+    @_builtins.property
+    def model(self) -> Global___MPModelProto:
+        """The model to be optimized by the server."""
+
+    @_builtins.property
+    def model_delta(self) -> Global___MPModelDeltaProto:
+        """Advanced usage: model "delta". If used, "model" must be unset. See the
+        definition of MPModelDeltaProto.
+        """
+
     def __init__(
         self,
         *,
-        model: global___MPModelProto | None = ...,
-        solver_type: global___MPModelRequest.SolverType.ValueType | None = ...,
-        solver_time_limit_seconds: builtins.float | None = ...,
-        enable_internal_solver_output: builtins.bool | None = ...,
-        solver_specific_parameters: builtins.str | None = ...,
-        ignore_solver_specific_parameters_failure: builtins.bool | None = ...,
-        model_delta: global___MPModelDeltaProto | None = ...,
-        populate_additional_solutions_up_to: builtins.int | None = ...,
+        model: Global___MPModelProto | None = ...,
+        solver_type: Global___MPModelRequest.SolverType.ValueType | None = ...,
+        solver_time_limit_seconds: _builtins.float | None = ...,
+        enable_internal_solver_output: _builtins.bool | None = ...,
+        solver_specific_parameters: _builtins.str | None = ...,
+        ignore_solver_specific_parameters_failure: _builtins.bool | None = ...,
+        model_delta: Global___MPModelDeltaProto | None = ...,
+        populate_additional_solutions_up_to: _builtins.int | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["enable_internal_solver_output", b"enable_internal_solver_output", "ignore_solver_specific_parameters_failure", b"ignore_solver_specific_parameters_failure", "model", b"model", "model_delta", b"model_delta", "populate_additional_solutions_up_to", b"populate_additional_solutions_up_to", "solver_specific_parameters", b"solver_specific_parameters", "solver_time_limit_seconds", b"solver_time_limit_seconds", "solver_type", b"solver_type"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["enable_internal_solver_output", b"enable_internal_solver_output", "ignore_solver_specific_parameters_failure", b"ignore_solver_specific_parameters_failure", "model", b"model", "model_delta", b"model_delta", "populate_additional_solutions_up_to", b"populate_additional_solutions_up_to", "solver_specific_parameters", b"solver_specific_parameters", "solver_time_limit_seconds", b"solver_time_limit_seconds", "solver_type", b"solver_type"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["enable_internal_solver_output", b"enable_internal_solver_output", "ignore_solver_specific_parameters_failure", b"ignore_solver_specific_parameters_failure", "model", b"model", "model_delta", b"model_delta", "populate_additional_solutions_up_to", b"populate_additional_solutions_up_to", "solver_specific_parameters", b"solver_specific_parameters", "solver_time_limit_seconds", b"solver_time_limit_seconds", "solver_type", b"solver_type"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["enable_internal_solver_output", b"enable_internal_solver_output", "ignore_solver_specific_parameters_failure", b"ignore_solver_specific_parameters_failure", "model", b"model", "model_delta", b"model_delta", "populate_additional_solutions_up_to", b"populate_additional_solutions_up_to", "solver_specific_parameters", b"solver_specific_parameters", "solver_time_limit_seconds", b"solver_time_limit_seconds", "solver_type", b"solver_type"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-global___MPModelRequest = MPModelRequest
+Global___MPModelRequest: _TypeAlias = MPModelRequest  # noqa: Y015
 
-@typing_extensions.final
-class MPSolution(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class MPSolution(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
-    OBJECTIVE_VALUE_FIELD_NUMBER: builtins.int
-    VARIABLE_VALUE_FIELD_NUMBER: builtins.int
-    objective_value: builtins.float
-    @property
-    def variable_value(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.float]: ...
+    OBJECTIVE_VALUE_FIELD_NUMBER: _builtins.int
+    VARIABLE_VALUE_FIELD_NUMBER: _builtins.int
+    objective_value: _builtins.float
+    @_builtins.property
+    def variable_value(self) -> _containers.RepeatedScalarFieldContainer[_builtins.float]: ...
     def __init__(
         self,
         *,
-        objective_value: builtins.float | None = ...,
-        variable_value: collections.abc.Iterable[builtins.float] | None = ...,
+        objective_value: _builtins.float | None = ...,
+        variable_value: _abc.Iterable[_builtins.float] | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["objective_value", b"objective_value"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["objective_value", b"objective_value", "variable_value", b"variable_value"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["objective_value", b"objective_value"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["objective_value", b"objective_value", "variable_value", b"variable_value"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-global___MPSolution = MPSolution
+Global___MPSolution: _TypeAlias = MPSolution  # noqa: Y015
 
-@typing_extensions.final
-class MPSolveInfo(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class MPSolveInfo(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
-    SOLVE_WALL_TIME_SECONDS_FIELD_NUMBER: builtins.int
-    SOLVE_USER_TIME_SECONDS_FIELD_NUMBER: builtins.int
-    solve_wall_time_seconds: builtins.float
+    SOLVE_WALL_TIME_SECONDS_FIELD_NUMBER: _builtins.int
+    SOLVE_USER_TIME_SECONDS_FIELD_NUMBER: _builtins.int
+    solve_wall_time_seconds: _builtins.float
     """How much wall time (resp. user time) elapsed during the Solve() of the
     underlying solver library. "wall" time and "user" time are to be
     interpreted like for the "time" command in bash (see "help time").
     In particular, "user time" is CPU time and can be greater than wall time
     when using several threads.
     """
-    solve_user_time_seconds: builtins.float
+    solve_user_time_seconds: _builtins.float
     def __init__(
         self,
         *,
-        solve_wall_time_seconds: builtins.float | None = ...,
-        solve_user_time_seconds: builtins.float | None = ...,
+        solve_wall_time_seconds: _builtins.float | None = ...,
+        solve_user_time_seconds: _builtins.float | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["solve_user_time_seconds", b"solve_user_time_seconds", "solve_wall_time_seconds", b"solve_wall_time_seconds"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["solve_user_time_seconds", b"solve_user_time_seconds", "solve_wall_time_seconds", b"solve_wall_time_seconds"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["solve_user_time_seconds", b"solve_user_time_seconds", "solve_wall_time_seconds", b"solve_wall_time_seconds"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["solve_user_time_seconds", b"solve_user_time_seconds", "solve_wall_time_seconds", b"solve_wall_time_seconds"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-global___MPSolveInfo = MPSolveInfo
+Global___MPSolveInfo: _TypeAlias = MPSolveInfo  # noqa: Y015
 
-@typing_extensions.final
-class MPSolutionResponse(google.protobuf.message.Message):
+@_typing.final
+class MPSolutionResponse(_message.Message):
     """Next id: 12."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    STATUS_FIELD_NUMBER: builtins.int
-    STATUS_STR_FIELD_NUMBER: builtins.int
-    OBJECTIVE_VALUE_FIELD_NUMBER: builtins.int
-    BEST_OBJECTIVE_BOUND_FIELD_NUMBER: builtins.int
-    VARIABLE_VALUE_FIELD_NUMBER: builtins.int
-    SOLVE_INFO_FIELD_NUMBER: builtins.int
-    SOLVER_SPECIFIC_INFO_FIELD_NUMBER: builtins.int
-    DUAL_VALUE_FIELD_NUMBER: builtins.int
-    REDUCED_COST_FIELD_NUMBER: builtins.int
-    ADDITIONAL_SOLUTIONS_FIELD_NUMBER: builtins.int
-    status: global___MPSolverResponseStatus.ValueType
+    STATUS_FIELD_NUMBER: _builtins.int
+    STATUS_STR_FIELD_NUMBER: _builtins.int
+    OBJECTIVE_VALUE_FIELD_NUMBER: _builtins.int
+    BEST_OBJECTIVE_BOUND_FIELD_NUMBER: _builtins.int
+    VARIABLE_VALUE_FIELD_NUMBER: _builtins.int
+    SOLVE_INFO_FIELD_NUMBER: _builtins.int
+    SOLVER_SPECIFIC_INFO_FIELD_NUMBER: _builtins.int
+    DUAL_VALUE_FIELD_NUMBER: _builtins.int
+    REDUCED_COST_FIELD_NUMBER: _builtins.int
+    ADDITIONAL_SOLUTIONS_FIELD_NUMBER: _builtins.int
+    status: Global___MPSolverResponseStatus.ValueType
     """Result of the optimization."""
-    status_str: builtins.str
+    status_str: _builtins.str
     """Human-readable string giving more details about the status. For example,
     when the status is MPSOLVER_INVALID_MODE, this can hold a description of
     why the model is invalid.
     This isn't always filled: don't depend on its value or even its presence.
     """
-    objective_value: builtins.float
+    objective_value: _builtins.float
     """Objective value corresponding to the "variable_value" below, taking into
     account the source "objective_offset" and "objective_coefficient".
     This is set iff 'status' is OPTIMAL or FEASIBLE.
     """
-    best_objective_bound: builtins.float
+    best_objective_bound: _builtins.float
     """This field is only filled for MIP problems. For a minimization problem,
     this is a lower bound on the optimal objective value. For a maximization
     problem, it is an upper bound. It is only filled if the status is OPTIMAL
     or FEASIBLE. In the former case, best_objective_bound should be equal to
     objective_value (modulo numerical errors).
     """
-    @property
-    def variable_value(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.float]:
+    solver_specific_info: _builtins.bytes
+    """Opaque solver-specific information.
+    For the PDLP solver, this is a serialized pdlp::SolveLog proto.
+    """
+    @_builtins.property
+    def variable_value(self) -> _containers.RepeatedScalarFieldContainer[_builtins.float]:
         """Variable values in the same order as the MPModelProto::variable field.
         This is a dense representation. These are set iff 'status' is OPTIMAL or
         FEASIBLE.
         """
-    @property
-    def solve_info(self) -> global___MPSolveInfo:
+
+    @_builtins.property
+    def solve_info(self) -> Global___MPSolveInfo:
         """Contains extra information about the solve, populated if the underlying
         solver (and its interface) supports it. As of 2021/07/19 this is supported
         by SCIP and Gurobi proto solves.
         """
-    solver_specific_info: builtins.bytes
-    """Opaque solver-specific information.
-    For the PDLP solver, this is a serialized pdlp::SolveLog proto.
-    """
-    @property
-    def dual_value(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.float]:
+
+    @_builtins.property
+    def dual_value(self) -> _containers.RepeatedScalarFieldContainer[_builtins.float]:
         """[Advanced usage.]
         Values of the dual variables values in the same order as the
         MPModelProto::constraint field. This is a dense representation.
@@ -1290,8 +1364,9 @@ class MPSolutionResponse(google.protobuf.message.Message):
         it is actually a linear program).
         These are set iff 'status' is OPTIMAL or FEASIBLE.
         """
-    @property
-    def reduced_cost(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.float]:
+
+    @_builtins.property
+    def reduced_cost(self) -> _containers.RepeatedScalarFieldContainer[_builtins.float]:
         """[Advanced usage.]
         Values of the reduced cost of the variables in the same order as the
         MPModelProto::variable. This is a dense representation.
@@ -1299,29 +1374,33 @@ class MPSolutionResponse(google.protobuf.message.Message):
         is actually a linear program).
         These are set iff 'status' is OPTIMAL or FEASIBLE.
         """
-    @property
-    def additional_solutions(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___MPSolution]:
+
+    @_builtins.property
+    def additional_solutions(self) -> _containers.RepeatedCompositeFieldContainer[Global___MPSolution]:
         """[Advanced usage.]
         If `MPModelRequest.populate_additional_solutions_up_to` > 0, up to that
         number of additional solutions may be populated here, if available. These
         additional solutions are different than the main solution described by the
         above fields `objective_value` and `variable_value`.
         """
+
     def __init__(
         self,
         *,
-        status: global___MPSolverResponseStatus.ValueType | None = ...,
-        status_str: builtins.str | None = ...,
-        objective_value: builtins.float | None = ...,
-        best_objective_bound: builtins.float | None = ...,
-        variable_value: collections.abc.Iterable[builtins.float] | None = ...,
-        solve_info: global___MPSolveInfo | None = ...,
-        solver_specific_info: builtins.bytes | None = ...,
-        dual_value: collections.abc.Iterable[builtins.float] | None = ...,
-        reduced_cost: collections.abc.Iterable[builtins.float] | None = ...,
-        additional_solutions: collections.abc.Iterable[global___MPSolution] | None = ...,
+        status: Global___MPSolverResponseStatus.ValueType | None = ...,
+        status_str: _builtins.str | None = ...,
+        objective_value: _builtins.float | None = ...,
+        best_objective_bound: _builtins.float | None = ...,
+        variable_value: _abc.Iterable[_builtins.float] | None = ...,
+        solve_info: Global___MPSolveInfo | None = ...,
+        solver_specific_info: _builtins.bytes | None = ...,
+        dual_value: _abc.Iterable[_builtins.float] | None = ...,
+        reduced_cost: _abc.Iterable[_builtins.float] | None = ...,
+        additional_solutions: _abc.Iterable[Global___MPSolution] | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["best_objective_bound", b"best_objective_bound", "objective_value", b"objective_value", "solve_info", b"solve_info", "solver_specific_info", b"solver_specific_info", "status", b"status", "status_str", b"status_str"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["additional_solutions", b"additional_solutions", "best_objective_bound", b"best_objective_bound", "dual_value", b"dual_value", "objective_value", b"objective_value", "reduced_cost", b"reduced_cost", "solve_info", b"solve_info", "solver_specific_info", b"solver_specific_info", "status", b"status", "status_str", b"status_str", "variable_value", b"variable_value"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["best_objective_bound", b"best_objective_bound", "objective_value", b"objective_value", "solve_info", b"solve_info", "solver_specific_info", b"solver_specific_info", "status", b"status", "status_str", b"status_str"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["additional_solutions", b"additional_solutions", "best_objective_bound", b"best_objective_bound", "dual_value", b"dual_value", "objective_value", b"objective_value", "reduced_cost", b"reduced_cost", "solve_info", b"solve_info", "solver_specific_info", b"solver_specific_info", "status", b"status", "status_str", b"status_str", "variable_value", b"variable_value"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-global___MPSolutionResponse = MPSolutionResponse
+Global___MPSolutionResponse: _TypeAlias = MPSolutionResponse  # noqa: Y015

@@ -1,0 +1,14 @@
+# Python build artifacts
+build/
+dist/
+*.egg-info/
+__pycache__/
+*.pyc
+
+# Local venvs / editor cruft
+.venv/
+.vscode/
+.idea/
+
+# Hooks dirs (not part of the fork)
+.claude/

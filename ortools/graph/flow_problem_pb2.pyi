@@ -23,94 +23,99 @@ MIN_COST_FLOW: the algorithm computes the flow of minimum cost. If a feasible
 flow does not exist (in particular if the sum of supplies is not 0), the
 problem is not feasible.
 """
-import builtins
-import collections.abc
-import google.protobuf.descriptor
-import google.protobuf.internal.containers
-import google.protobuf.internal.enum_type_wrapper
-import google.protobuf.message
+
+from collections import abc as _abc
+from google.protobuf import descriptor as _descriptor
+from google.protobuf import message as _message
+from google.protobuf.internal import containers as _containers
+from google.protobuf.internal import enum_type_wrapper as _enum_type_wrapper
+import builtins as _builtins
 import sys
-import typing
+import typing as _typing
 
 if sys.version_info >= (3, 10):
-    import typing as typing_extensions
+    from typing import TypeAlias as _TypeAlias
 else:
-    import typing_extensions
+    from typing_extensions import TypeAlias as _TypeAlias
 
-DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
+DESCRIPTOR: _descriptor.FileDescriptor
 
-@typing_extensions.final
-class FlowArcProto(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class FlowArcProto(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
-    TAIL_FIELD_NUMBER: builtins.int
-    HEAD_FIELD_NUMBER: builtins.int
-    CAPACITY_FIELD_NUMBER: builtins.int
-    UNIT_COST_FIELD_NUMBER: builtins.int
-    tail: builtins.int
+    TAIL_FIELD_NUMBER: _builtins.int
+    HEAD_FIELD_NUMBER: _builtins.int
+    CAPACITY_FIELD_NUMBER: _builtins.int
+    UNIT_COST_FIELD_NUMBER: _builtins.int
+    tail: _builtins.int
     """A directed arc goes from a tail node to a head node.
     Node ids must be non-negative (>= 0).
     """
-    head: builtins.int
-    capacity: builtins.int
+    head: _builtins.int
+    capacity: _builtins.int
     """Capacity of the arc. Must be non-negative (>= 0). If the capacity is zero,
     it is equivalent to not including the arc in the FlowModelProto.
     """
-    unit_cost: builtins.int
+    unit_cost: _builtins.int
     """Cost of this arc per unit of flow.
     Note that it can take any positive, negative or null value.
     """
     def __init__(
         self,
         *,
-        tail: builtins.int | None = ...,
-        head: builtins.int | None = ...,
-        capacity: builtins.int | None = ...,
-        unit_cost: builtins.int | None = ...,
+        tail: _builtins.int | None = ...,
+        head: _builtins.int | None = ...,
+        capacity: _builtins.int | None = ...,
+        unit_cost: _builtins.int | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["capacity", b"capacity", "head", b"head", "tail", b"tail", "unit_cost", b"unit_cost"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["capacity", b"capacity", "head", b"head", "tail", b"tail", "unit_cost", b"unit_cost"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["capacity", b"capacity", "head", b"head", "tail", b"tail", "unit_cost", b"unit_cost"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["capacity", b"capacity", "head", b"head", "tail", b"tail", "unit_cost", b"unit_cost"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-global___FlowArcProto = FlowArcProto
+Global___FlowArcProto: _TypeAlias = FlowArcProto  # noqa: Y015
 
-@typing_extensions.final
-class FlowNodeProto(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class FlowNodeProto(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
-    ID_FIELD_NUMBER: builtins.int
-    SUPPLY_FIELD_NUMBER: builtins.int
-    id: builtins.int
+    ID_FIELD_NUMBER: _builtins.int
+    SUPPLY_FIELD_NUMBER: _builtins.int
+    id: _builtins.int
     """The ids must be non-negative (>= 0). They should be dense for good
     performance. Note that it is not mandatory to include nodes with no supply
     in a FlowModelProto.
     """
-    supply: builtins.int
+    supply: _builtins.int
     """The supply can be positive or negative in which case it means demand.
     The sum of the supplies over all nodes must always be 0.
     """
     def __init__(
         self,
         *,
-        id: builtins.int | None = ...,
-        supply: builtins.int | None = ...,
+        id: _builtins.int | None = ...,
+        supply: _builtins.int | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["id", b"id", "supply", b"supply"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["id", b"id", "supply", b"supply"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["id", b"id", "supply", b"supply"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["id", b"id", "supply", b"supply"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-global___FlowNodeProto = FlowNodeProto
+Global___FlowNodeProto: _TypeAlias = FlowNodeProto  # noqa: Y015
 
-@typing_extensions.final
-class FlowModelProto(google.protobuf.message.Message):
+@_typing.final
+class FlowModelProto(_message.Message):
     """Holds a flow problem, see NodeProto and ArcProto for more details."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
     class _ProblemType:
-        ValueType = typing.NewType("ValueType", builtins.int)
-        V: typing_extensions.TypeAlias = ValueType
+        ValueType = _typing.NewType("ValueType", _builtins.int)
+        V: _TypeAlias = ValueType  # noqa: Y015
 
-    class _ProblemTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[FlowModelProto._ProblemType.ValueType], builtins.type):
-        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    class _ProblemTypeEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[FlowModelProto._ProblemType.ValueType], _builtins.type):
+        DESCRIPTOR: _descriptor.EnumDescriptor
         LINEAR_SUM_ASSIGNMENT: FlowModelProto._ProblemType.ValueType  # 0
         MAX_FLOW: FlowModelProto._ProblemType.ValueType  # 1
         MIN_COST_FLOW: FlowModelProto._ProblemType.ValueType  # 2
@@ -122,22 +127,24 @@ class FlowModelProto(google.protobuf.message.Message):
     MAX_FLOW: FlowModelProto.ProblemType.ValueType  # 1
     MIN_COST_FLOW: FlowModelProto.ProblemType.ValueType  # 2
 
-    NODES_FIELD_NUMBER: builtins.int
-    ARCS_FIELD_NUMBER: builtins.int
-    PROBLEM_TYPE_FIELD_NUMBER: builtins.int
-    @property
-    def nodes(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___FlowNodeProto]: ...
-    @property
-    def arcs(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___FlowArcProto]: ...
-    problem_type: global___FlowModelProto.ProblemType.ValueType
+    NODES_FIELD_NUMBER: _builtins.int
+    ARCS_FIELD_NUMBER: _builtins.int
+    PROBLEM_TYPE_FIELD_NUMBER: _builtins.int
+    problem_type: Global___FlowModelProto.ProblemType.ValueType
+    @_builtins.property
+    def nodes(self) -> _containers.RepeatedCompositeFieldContainer[Global___FlowNodeProto]: ...
+    @_builtins.property
+    def arcs(self) -> _containers.RepeatedCompositeFieldContainer[Global___FlowArcProto]: ...
     def __init__(
         self,
         *,
-        nodes: collections.abc.Iterable[global___FlowNodeProto] | None = ...,
-        arcs: collections.abc.Iterable[global___FlowArcProto] | None = ...,
-        problem_type: global___FlowModelProto.ProblemType.ValueType | None = ...,
+        nodes: _abc.Iterable[Global___FlowNodeProto] | None = ...,
+        arcs: _abc.Iterable[Global___FlowArcProto] | None = ...,
+        problem_type: Global___FlowModelProto.ProblemType.ValueType | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["problem_type", b"problem_type"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["arcs", b"arcs", "nodes", b"nodes", "problem_type", b"problem_type"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["problem_type", b"problem_type"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["arcs", b"arcs", "nodes", b"nodes", "problem_type", b"problem_type"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-global___FlowModelProto = FlowModelProto
+Global___FlowModelProto: _TypeAlias = FlowModelProto  # noqa: Y015

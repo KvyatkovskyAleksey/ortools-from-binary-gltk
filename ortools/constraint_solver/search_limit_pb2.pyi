@@ -4,49 +4,52 @@ isort:skip_file
 
 This file contains a protocol buffer definition for search limits.
 """
-import builtins
-import google.protobuf.descriptor
-import google.protobuf.message
+
+from google.protobuf import descriptor as _descriptor
+from google.protobuf import message as _message
+import builtins as _builtins
 import sys
+import typing as _typing
 
-if sys.version_info >= (3, 8):
-    import typing as typing_extensions
+if sys.version_info >= (3, 10):
+    from typing import TypeAlias as _TypeAlias
 else:
-    import typing_extensions
+    from typing_extensions import TypeAlias as _TypeAlias
 
-DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
+DESCRIPTOR: _descriptor.FileDescriptor
 
-@typing_extensions.final
-class RegularLimitParameters(google.protobuf.message.Message):
+@_typing.final
+class RegularLimitParameters(_message.Message):
     """A search limit
     The default values for int64 fields is the maxima value, i.e., 2^63-1
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    TIME_FIELD_NUMBER: builtins.int
-    BRANCHES_FIELD_NUMBER: builtins.int
-    FAILURES_FIELD_NUMBER: builtins.int
-    SOLUTIONS_FIELD_NUMBER: builtins.int
-    SMART_TIME_CHECK_FIELD_NUMBER: builtins.int
-    CUMULATIVE_FIELD_NUMBER: builtins.int
-    time: builtins.int
+    TIME_FIELD_NUMBER: _builtins.int
+    BRANCHES_FIELD_NUMBER: _builtins.int
+    FAILURES_FIELD_NUMBER: _builtins.int
+    SOLUTIONS_FIELD_NUMBER: _builtins.int
+    SMART_TIME_CHECK_FIELD_NUMBER: _builtins.int
+    CUMULATIVE_FIELD_NUMBER: _builtins.int
+    time: _builtins.int
     """TODO(user): Specify the time units or switch to google.Duration proto."""
-    branches: builtins.int
-    failures: builtins.int
-    solutions: builtins.int
-    smart_time_check: builtins.bool
-    cumulative: builtins.bool
+    branches: _builtins.int
+    failures: _builtins.int
+    solutions: _builtins.int
+    smart_time_check: _builtins.bool
+    cumulative: _builtins.bool
     def __init__(
         self,
         *,
-        time: builtins.int = ...,
-        branches: builtins.int = ...,
-        failures: builtins.int = ...,
-        solutions: builtins.int = ...,
-        smart_time_check: builtins.bool = ...,
-        cumulative: builtins.bool = ...,
+        time: _builtins.int = ...,
+        branches: _builtins.int = ...,
+        failures: _builtins.int = ...,
+        solutions: _builtins.int = ...,
+        smart_time_check: _builtins.bool = ...,
+        cumulative: _builtins.bool = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["branches", b"branches", "cumulative", b"cumulative", "failures", b"failures", "smart_time_check", b"smart_time_check", "solutions", b"solutions", "time", b"time"]) -> None: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["branches", b"branches", "cumulative", b"cumulative", "failures", b"failures", "smart_time_check", b"smart_time_check", "solutions", b"solutions", "time", b"time"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-global___RegularLimitParameters = RegularLimitParameters
+Global___RegularLimitParameters: _TypeAlias = RegularLimitParameters  # noqa: Y015

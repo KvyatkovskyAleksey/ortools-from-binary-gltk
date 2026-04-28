@@ -56,132 +56,142 @@ The supported file formats are:
     https://www.wiwi.tu-clausthal.de/de/abteilungen/produktion/forschung/
           schwerpunkte/project-generator/ripmax/
 """
-import builtins
-import collections.abc
-import google.protobuf.descriptor
-import google.protobuf.internal.containers
-import google.protobuf.message
+
+from collections import abc as _abc
+from google.protobuf import descriptor as _descriptor
+from google.protobuf import message as _message
+from google.protobuf.internal import containers as _containers
+import builtins as _builtins
 import sys
+import typing as _typing
 
-if sys.version_info >= (3, 8):
-    import typing as typing_extensions
+if sys.version_info >= (3, 10):
+    from typing import TypeAlias as _TypeAlias
 else:
-    import typing_extensions
+    from typing_extensions import TypeAlias as _TypeAlias
 
-DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
+DESCRIPTOR: _descriptor.FileDescriptor
 
-@typing_extensions.final
-class Resource(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class Resource(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
-    MAX_CAPACITY_FIELD_NUMBER: builtins.int
-    MIN_CAPACITY_FIELD_NUMBER: builtins.int
-    RENEWABLE_FIELD_NUMBER: builtins.int
-    UNIT_COST_FIELD_NUMBER: builtins.int
-    max_capacity: builtins.int
+    MAX_CAPACITY_FIELD_NUMBER: _builtins.int
+    MIN_CAPACITY_FIELD_NUMBER: _builtins.int
+    RENEWABLE_FIELD_NUMBER: _builtins.int
+    UNIT_COST_FIELD_NUMBER: _builtins.int
+    max_capacity: _builtins.int
     """The max capacity of the cumulative."""
-    min_capacity: builtins.int
+    min_capacity: _builtins.int
     """This field is used only in the consumer/producer case. It states the
     minimum capacity that must be valid at each time point.
     """
-    renewable: builtins.bool
+    renewable: _builtins.bool
     """Indicates if the resource is renewable, that is if a task demands
     d from this resource, then the available capacity decreases by d at the
     start of the task and increases by d at the end of the task.
     """
-    unit_cost: builtins.int
+    unit_cost: _builtins.int
     """If non zero, then each unit of capacity will incur a cost of unit_cost."""
     def __init__(
         self,
         *,
-        max_capacity: builtins.int = ...,
-        min_capacity: builtins.int = ...,
-        renewable: builtins.bool = ...,
-        unit_cost: builtins.int = ...,
+        max_capacity: _builtins.int = ...,
+        min_capacity: _builtins.int = ...,
+        renewable: _builtins.bool = ...,
+        unit_cost: _builtins.int = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["max_capacity", b"max_capacity", "min_capacity", b"min_capacity", "renewable", b"renewable", "unit_cost", b"unit_cost"]) -> None: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["max_capacity", b"max_capacity", "min_capacity", b"min_capacity", "renewable", b"renewable", "unit_cost", b"unit_cost"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-global___Resource = Resource
+Global___Resource: _TypeAlias = Resource  # noqa: Y015
 
-@typing_extensions.final
-class Recipe(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class Recipe(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
-    DURATION_FIELD_NUMBER: builtins.int
-    DEMANDS_FIELD_NUMBER: builtins.int
-    RESOURCES_FIELD_NUMBER: builtins.int
-    duration: builtins.int
+    DURATION_FIELD_NUMBER: _builtins.int
+    DEMANDS_FIELD_NUMBER: _builtins.int
+    RESOURCES_FIELD_NUMBER: _builtins.int
+    duration: _builtins.int
     """The duration of the task when this recipe is selected."""
-    @property
-    def demands(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]:
+    @_builtins.property
+    def demands(self) -> _containers.RepeatedScalarFieldContainer[_builtins.int]:
         """In the general case, demand must be >= 0. In the consumer/producer case,
         it can be < 0. Note that in this case, the tasks always have a duration
         of zero. Thus the effect of the demand (increase or decrease of the
         current usage) happens at the start of the task.
         """
-    @property
-    def resources(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]:
+
+    @_builtins.property
+    def resources(self) -> _containers.RepeatedScalarFieldContainer[_builtins.int]:
         """This parallel list indicates which resource index (in the main problem)
         the above demand corresponds to.
         """
+
     def __init__(
         self,
         *,
-        duration: builtins.int = ...,
-        demands: collections.abc.Iterable[builtins.int] | None = ...,
-        resources: collections.abc.Iterable[builtins.int] | None = ...,
+        duration: _builtins.int = ...,
+        demands: _abc.Iterable[_builtins.int] | None = ...,
+        resources: _abc.Iterable[_builtins.int] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["demands", b"demands", "duration", b"duration", "resources", b"resources"]) -> None: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["demands", b"demands", "duration", b"duration", "resources", b"resources"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-global___Recipe = Recipe
+Global___Recipe: _TypeAlias = Recipe  # noqa: Y015
 
-@typing_extensions.final
-class PerRecipeDelays(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class PerRecipeDelays(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
-    MIN_DELAYS_FIELD_NUMBER: builtins.int
-    @property
-    def min_delays(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
+    MIN_DELAYS_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def min_delays(self) -> _containers.RepeatedScalarFieldContainer[_builtins.int]: ...
     def __init__(
         self,
         *,
-        min_delays: collections.abc.Iterable[builtins.int] | None = ...,
+        min_delays: _abc.Iterable[_builtins.int] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["min_delays", b"min_delays"]) -> None: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["min_delays", b"min_delays"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-global___PerRecipeDelays = PerRecipeDelays
+Global___PerRecipeDelays: _TypeAlias = PerRecipeDelays  # noqa: Y015
 
-@typing_extensions.final
-class PerSuccessorDelays(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class PerSuccessorDelays(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
-    RECIPE_DELAYS_FIELD_NUMBER: builtins.int
-    @property
-    def recipe_delays(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___PerRecipeDelays]: ...
+    RECIPE_DELAYS_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def recipe_delays(self) -> _containers.RepeatedCompositeFieldContainer[Global___PerRecipeDelays]: ...
     def __init__(
         self,
         *,
-        recipe_delays: collections.abc.Iterable[global___PerRecipeDelays] | None = ...,
+        recipe_delays: _abc.Iterable[Global___PerRecipeDelays] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["recipe_delays", b"recipe_delays"]) -> None: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["recipe_delays", b"recipe_delays"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-global___PerSuccessorDelays = PerSuccessorDelays
+Global___PerSuccessorDelays: _TypeAlias = PerSuccessorDelays  # noqa: Y015
 
-@typing_extensions.final
-class Task(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class Task(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
-    SUCCESSORS_FIELD_NUMBER: builtins.int
-    RECIPES_FIELD_NUMBER: builtins.int
-    SUCCESSOR_DELAYS_FIELD_NUMBER: builtins.int
-    @property
-    def successors(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]:
+    SUCCESSORS_FIELD_NUMBER: _builtins.int
+    RECIPES_FIELD_NUMBER: _builtins.int
+    SUCCESSOR_DELAYS_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def successors(self) -> _containers.RepeatedScalarFieldContainer[_builtins.int]:
         """The indices of the successors tasks in the main problem."""
-    @property
-    def recipes(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Recipe]:
+
+    @_builtins.property
+    def recipes(self) -> _containers.RepeatedCompositeFieldContainer[Global___Recipe]:
         """The list of possible ways to execute the task."""
-    @property
-    def successor_delays(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___PerSuccessorDelays]:
+
+    @_builtins.property
+    def successor_delays(self) -> _containers.RepeatedCompositeFieldContainer[Global___PerSuccessorDelays]:
         """If the current task has n successors and m recipes then this is
         an n x m matrix where each entry at line i is a vector with the
         same length as the number of recipes for the task successor[i]. If
@@ -189,102 +199,107 @@ class Task(google.protobuf.message.Message):
         for its successor i, we have:
            start(current_task) + delay[i][m1][m2] <= start(successor_task).
         """
+
     def __init__(
         self,
         *,
-        successors: collections.abc.Iterable[builtins.int] | None = ...,
-        recipes: collections.abc.Iterable[global___Recipe] | None = ...,
-        successor_delays: collections.abc.Iterable[global___PerSuccessorDelays] | None = ...,
+        successors: _abc.Iterable[_builtins.int] | None = ...,
+        recipes: _abc.Iterable[Global___Recipe] | None = ...,
+        successor_delays: _abc.Iterable[Global___PerSuccessorDelays] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["recipes", b"recipes", "successor_delays", b"successor_delays", "successors", b"successors"]) -> None: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["recipes", b"recipes", "successor_delays", b"successor_delays", "successors", b"successors"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-global___Task = Task
+Global___Task: _TypeAlias = Task  # noqa: Y015
 
-@typing_extensions.final
-class RcpspProblem(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class RcpspProblem(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
-    RESOURCES_FIELD_NUMBER: builtins.int
-    TASKS_FIELD_NUMBER: builtins.int
-    IS_CONSUMER_PRODUCER_FIELD_NUMBER: builtins.int
-    IS_RESOURCE_INVESTMENT_FIELD_NUMBER: builtins.int
-    IS_RCPSP_MAX_FIELD_NUMBER: builtins.int
-    DEADLINE_FIELD_NUMBER: builtins.int
-    HORIZON_FIELD_NUMBER: builtins.int
-    RELEASE_DATE_FIELD_NUMBER: builtins.int
-    TARDINESS_COST_FIELD_NUMBER: builtins.int
-    MPM_TIME_FIELD_NUMBER: builtins.int
-    SEED_FIELD_NUMBER: builtins.int
-    BASEDATA_FIELD_NUMBER: builtins.int
-    DUE_DATE_FIELD_NUMBER: builtins.int
-    NAME_FIELD_NUMBER: builtins.int
-    @property
-    def resources(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Resource]:
-        """Problem data."""
-    @property
-    def tasks(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Task]: ...
-    is_consumer_producer: builtins.bool
+    RESOURCES_FIELD_NUMBER: _builtins.int
+    TASKS_FIELD_NUMBER: _builtins.int
+    IS_CONSUMER_PRODUCER_FIELD_NUMBER: _builtins.int
+    IS_RESOURCE_INVESTMENT_FIELD_NUMBER: _builtins.int
+    IS_RCPSP_MAX_FIELD_NUMBER: _builtins.int
+    DEADLINE_FIELD_NUMBER: _builtins.int
+    HORIZON_FIELD_NUMBER: _builtins.int
+    RELEASE_DATE_FIELD_NUMBER: _builtins.int
+    TARDINESS_COST_FIELD_NUMBER: _builtins.int
+    MPM_TIME_FIELD_NUMBER: _builtins.int
+    SEED_FIELD_NUMBER: _builtins.int
+    BASEDATA_FIELD_NUMBER: _builtins.int
+    DUE_DATE_FIELD_NUMBER: _builtins.int
+    NAME_FIELD_NUMBER: _builtins.int
+    is_consumer_producer: _builtins.bool
     """Problem type."""
-    is_resource_investment: builtins.bool
-    is_rcpsp_max: builtins.bool
-    deadline: builtins.int
+    is_resource_investment: _builtins.bool
+    is_rcpsp_max: _builtins.bool
+    deadline: _builtins.int
     """If set, it defines a strict date, and each task must finish before this."""
-    horizon: builtins.int
+    horizon: _builtins.int
     """Additional info stored in the source file.
     The horizon is a date where we are sure that all tasks can fit before it.
     """
-    release_date: builtins.int
+    release_date: _builtins.int
     """The release date is defined in the rcpsp base format, but is not used."""
-    tardiness_cost: builtins.int
+    tardiness_cost: _builtins.int
     """The tardiness cost is defined in the rcpsp base format, but is not used."""
-    mpm_time: builtins.int
+    mpm_time: _builtins.int
     """The mpm_time is defined in the rcpsp base format, but is not used.
     It is defined as the minimum makespan in case of interruptible tasks.
     """
-    seed: builtins.int
+    seed: _builtins.int
     """Data used by the problem generator."""
-    basedata: builtins.str
-    due_date: builtins.int
+    basedata: _builtins.str
+    due_date: _builtins.int
     """The due date is defined in the rcpsp base format, but is not used."""
-    name: builtins.str
+    name: _builtins.str
+    @_builtins.property
+    def resources(self) -> _containers.RepeatedCompositeFieldContainer[Global___Resource]:
+        """Problem data."""
+
+    @_builtins.property
+    def tasks(self) -> _containers.RepeatedCompositeFieldContainer[Global___Task]: ...
     def __init__(
         self,
         *,
-        resources: collections.abc.Iterable[global___Resource] | None = ...,
-        tasks: collections.abc.Iterable[global___Task] | None = ...,
-        is_consumer_producer: builtins.bool = ...,
-        is_resource_investment: builtins.bool = ...,
-        is_rcpsp_max: builtins.bool = ...,
-        deadline: builtins.int = ...,
-        horizon: builtins.int = ...,
-        release_date: builtins.int = ...,
-        tardiness_cost: builtins.int = ...,
-        mpm_time: builtins.int = ...,
-        seed: builtins.int = ...,
-        basedata: builtins.str = ...,
-        due_date: builtins.int = ...,
-        name: builtins.str = ...,
+        resources: _abc.Iterable[Global___Resource] | None = ...,
+        tasks: _abc.Iterable[Global___Task] | None = ...,
+        is_consumer_producer: _builtins.bool = ...,
+        is_resource_investment: _builtins.bool = ...,
+        is_rcpsp_max: _builtins.bool = ...,
+        deadline: _builtins.int = ...,
+        horizon: _builtins.int = ...,
+        release_date: _builtins.int = ...,
+        tardiness_cost: _builtins.int = ...,
+        mpm_time: _builtins.int = ...,
+        seed: _builtins.int = ...,
+        basedata: _builtins.str = ...,
+        due_date: _builtins.int = ...,
+        name: _builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["basedata", b"basedata", "deadline", b"deadline", "due_date", b"due_date", "horizon", b"horizon", "is_consumer_producer", b"is_consumer_producer", "is_rcpsp_max", b"is_rcpsp_max", "is_resource_investment", b"is_resource_investment", "mpm_time", b"mpm_time", "name", b"name", "release_date", b"release_date", "resources", b"resources", "seed", b"seed", "tardiness_cost", b"tardiness_cost", "tasks", b"tasks"]) -> None: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["basedata", b"basedata", "deadline", b"deadline", "due_date", b"due_date", "horizon", b"horizon", "is_consumer_producer", b"is_consumer_producer", "is_rcpsp_max", b"is_rcpsp_max", "is_resource_investment", b"is_resource_investment", "mpm_time", b"mpm_time", "name", b"name", "release_date", b"release_date", "resources", b"resources", "seed", b"seed", "tardiness_cost", b"tardiness_cost", "tasks", b"tasks"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-global___RcpspProblem = RcpspProblem
+Global___RcpspProblem: _TypeAlias = RcpspProblem  # noqa: Y015
 
-@typing_extensions.final
-class RcpspAssignment(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class RcpspAssignment(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
-    START_OF_TASK_FIELD_NUMBER: builtins.int
-    SELECTED_RECIPE_OF_TASK_FIELD_NUMBER: builtins.int
-    @property
-    def start_of_task(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
-    @property
-    def selected_recipe_of_task(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
+    START_OF_TASK_FIELD_NUMBER: _builtins.int
+    SELECTED_RECIPE_OF_TASK_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def start_of_task(self) -> _containers.RepeatedScalarFieldContainer[_builtins.int]: ...
+    @_builtins.property
+    def selected_recipe_of_task(self) -> _containers.RepeatedScalarFieldContainer[_builtins.int]: ...
     def __init__(
         self,
         *,
-        start_of_task: collections.abc.Iterable[builtins.int] | None = ...,
-        selected_recipe_of_task: collections.abc.Iterable[builtins.int] | None = ...,
+        start_of_task: _abc.Iterable[_builtins.int] | None = ...,
+        selected_recipe_of_task: _abc.Iterable[_builtins.int] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["selected_recipe_of_task", b"selected_recipe_of_task", "start_of_task", b"start_of_task"]) -> None: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["selected_recipe_of_task", b"selected_recipe_of_task", "start_of_task", b"start_of_task"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-global___RcpspAssignment = RcpspAssignment
+Global___RcpspAssignment: _TypeAlias = RcpspAssignment  # noqa: Y015

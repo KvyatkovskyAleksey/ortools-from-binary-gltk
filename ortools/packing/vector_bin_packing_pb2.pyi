@@ -25,28 +25,29 @@ bin.
 An optional integer imposes an upper bound on how many copies of the same
 item are allowed in a single bin, regardless of resource utilization.
 """
-import builtins
-import collections.abc
-import google.protobuf.descriptor
-import google.protobuf.internal.containers
-import google.protobuf.internal.enum_type_wrapper
-import google.protobuf.message
+
+from collections import abc as _abc
+from google.protobuf import descriptor as _descriptor
+from google.protobuf import message as _message
+from google.protobuf.internal import containers as _containers
+from google.protobuf.internal import enum_type_wrapper as _enum_type_wrapper
+import builtins as _builtins
 import sys
-import typing
+import typing as _typing
 
 if sys.version_info >= (3, 10):
-    import typing as typing_extensions
+    from typing import TypeAlias as _TypeAlias
 else:
-    import typing_extensions
+    from typing_extensions import TypeAlias as _TypeAlias
 
-DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
+DESCRIPTOR: _descriptor.FileDescriptor
 
 class _VectorBinPackingSolveStatus:
-    ValueType = typing.NewType("ValueType", builtins.int)
-    V: typing_extensions.TypeAlias = ValueType
+    ValueType = _typing.NewType("ValueType", _builtins.int)
+    V: _TypeAlias = ValueType  # noqa: Y015
 
-class _VectorBinPackingSolveStatusEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_VectorBinPackingSolveStatus.ValueType], builtins.type):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+class _VectorBinPackingSolveStatusEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[_VectorBinPackingSolveStatus.ValueType], _builtins.type):
+    DESCRIPTOR: _descriptor.EnumDescriptor
     VECTOR_BIN_PACKING_SOLVE_STATUS_UNSPECIFIED: _VectorBinPackingSolveStatus.ValueType  # 0
     """Default state."""
     OPTIMAL: _VectorBinPackingSolveStatus.ValueType  # 1
@@ -67,169 +68,183 @@ FEASIBLE: VectorBinPackingSolveStatus.ValueType  # 2
 """A feasible solution has been found."""
 INFEASIBLE: VectorBinPackingSolveStatus.ValueType  # 3
 """The problem is infeasible."""
-global___VectorBinPackingSolveStatus = VectorBinPackingSolveStatus
+Global___VectorBinPackingSolveStatus: _TypeAlias = VectorBinPackingSolveStatus  # noqa: Y015
 
-@typing_extensions.final
-class Item(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class Item(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
-    NAME_FIELD_NUMBER: builtins.int
-    RESOURCE_USAGE_FIELD_NUMBER: builtins.int
-    NUM_COPIES_FIELD_NUMBER: builtins.int
-    NUM_OPTIONAL_COPIES_FIELD_NUMBER: builtins.int
-    MAX_NUMBER_OF_COPIES_PER_BIN_FIELD_NUMBER: builtins.int
-    PENALTY_PER_MISSING_COPY_FIELD_NUMBER: builtins.int
-    name: builtins.str
+    NAME_FIELD_NUMBER: _builtins.int
+    RESOURCE_USAGE_FIELD_NUMBER: _builtins.int
+    NUM_COPIES_FIELD_NUMBER: _builtins.int
+    NUM_OPTIONAL_COPIES_FIELD_NUMBER: _builtins.int
+    MAX_NUMBER_OF_COPIES_PER_BIN_FIELD_NUMBER: _builtins.int
+    PENALTY_PER_MISSING_COPY_FIELD_NUMBER: _builtins.int
+    name: _builtins.str
     """Optional name. This is only used for display/debugging purposes."""
-    @property
-    def resource_usage(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]:
-        """Resource usages for this item. All usages must be non-negative.
-        Should be the same size as resource_capacity in the
-        VectorBinPackingProblem.
-        """
-    num_copies: builtins.int
+    num_copies: _builtins.int
     """Number of identical copies of this item that must be packed into some bin."""
-    num_optional_copies: builtins.int
+    num_optional_copies: _builtins.int
     """The number of extra copies which may be skipped for a penalty.
     Currently only supported by the ArcFlow solver (arc_flow_solver.h), other
     solvers ignore this field.
     """
-    max_number_of_copies_per_bin: builtins.int
+    max_number_of_copies_per_bin: _builtins.int
     """An optional upper bound on how many copies of the same item are allowed in
     a single bin, regardless of resource utilization. A value of 0 is
     interpreted as no limit.
     """
-    penalty_per_missing_copy: builtins.float
+    penalty_per_missing_copy: _builtins.float
     """Minimize the total cost of bins plus this penalty for each optional copy
     not placed in any bin.
     Currently only supported by the ArcFlow solver (arc_flow_solver.h), other
     solvers ignore this field.
     """
+    @_builtins.property
+    def resource_usage(self) -> _containers.RepeatedScalarFieldContainer[_builtins.int]:
+        """Resource usages for this item. All usages must be non-negative.
+        Should be the same size as resource_capacity in the
+        VectorBinPackingProblem.
+        """
+
     def __init__(
         self,
         *,
-        name: builtins.str = ...,
-        resource_usage: collections.abc.Iterable[builtins.int] | None = ...,
-        num_copies: builtins.int = ...,
-        num_optional_copies: builtins.int = ...,
-        max_number_of_copies_per_bin: builtins.int = ...,
-        penalty_per_missing_copy: builtins.float = ...,
+        name: _builtins.str = ...,
+        resource_usage: _abc.Iterable[_builtins.int] | None = ...,
+        num_copies: _builtins.int = ...,
+        num_optional_copies: _builtins.int = ...,
+        max_number_of_copies_per_bin: _builtins.int = ...,
+        penalty_per_missing_copy: _builtins.float = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["max_number_of_copies_per_bin", b"max_number_of_copies_per_bin", "name", b"name", "num_copies", b"num_copies", "num_optional_copies", b"num_optional_copies", "penalty_per_missing_copy", b"penalty_per_missing_copy", "resource_usage", b"resource_usage"]) -> None: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["max_number_of_copies_per_bin", b"max_number_of_copies_per_bin", "name", b"name", "num_copies", b"num_copies", "num_optional_copies", b"num_optional_copies", "penalty_per_missing_copy", b"penalty_per_missing_copy", "resource_usage", b"resource_usage"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-global___Item = Item
+Global___Item: _TypeAlias = Item  # noqa: Y015
 
-@typing_extensions.final
-class VectorBinPackingProblem(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class VectorBinPackingProblem(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
-    NAME_FIELD_NUMBER: builtins.int
-    RESOURCE_CAPACITY_FIELD_NUMBER: builtins.int
-    RESOURCE_NAME_FIELD_NUMBER: builtins.int
-    ITEM_FIELD_NUMBER: builtins.int
-    MAX_BINS_FIELD_NUMBER: builtins.int
-    COST_PER_BIN_FIELD_NUMBER: builtins.int
-    name: builtins.str
+    NAME_FIELD_NUMBER: _builtins.int
+    RESOURCE_CAPACITY_FIELD_NUMBER: _builtins.int
+    RESOURCE_NAME_FIELD_NUMBER: _builtins.int
+    ITEM_FIELD_NUMBER: _builtins.int
+    MAX_BINS_FIELD_NUMBER: _builtins.int
+    COST_PER_BIN_FIELD_NUMBER: _builtins.int
+    name: _builtins.str
     """Optional name."""
-    @property
-    def resource_capacity(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]:
-        """Max capacity of each resource.
-        All bins have the same resource capacities.
-        """
-    @property
-    def resource_name(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """Resources names. This can either be left empty or
-        must be of the same size as resource_capacity.
-        """
-    @property
-    def item(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Item]:
-        """The list of items which are to be assigned to bins."""
-    max_bins: builtins.int
+    max_bins: _builtins.int
     """The maximum number of bins available. A value of 0 is interpreted as no
     limit. Nonzero values may be used to encode feasibility problems.
     """
-    cost_per_bin: builtins.float
+    cost_per_bin: _builtins.float
     """If specified, tries to maximize the value of packed items minus the cost
     per bin used. A missing value is treated as 1.
     Currently only supported by the ArcFlow solver
     (ortools/packing/arc_flow_solver.h), other solvers
     ignore this field.
     """
+    @_builtins.property
+    def resource_capacity(self) -> _containers.RepeatedScalarFieldContainer[_builtins.int]:
+        """Max capacity of each resource.
+        All bins have the same resource capacities.
+        """
+
+    @_builtins.property
+    def resource_name(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
+        """Resources names. This can either be left empty or
+        must be of the same size as resource_capacity.
+        """
+
+    @_builtins.property
+    def item(self) -> _containers.RepeatedCompositeFieldContainer[Global___Item]:
+        """The list of items which are to be assigned to bins."""
+
     def __init__(
         self,
         *,
-        name: builtins.str = ...,
-        resource_capacity: collections.abc.Iterable[builtins.int] | None = ...,
-        resource_name: collections.abc.Iterable[builtins.str] | None = ...,
-        item: collections.abc.Iterable[global___Item] | None = ...,
-        max_bins: builtins.int = ...,
-        cost_per_bin: builtins.float | None = ...,
+        name: _builtins.str = ...,
+        resource_capacity: _abc.Iterable[_builtins.int] | None = ...,
+        resource_name: _abc.Iterable[_builtins.str] | None = ...,
+        item: _abc.Iterable[Global___Item] | None = ...,
+        max_bins: _builtins.int = ...,
+        cost_per_bin: _builtins.float | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["_cost_per_bin", b"_cost_per_bin", "cost_per_bin", b"cost_per_bin"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["_cost_per_bin", b"_cost_per_bin", "cost_per_bin", b"cost_per_bin", "item", b"item", "max_bins", b"max_bins", "name", b"name", "resource_capacity", b"resource_capacity", "resource_name", b"resource_name"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing_extensions.Literal["_cost_per_bin", b"_cost_per_bin"]) -> typing_extensions.Literal["cost_per_bin"] | None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["_cost_per_bin", b"_cost_per_bin", "cost_per_bin", b"cost_per_bin"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["_cost_per_bin", b"_cost_per_bin", "cost_per_bin", b"cost_per_bin", "item", b"item", "max_bins", b"max_bins", "name", b"name", "resource_capacity", b"resource_capacity", "resource_name", b"resource_name"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    _WhichOneofReturnType__cost_per_bin: _TypeAlias = _typing.Literal["cost_per_bin"]  # noqa: Y015
+    _WhichOneofArgType__cost_per_bin: _TypeAlias = _typing.Literal["_cost_per_bin", b"_cost_per_bin"]  # noqa: Y015
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__cost_per_bin) -> _WhichOneofReturnType__cost_per_bin | None: ...
 
-global___VectorBinPackingProblem = VectorBinPackingProblem
+Global___VectorBinPackingProblem: _TypeAlias = VectorBinPackingProblem  # noqa: Y015
 
-@typing_extensions.final
-class VectorBinPackingOneBinInSolution(google.protobuf.message.Message):
+@_typing.final
+class VectorBinPackingOneBinInSolution(_message.Message):
     """Describe one filled bin in the solution."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    ITEM_INDICES_FIELD_NUMBER: builtins.int
-    ITEM_COPIES_FIELD_NUMBER: builtins.int
-    @property
-    def item_indices(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]:
+    ITEM_INDICES_FIELD_NUMBER: _builtins.int
+    ITEM_COPIES_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def item_indices(self) -> _containers.RepeatedScalarFieldContainer[_builtins.int]:
         """Which items are in this bin. They are supposed to be unique."""
-    @property
-    def item_copies(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]:
+
+    @_builtins.property
+    def item_copies(self) -> _containers.RepeatedScalarFieldContainer[_builtins.int]:
         """How many of each items are in this bins."""
+
     def __init__(
         self,
         *,
-        item_indices: collections.abc.Iterable[builtins.int] | None = ...,
-        item_copies: collections.abc.Iterable[builtins.int] | None = ...,
+        item_indices: _abc.Iterable[_builtins.int] | None = ...,
+        item_copies: _abc.Iterable[_builtins.int] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["item_copies", b"item_copies", "item_indices", b"item_indices"]) -> None: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["item_copies", b"item_copies", "item_indices", b"item_indices"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-global___VectorBinPackingOneBinInSolution = VectorBinPackingOneBinInSolution
+Global___VectorBinPackingOneBinInSolution: _TypeAlias = VectorBinPackingOneBinInSolution  # noqa: Y015
 
-@typing_extensions.final
-class VectorBinPackingSolution(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class VectorBinPackingSolution(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
-    SOLVER_INFO_FIELD_NUMBER: builtins.int
-    BINS_FIELD_NUMBER: builtins.int
-    STATUS_FIELD_NUMBER: builtins.int
-    OBJECTIVE_VALUE_FIELD_NUMBER: builtins.int
-    SOLVE_TIME_IN_SECONDS_FIELD_NUMBER: builtins.int
-    ARC_FLOW_TIME_IN_SECONDS_FIELD_NUMBER: builtins.int
-    solver_info: builtins.str
+    SOLVER_INFO_FIELD_NUMBER: _builtins.int
+    BINS_FIELD_NUMBER: _builtins.int
+    STATUS_FIELD_NUMBER: _builtins.int
+    OBJECTIVE_VALUE_FIELD_NUMBER: _builtins.int
+    SOLVE_TIME_IN_SECONDS_FIELD_NUMBER: _builtins.int
+    ARC_FLOW_TIME_IN_SECONDS_FIELD_NUMBER: _builtins.int
+    solver_info: _builtins.str
     """Optional info from the solver."""
-    @property
-    def bins(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___VectorBinPackingOneBinInSolution]:
-        """Filled bins."""
-    status: global___VectorBinPackingSolveStatus.ValueType
+    status: Global___VectorBinPackingSolveStatus.ValueType
     """Solve status."""
-    objective_value: builtins.float
+    objective_value: _builtins.float
     """Objective value.
     The total cost of bins used plus the penalty for any skipped items.
     """
-    solve_time_in_seconds: builtins.float
+    solve_time_in_seconds: _builtins.float
     """Solve time in seconds."""
-    arc_flow_time_in_seconds: builtins.float
+    arc_flow_time_in_seconds: _builtins.float
     """Time to create the Arc-Flow graph."""
+    @_builtins.property
+    def bins(self) -> _containers.RepeatedCompositeFieldContainer[Global___VectorBinPackingOneBinInSolution]:
+        """Filled bins."""
+
     def __init__(
         self,
         *,
-        solver_info: builtins.str = ...,
-        bins: collections.abc.Iterable[global___VectorBinPackingOneBinInSolution] | None = ...,
-        status: global___VectorBinPackingSolveStatus.ValueType = ...,
-        objective_value: builtins.float = ...,
-        solve_time_in_seconds: builtins.float = ...,
-        arc_flow_time_in_seconds: builtins.float = ...,
+        solver_info: _builtins.str = ...,
+        bins: _abc.Iterable[Global___VectorBinPackingOneBinInSolution] | None = ...,
+        status: Global___VectorBinPackingSolveStatus.ValueType = ...,
+        objective_value: _builtins.float = ...,
+        solve_time_in_seconds: _builtins.float = ...,
+        arc_flow_time_in_seconds: _builtins.float = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["arc_flow_time_in_seconds", b"arc_flow_time_in_seconds", "bins", b"bins", "objective_value", b"objective_value", "solve_time_in_seconds", b"solve_time_in_seconds", "solver_info", b"solver_info", "status", b"status"]) -> None: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["arc_flow_time_in_seconds", b"arc_flow_time_in_seconds", "bins", b"bins", "objective_value", b"objective_value", "solve_time_in_seconds", b"solve_time_in_seconds", "solver_info", b"solver_info", "status", b"status"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-global___VectorBinPackingSolution = VectorBinPackingSolution
+Global___VectorBinPackingSolution: _TypeAlias = VectorBinPackingSolution  # noqa: Y015

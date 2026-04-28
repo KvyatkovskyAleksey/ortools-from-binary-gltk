@@ -27,94 +27,94 @@ The objective to minimize is:
    the earliness-tardiness cost for all jobs +
    the weighted makespan.
 """
-import builtins
-import collections.abc
-import google.protobuf.descriptor
-import google.protobuf.internal.containers
-import google.protobuf.message
-import google.protobuf.wrappers_pb2
+
+from collections import abc as _abc
+from google.protobuf import descriptor as _descriptor
+from google.protobuf import message as _message
+from google.protobuf import wrappers_pb2 as _wrappers_pb2
+from google.protobuf.internal import containers as _containers
+import builtins as _builtins
 import sys
+import typing as _typing
 
-if sys.version_info >= (3, 8):
-    import typing as typing_extensions
+if sys.version_info >= (3, 10):
+    from typing import TypeAlias as _TypeAlias
 else:
-    import typing_extensions
+    from typing_extensions import TypeAlias as _TypeAlias
 
-DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
+DESCRIPTOR: _descriptor.FileDescriptor
 
-@typing_extensions.final
-class Task(google.protobuf.message.Message):
+@_typing.final
+class Task(_message.Message):
     """This message specifies a task inside a job."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    MACHINE_FIELD_NUMBER: builtins.int
-    DURATION_FIELD_NUMBER: builtins.int
-    COST_FIELD_NUMBER: builtins.int
-    @property
-    def machine(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]:
+    MACHINE_FIELD_NUMBER: _builtins.int
+    DURATION_FIELD_NUMBER: _builtins.int
+    COST_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def machine(self) -> _containers.RepeatedScalarFieldContainer[_builtins.int]:
         """The alternative machines that can perform that task. Only one must
         be selected. We store the index of the machine in the main
         JsspInputProblem.
         """
-    @property
-    def duration(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]:
+
+    @_builtins.property
+    def duration(self) -> _containers.RepeatedScalarFieldContainer[_builtins.int]:
         """The corresponding duration for the alternative ways of performing this
         task. This list must have the same size as the machine_id list.
         """
-    @property
-    def cost(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]:
+
+    @_builtins.property
+    def cost(self) -> _containers.RepeatedScalarFieldContainer[_builtins.int]:
         """An optional cost for selecting one alternative way of performing the task
         against another. This list must either be empty, or has the same size as
         the above two lists.
         """
+
     def __init__(
         self,
         *,
-        machine: collections.abc.Iterable[builtins.int] | None = ...,
-        duration: collections.abc.Iterable[builtins.int] | None = ...,
-        cost: collections.abc.Iterable[builtins.int] | None = ...,
+        machine: _abc.Iterable[_builtins.int] | None = ...,
+        duration: _abc.Iterable[_builtins.int] | None = ...,
+        cost: _abc.Iterable[_builtins.int] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["cost", b"cost", "duration", b"duration", "machine", b"machine"]) -> None: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["cost", b"cost", "duration", b"duration", "machine", b"machine"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-global___Task = Task
+Global___Task: _TypeAlias = Task  # noqa: Y015
 
-@typing_extensions.final
-class Job(google.protobuf.message.Message):
+@_typing.final
+class Job(_message.Message):
     """A job is an ordered sequence of tasks, plus hard constraints on its earliest
     start time, and its latest completion time. As well as optional
     earliness-tardiness penalties on its end date. The job starts with the first
     task in the list, and ends with the last.
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    TASKS_FIELD_NUMBER: builtins.int
-    EARLIEST_START_FIELD_NUMBER: builtins.int
-    EARLY_DUE_DATE_FIELD_NUMBER: builtins.int
-    LATE_DUE_DATE_FIELD_NUMBER: builtins.int
-    EARLINESS_COST_PER_TIME_UNIT_FIELD_NUMBER: builtins.int
-    LATENESS_COST_PER_TIME_UNIT_FIELD_NUMBER: builtins.int
-    LATEST_END_FIELD_NUMBER: builtins.int
-    NAME_FIELD_NUMBER: builtins.int
-    @property
-    def tasks(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Task]:
-        """The ordered sequence of tasks."""
-    @property
-    def earliest_start(self) -> google.protobuf.wrappers_pb2.Int64Value:
-        """This date, if set, specifies a hard constraint on when the job can start."""
-    early_due_date: builtins.int
+    TASKS_FIELD_NUMBER: _builtins.int
+    EARLIEST_START_FIELD_NUMBER: _builtins.int
+    EARLY_DUE_DATE_FIELD_NUMBER: _builtins.int
+    LATE_DUE_DATE_FIELD_NUMBER: _builtins.int
+    EARLINESS_COST_PER_TIME_UNIT_FIELD_NUMBER: _builtins.int
+    LATENESS_COST_PER_TIME_UNIT_FIELD_NUMBER: _builtins.int
+    LATEST_END_FIELD_NUMBER: _builtins.int
+    NAME_FIELD_NUMBER: _builtins.int
+    early_due_date: _builtins.int
     """This date specifies the earliest time the job should end. If
     this is set, then the earliness_cost_per_time_unit should be set
     too with a positive value.
     """
-    late_due_date: builtins.int
+    late_due_date: _builtins.int
     """This date specifies the latest time the job should end. If this
     is set, then the lateness_cost_per_time_unit should be set too
     with a positive value.  If both early_due_date and late_due_date
     are set, then early_due_date <= late_due_date must hold.
     """
-    earliness_cost_per_time_unit: builtins.int
+    earliness_cost_per_time_unit: _builtins.int
     """The cost model is a convex function
        \\            /
         \\          /
@@ -124,34 +124,45 @@ class Job(google.protobuf.message.Message):
     early and late due dates. For one penalty part to be active, both
     the date and a positive cost must be defined. All costs must be positive.
     """
-    lateness_cost_per_time_unit: builtins.int
-    @property
-    def latest_end(self) -> google.protobuf.wrappers_pb2.Int64Value:
+    lateness_cost_per_time_unit: _builtins.int
+    name: _builtins.str
+    """Optional. A name for the job. This will only be used for logging purposes."""
+    @_builtins.property
+    def tasks(self) -> _containers.RepeatedCompositeFieldContainer[Global___Task]:
+        """The ordered sequence of tasks."""
+
+    @_builtins.property
+    def earliest_start(self) -> _wrappers_pb2.Int64Value:
+        """This date, if set, specifies a hard constraint on when the job can start."""
+
+    @_builtins.property
+    def latest_end(self) -> _wrappers_pb2.Int64Value:
         """This date, if set, specifies a hard constraint on when the job
         can end.  If both earliest_start and latest_end are specified,
         then earliest_start <= latest_end must hold.
         """
-    name: builtins.str
-    """Optional. A name for the job. This will only be used for logging purposes."""
+
     def __init__(
         self,
         *,
-        tasks: collections.abc.Iterable[global___Task] | None = ...,
-        earliest_start: google.protobuf.wrappers_pb2.Int64Value | None = ...,
-        early_due_date: builtins.int = ...,
-        late_due_date: builtins.int = ...,
-        earliness_cost_per_time_unit: builtins.int = ...,
-        lateness_cost_per_time_unit: builtins.int = ...,
-        latest_end: google.protobuf.wrappers_pb2.Int64Value | None = ...,
-        name: builtins.str = ...,
+        tasks: _abc.Iterable[Global___Task] | None = ...,
+        earliest_start: _wrappers_pb2.Int64Value | None = ...,
+        early_due_date: _builtins.int = ...,
+        late_due_date: _builtins.int = ...,
+        earliness_cost_per_time_unit: _builtins.int = ...,
+        lateness_cost_per_time_unit: _builtins.int = ...,
+        latest_end: _wrappers_pb2.Int64Value | None = ...,
+        name: _builtins.str = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["earliest_start", b"earliest_start", "latest_end", b"latest_end"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["earliest_start", b"earliest_start", "earliness_cost_per_time_unit", b"earliness_cost_per_time_unit", "early_due_date", b"early_due_date", "late_due_date", b"late_due_date", "lateness_cost_per_time_unit", b"lateness_cost_per_time_unit", "latest_end", b"latest_end", "name", b"name", "tasks", b"tasks"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["earliest_start", b"earliest_start", "latest_end", b"latest_end"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["earliest_start", b"earliest_start", "earliness_cost_per_time_unit", b"earliness_cost_per_time_unit", "early_due_date", b"early_due_date", "late_due_date", b"late_due_date", "lateness_cost_per_time_unit", b"lateness_cost_per_time_unit", "latest_end", b"latest_end", "name", b"name", "tasks", b"tasks"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-global___Job = Job
+Global___Job: _TypeAlias = Job  # noqa: Y015
 
-@typing_extensions.final
-class TransitionTimeMatrix(google.protobuf.message.Message):
+@_typing.final
+class TransitionTimeMatrix(_message.Message):
     """Stores the transition time matrix between jobs on a given machine.
     If the initial job has n jobs, then time[i * n + j] will indicate the
     minimum delay between the end of a task of a job i performed on this machine
@@ -159,191 +170,204 @@ class TransitionTimeMatrix(google.protobuf.message.Message):
     Nothing can be executed on that machine during this delay.
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    TRANSITION_TIME_FIELD_NUMBER: builtins.int
-    @property
-    def transition_time(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
+    TRANSITION_TIME_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def transition_time(self) -> _containers.RepeatedScalarFieldContainer[_builtins.int]: ...
     def __init__(
         self,
         *,
-        transition_time: collections.abc.Iterable[builtins.int] | None = ...,
+        transition_time: _abc.Iterable[_builtins.int] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["transition_time", b"transition_time"]) -> None: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["transition_time", b"transition_time"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-global___TransitionTimeMatrix = TransitionTimeMatrix
+Global___TransitionTimeMatrix: _TypeAlias = TransitionTimeMatrix  # noqa: Y015
 
-@typing_extensions.final
-class Machine(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class Machine(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
-    TRANSITION_TIME_MATRIX_FIELD_NUMBER: builtins.int
-    NAME_FIELD_NUMBER: builtins.int
-    @property
-    def transition_time_matrix(self) -> global___TransitionTimeMatrix:
-        """Optional transition time matrix for this machine."""
-    name: builtins.str
+    TRANSITION_TIME_MATRIX_FIELD_NUMBER: _builtins.int
+    NAME_FIELD_NUMBER: _builtins.int
+    name: _builtins.str
     """Optional. A name for a machine. This will only be used for logging
     purposes.
     """
+    @_builtins.property
+    def transition_time_matrix(self) -> Global___TransitionTimeMatrix:
+        """Optional transition time matrix for this machine."""
+
     def __init__(
         self,
         *,
-        transition_time_matrix: global___TransitionTimeMatrix | None = ...,
-        name: builtins.str = ...,
+        transition_time_matrix: Global___TransitionTimeMatrix | None = ...,
+        name: _builtins.str = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["transition_time_matrix", b"transition_time_matrix"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["name", b"name", "transition_time_matrix", b"transition_time_matrix"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["transition_time_matrix", b"transition_time_matrix"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["name", b"name", "transition_time_matrix", b"transition_time_matrix"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-global___Machine = Machine
+Global___Machine: _TypeAlias = Machine  # noqa: Y015
 
-@typing_extensions.final
-class JobPrecedence(google.protobuf.message.Message):
+@_typing.final
+class JobPrecedence(_message.Message):
     """Specifies a precedence relation between jobs.
     It states: start(second_job) >= end(first_job) + min_delay.
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    FIRST_JOB_INDEX_FIELD_NUMBER: builtins.int
-    SECOND_JOB_INDEX_FIELD_NUMBER: builtins.int
-    MIN_DELAY_FIELD_NUMBER: builtins.int
-    first_job_index: builtins.int
-    second_job_index: builtins.int
-    min_delay: builtins.int
+    FIRST_JOB_INDEX_FIELD_NUMBER: _builtins.int
+    SECOND_JOB_INDEX_FIELD_NUMBER: _builtins.int
+    MIN_DELAY_FIELD_NUMBER: _builtins.int
+    first_job_index: _builtins.int
+    second_job_index: _builtins.int
+    min_delay: _builtins.int
     def __init__(
         self,
         *,
-        first_job_index: builtins.int = ...,
-        second_job_index: builtins.int = ...,
-        min_delay: builtins.int = ...,
+        first_job_index: _builtins.int = ...,
+        second_job_index: _builtins.int = ...,
+        min_delay: _builtins.int = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["first_job_index", b"first_job_index", "min_delay", b"min_delay", "second_job_index", b"second_job_index"]) -> None: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["first_job_index", b"first_job_index", "min_delay", b"min_delay", "second_job_index", b"second_job_index"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-global___JobPrecedence = JobPrecedence
+Global___JobPrecedence: _TypeAlias = JobPrecedence  # noqa: Y015
 
-@typing_extensions.final
-class JsspInputProblem(google.protobuf.message.Message):
+@_typing.final
+class JsspInputProblem(_message.Message):
     """The input of a problem."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    JOBS_FIELD_NUMBER: builtins.int
-    MACHINES_FIELD_NUMBER: builtins.int
-    PRECEDENCES_FIELD_NUMBER: builtins.int
-    MAKESPAN_COST_PER_TIME_UNIT_FIELD_NUMBER: builtins.int
-    SCALING_FACTOR_FIELD_NUMBER: builtins.int
-    SEED_FIELD_NUMBER: builtins.int
-    NAME_FIELD_NUMBER: builtins.int
-    @property
-    def jobs(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Job]: ...
-    @property
-    def machines(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Machine]: ...
-    @property
-    def precedences(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___JobPrecedence]: ...
-    makespan_cost_per_time_unit: builtins.int
-    @property
-    def scaling_factor(self) -> google.protobuf.wrappers_pb2.DoubleValue:
+    JOBS_FIELD_NUMBER: _builtins.int
+    MACHINES_FIELD_NUMBER: _builtins.int
+    PRECEDENCES_FIELD_NUMBER: _builtins.int
+    MAKESPAN_COST_PER_TIME_UNIT_FIELD_NUMBER: _builtins.int
+    SCALING_FACTOR_FIELD_NUMBER: _builtins.int
+    SEED_FIELD_NUMBER: _builtins.int
+    NAME_FIELD_NUMBER: _builtins.int
+    makespan_cost_per_time_unit: _builtins.int
+    seed: _builtins.int
+    """Sometimes, the academic data files contain extra information. We store it
+    in the input problem message.
+    """
+    name: _builtins.str
+    """Optional: Name of the problem."""
+    @_builtins.property
+    def jobs(self) -> _containers.RepeatedCompositeFieldContainer[Global___Job]: ...
+    @_builtins.property
+    def machines(self) -> _containers.RepeatedCompositeFieldContainer[Global___Machine]: ...
+    @_builtins.property
+    def precedences(self) -> _containers.RepeatedCompositeFieldContainer[Global___JobPrecedence]: ...
+    @_builtins.property
+    def scaling_factor(self) -> _wrappers_pb2.DoubleValue:
         """If set, the cost coefficients are multiplied by this factor.
         It is set to 1000 by the parser when reading early tardy taillard problems
         where the weight of a job is a floating point value.
         """
-    seed: builtins.int
-    """Sometimes, the academic data files contain extra information. We store it
-    in the input problem message.
-    """
-    name: builtins.str
-    """Optional: Name of the problem."""
+
     def __init__(
         self,
         *,
-        jobs: collections.abc.Iterable[global___Job] | None = ...,
-        machines: collections.abc.Iterable[global___Machine] | None = ...,
-        precedences: collections.abc.Iterable[global___JobPrecedence] | None = ...,
-        makespan_cost_per_time_unit: builtins.int = ...,
-        scaling_factor: google.protobuf.wrappers_pb2.DoubleValue | None = ...,
-        seed: builtins.int = ...,
-        name: builtins.str = ...,
+        jobs: _abc.Iterable[Global___Job] | None = ...,
+        machines: _abc.Iterable[Global___Machine] | None = ...,
+        precedences: _abc.Iterable[Global___JobPrecedence] | None = ...,
+        makespan_cost_per_time_unit: _builtins.int = ...,
+        scaling_factor: _wrappers_pb2.DoubleValue | None = ...,
+        seed: _builtins.int = ...,
+        name: _builtins.str = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["scaling_factor", b"scaling_factor"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["jobs", b"jobs", "machines", b"machines", "makespan_cost_per_time_unit", b"makespan_cost_per_time_unit", "name", b"name", "precedences", b"precedences", "scaling_factor", b"scaling_factor", "seed", b"seed"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["scaling_factor", b"scaling_factor"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["jobs", b"jobs", "machines", b"machines", "makespan_cost_per_time_unit", b"makespan_cost_per_time_unit", "name", b"name", "precedences", b"precedences", "scaling_factor", b"scaling_factor", "seed", b"seed"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-global___JsspInputProblem = JsspInputProblem
+Global___JsspInputProblem: _TypeAlias = JsspInputProblem  # noqa: Y015
 
-@typing_extensions.final
-class AssignedTask(google.protobuf.message.Message):
+@_typing.final
+class AssignedTask(_message.Message):
     """Stores how a task is executed."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    ALTERNATIVE_INDEX_FIELD_NUMBER: builtins.int
-    START_TIME_FIELD_NUMBER: builtins.int
-    alternative_index: builtins.int
+    ALTERNATIVE_INDEX_FIELD_NUMBER: _builtins.int
+    START_TIME_FIELD_NUMBER: _builtins.int
+    alternative_index: _builtins.int
     """Indicates which alternative was selected. It corresponds to the
     alternative_index-th machine in the 'machine' field in Tasks
     """
-    start_time: builtins.int
+    start_time: _builtins.int
     """The start time of that task."""
     def __init__(
         self,
         *,
-        alternative_index: builtins.int = ...,
-        start_time: builtins.int = ...,
+        alternative_index: _builtins.int = ...,
+        start_time: _builtins.int = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["alternative_index", b"alternative_index", "start_time", b"start_time"]) -> None: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["alternative_index", b"alternative_index", "start_time", b"start_time"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-global___AssignedTask = AssignedTask
+Global___AssignedTask: _TypeAlias = AssignedTask  # noqa: Y015
 
-@typing_extensions.final
-class AssignedJob(google.protobuf.message.Message):
+@_typing.final
+class AssignedJob(_message.Message):
     """Stores how a job is executed."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    TASKS_FIELD_NUMBER: builtins.int
-    DUE_DATE_COST_FIELD_NUMBER: builtins.int
-    SUM_OF_TASK_COSTS_FIELD_NUMBER: builtins.int
-    @property
-    def tasks(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___AssignedTask]:
-        """How each task is executed."""
-    due_date_cost: builtins.int
+    TASKS_FIELD_NUMBER: _builtins.int
+    DUE_DATE_COST_FIELD_NUMBER: _builtins.int
+    SUM_OF_TASK_COSTS_FIELD_NUMBER: _builtins.int
+    due_date_cost: _builtins.int
     """Earliness-Tardiness cost of that job."""
-    sum_of_task_costs: builtins.int
+    sum_of_task_costs: _builtins.int
     """Sum of all tasks costs for that job."""
+    @_builtins.property
+    def tasks(self) -> _containers.RepeatedCompositeFieldContainer[Global___AssignedTask]:
+        """How each task is executed."""
+
     def __init__(
         self,
         *,
-        tasks: collections.abc.Iterable[global___AssignedTask] | None = ...,
-        due_date_cost: builtins.int = ...,
-        sum_of_task_costs: builtins.int = ...,
+        tasks: _abc.Iterable[Global___AssignedTask] | None = ...,
+        due_date_cost: _builtins.int = ...,
+        sum_of_task_costs: _builtins.int = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["due_date_cost", b"due_date_cost", "sum_of_task_costs", b"sum_of_task_costs", "tasks", b"tasks"]) -> None: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["due_date_cost", b"due_date_cost", "sum_of_task_costs", b"sum_of_task_costs", "tasks", b"tasks"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-global___AssignedJob = AssignedJob
+Global___AssignedJob: _TypeAlias = AssignedJob  # noqa: Y015
 
-@typing_extensions.final
-class JsspOutputSolution(google.protobuf.message.Message):
+@_typing.final
+class JsspOutputSolution(_message.Message):
     """The output of solving a jobshop problem."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    JOBS_FIELD_NUMBER: builtins.int
-    MAKESPAN_COST_FIELD_NUMBER: builtins.int
-    TOTAL_COST_FIELD_NUMBER: builtins.int
-    @property
-    def jobs(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___AssignedJob]:
-        """The solution for all jobs."""
-    makespan_cost: builtins.int
+    JOBS_FIELD_NUMBER: _builtins.int
+    MAKESPAN_COST_FIELD_NUMBER: _builtins.int
+    TOTAL_COST_FIELD_NUMBER: _builtins.int
+    makespan_cost: _builtins.int
     """The makespan cost of that solution."""
-    total_cost: builtins.int
+    total_cost: _builtins.int
     """The total cost of that solution."""
+    @_builtins.property
+    def jobs(self) -> _containers.RepeatedCompositeFieldContainer[Global___AssignedJob]:
+        """The solution for all jobs."""
+
     def __init__(
         self,
         *,
-        jobs: collections.abc.Iterable[global___AssignedJob] | None = ...,
-        makespan_cost: builtins.int = ...,
-        total_cost: builtins.int = ...,
+        jobs: _abc.Iterable[Global___AssignedJob] | None = ...,
+        makespan_cost: _builtins.int = ...,
+        total_cost: _builtins.int = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["jobs", b"jobs", "makespan_cost", b"makespan_cost", "total_cost", b"total_cost"]) -> None: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["jobs", b"jobs", "makespan_cost", b"makespan_cost", "total_cost", b"total_cost"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-global___JsspOutputSolution = JsspOutputSolution
+Global___JsspOutputSolution: _TypeAlias = JsspOutputSolution  # noqa: Y015

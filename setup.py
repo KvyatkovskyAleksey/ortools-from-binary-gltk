@@ -1,21 +1,30 @@
-from sys import executable
-from os.path import join as pjoin
-from os.path import dirname
+"""
+ortools-from-binary-glpk: pre-built or-tools 9.12 wheel-equivalent with GLPK linked.
 
-setuptools_import_error_message = """setuptools is not installed for """ + executable + """
-Please follow this link for installing instructions :
-https://pypi.python.org/pypi/setuptools
-make sure you use \"""" + executable + """\" during the installation"""
+Branch `lambda-py312`: built for Python 3.12 against manylinux_2_28_x86_64
+(glibc 2.28; runs on AWS Lambda Python 3.12 runtime, AL2023 glibc 2.34, and any
+Linux >= glibc 2.28).
 
-try:
-    from setuptools import find_packages, setup
-    from setuptools.dist import Distribution
-    from setuptools.command.install import install
-except ImportError:
-    raise ImportError(setuptools_import_error_message)
+Built via the `build.Dockerfile` at the repo root using
+`quay.io/pypa/manylinux_2_28_x86_64`. The wheel is repaired with auditwheel,
+which bundles libGLPK.so.5.0 and a few abseil libs into ortools/.libs/.
+
+Usage from a downstream project's requirements.txt:
+
+    git+https://github.com/KvyatkovskyAleksey/ortools-from-binary-gltk.git@lambda-py312
+
+For the original cp39 build, use the `lambda` branch.
+"""
+from os.path import dirname, join as pjoin
+
+from setuptools import find_packages, setup
+from setuptools.command.install import install
+from setuptools.dist import Distribution
 
 
 class BinaryDistribution(Distribution):
+    """Marks this as a non-pure (binary) distribution so the platform tag is set."""
+
     def is_pure(self):
         return False
 
@@ -24,91 +33,65 @@ class BinaryDistribution(Distribution):
 
 
 class InstallPlatlib(install):
+    """Force install into the platform-specific lib dir (where binary extensions go)."""
+
     def finalize_options(self):
         install.finalize_options(self)
         self.install_lib = self.install_platlib
 
 
-# Utility function to read the README file.
-# Used for the long_description.  It's nice, because now 1) we have a top level
-# README file and 2) it's easier to type in the README file than to put a raw
-# string in below ...
 def read(fname):
     return open(pjoin(dirname(__file__), fname)).read()
 
 
 setup(
     name='ortools',
-    version='9.8.3309',
+    version='9.12.9999',
     packages=find_packages(),
-    python_requires='>= 3.8',
+    python_requires='>=3.12',
     install_requires=[
-        'absl-py >= 2.0.0',
-        'numpy >= 1.13.3',
-        'pandas >= 2.0.0',
-        'protobuf >= 4.25.0',
+        'absl-py>=2.0.0',
+        'numpy>=1.13.3',
+        'pandas>=2.0.0',
+        'protobuf<5.30,>=5.29.3',
+        'immutabledict>=3.0.0',
     ],
     package_data={
-        'ortools':['.libs/*','../libortools.so.9'],
-        'ortools.init.python':['init.cpython-39-x86_64-linux-gnu.so', '*.pyi'],
-        'ortools.algorithms.python':['knapsack_solver.cpython-39-x86_64-linux-gnu.so', '*.pyi'],
-        'ortools.bop':['*.pyi'],
-        'ortools.glop':['*.pyi'],
-        'ortools.graph.python':[
-            'linear_sum_assignment.cpython-39-x86_64-linux-gnu.so',
-            'max_flow.cpython-39-x86_64-linux-gnu.so',
-            'min_cost_flow.cpython-39-x86_64-linux-gnu.so',
-            '*.pyi'],
-        'ortools.constraint_solver':['_pywrapcp.so', '*.pyi'],
-        'ortools.linear_solver':['_pywraplp.so', '*.pyi'],
-        'ortools.linear_solver.python':['model_builder_helper.cpython-39-x86_64-linux-gnu.so', '*.pyi'],
-        'ortools.packing':['*.pyi'],
-        'ortools.pdlp':['*.pyi'],
-        'ortools.pdlp.python':['pdlp.cpython-39-x86_64-linux-gnu.so', '*.pyi'],
-        'ortools.sat':['*.pyi'],
-        'ortools.sat.colab':['*.pyi'],
-        'ortools.sat.python':['swig_helper.cpython-39-x86_64-linux-gnu.so', '*.pyi'],
-        'ortools.scheduling.python':['rcpsp.cpython-39-x86_64-linux-gnu.so', '*.pyi'],
-        'ortools.util.python':['sorted_interval_list.cpython-39-x86_64-linux-gnu.so', '*.pyi'],
+        # Catch-all: every package gets its compiled extensions, type stubs, and
+        # Python sources bundled. This avoids per-module hardcoded filenames so
+        # future minor or-tools bumps "just work" without touching setup.py.
+        '': ['*.so', '*.so.*', '*.pyi'],
+        # Bundled shared libraries (Cbc/Clp/Osi/Abseil/GLPK/...). The .so files
+        # in ortools/ have RPATH `$ORIGIN/../../ortools/.libs` so they find
+        # these at runtime.
+        'ortools': ['.libs/*'],
     },
     include_package_data=True,
     license='Apache 2.0',
     author='Google LLC',
     author_email='or-tools@google.com',
-    description='Google OR-Tools python libraries and modules',
+    description='Google OR-Tools python libraries and modules (custom build with GLPK linked)',
     long_description=read('README.txt'),
-    keywords=('operations research' + ', constraint programming' +
-              ', linear programming' + ', flow algorithms' + ', python'),
+    keywords=(
+        'operations research, constraint programming, linear programming,'
+        ' flow algorithms, python, glpk'
+    ),
     url='https://developers.google.com/optimization/',
     download_url='https://github.com/google/or-tools/releases',
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Environment :: Console',
         'Intended Audience :: Developers',
-        'Intended Audience :: Education',
-        'Intended Audience :: Information Technology',
         'Intended Audience :: Science/Research',
         'License :: OSI Approved :: Apache Software License',
-        'Operating System :: Unix',
         'Operating System :: POSIX :: Linux',
-        'Operating System :: POSIX :: BSD :: FreeBSD',
-        'Operating System :: MacOS',
-        'Operating System :: MacOS :: MacOS X',
-        'Operating System :: Microsoft :: Windows',
         'Programming Language :: Python',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3 :: Only',
-        'Programming Language :: Python :: 3.8',
-        'Programming Language :: Python :: 3.9',
-        'Programming Language :: Python :: 3.10',
-        'Programming Language :: Python :: 3.11',
         'Programming Language :: Python :: 3.12',
         'Programming Language :: C++',
         'Programming Language :: Python :: Implementation :: CPython',
-        'Topic :: Office/Business :: Scheduling',
-        'Topic :: Scientific/Engineering',
         'Topic :: Scientific/Engineering :: Mathematics',
-        'Topic :: Software Development',
         'Topic :: Software Development :: Libraries :: Python Modules',
     ],
     distclass=BinaryDistribution,

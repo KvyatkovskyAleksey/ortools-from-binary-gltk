@@ -7,32 +7,33 @@ default values.
 TODO(user): Make the above statement true by moving all algorithm parameters
 flags here.
 """
-import builtins
-import google.protobuf.descriptor
-import google.protobuf.internal.enum_type_wrapper
-import google.protobuf.message
+
+from google.protobuf import descriptor as _descriptor
+from google.protobuf import message as _message
+from google.protobuf.internal import enum_type_wrapper as _enum_type_wrapper
+import builtins as _builtins
 import sys
-import typing
+import typing as _typing
 
 if sys.version_info >= (3, 10):
-    import typing as typing_extensions
+    from typing import TypeAlias as _TypeAlias
 else:
-    import typing_extensions
+    from typing_extensions import TypeAlias as _TypeAlias
 
-DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
+DESCRIPTOR: _descriptor.FileDescriptor
 
-@typing_extensions.final
-class GlopParameters(google.protobuf.message.Message):
-    """next id = 70"""
+@_typing.final
+class GlopParameters(_message.Message):
+    """next id = 72"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
     class _ScalingAlgorithm:
-        ValueType = typing.NewType("ValueType", builtins.int)
-        V: typing_extensions.TypeAlias = ValueType
+        ValueType = _typing.NewType("ValueType", _builtins.int)
+        V: _TypeAlias = ValueType  # noqa: Y015
 
-    class _ScalingAlgorithmEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[GlopParameters._ScalingAlgorithm.ValueType], builtins.type):
-        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    class _ScalingAlgorithmEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[GlopParameters._ScalingAlgorithm.ValueType], _builtins.type):
+        DESCRIPTOR: _descriptor.EnumDescriptor
         DEFAULT: GlopParameters._ScalingAlgorithm.ValueType  # 0
         EQUILIBRATION: GlopParameters._ScalingAlgorithm.ValueType  # 1
         LINEAR_PROGRAM: GlopParameters._ScalingAlgorithm.ValueType  # 2
@@ -50,11 +51,11 @@ class GlopParameters(google.protobuf.message.Message):
     LINEAR_PROGRAM: GlopParameters.ScalingAlgorithm.ValueType  # 2
 
     class _SolverBehavior:
-        ValueType = typing.NewType("ValueType", builtins.int)
-        V: typing_extensions.TypeAlias = ValueType
+        ValueType = _typing.NewType("ValueType", _builtins.int)
+        V: _TypeAlias = ValueType  # noqa: Y015
 
-    class _SolverBehaviorEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[GlopParameters._SolverBehavior.ValueType], builtins.type):
-        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    class _SolverBehaviorEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[GlopParameters._SolverBehavior.ValueType], _builtins.type):
+        DESCRIPTOR: _descriptor.EnumDescriptor
         ALWAYS_DO: GlopParameters._SolverBehavior.ValueType  # 0
         NEVER_DO: GlopParameters._SolverBehavior.ValueType  # 1
         LET_SOLVER_DECIDE: GlopParameters._SolverBehavior.ValueType  # 2
@@ -69,11 +70,11 @@ class GlopParameters(google.protobuf.message.Message):
     LET_SOLVER_DECIDE: GlopParameters.SolverBehavior.ValueType  # 2
 
     class _PricingRule:
-        ValueType = typing.NewType("ValueType", builtins.int)
-        V: typing_extensions.TypeAlias = ValueType
+        ValueType = _typing.NewType("ValueType", _builtins.int)
+        V: _TypeAlias = ValueType  # noqa: Y015
 
-    class _PricingRuleEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[GlopParameters._PricingRule.ValueType], builtins.type):
-        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    class _PricingRuleEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[GlopParameters._PricingRule.ValueType], _builtins.type):
+        DESCRIPTOR: _descriptor.EnumDescriptor
         DANTZIG: GlopParameters._PricingRule.ValueType  # 0
         """Strategy using only the reduced cost of a variable.
 
@@ -114,11 +115,11 @@ class GlopParameters(google.protobuf.message.Message):
     """
 
     class _InitialBasisHeuristic:
-        ValueType = typing.NewType("ValueType", builtins.int)
-        V: typing_extensions.TypeAlias = ValueType
+        ValueType = _typing.NewType("ValueType", _builtins.int)
+        V: _TypeAlias = ValueType  # noqa: Y015
 
-    class _InitialBasisHeuristicEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[GlopParameters._InitialBasisHeuristic.ValueType], builtins.type):
-        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    class _InitialBasisHeuristicEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[GlopParameters._InitialBasisHeuristic.ValueType], _builtins.type):
+        DESCRIPTOR: _descriptor.EnumDescriptor
         NONE: GlopParameters._InitialBasisHeuristic.ValueType  # 0
         """Leave the fixed slack variables in the basis."""
         BIXBY: GlopParameters._InitialBasisHeuristic.ValueType  # 1
@@ -171,11 +172,11 @@ class GlopParameters(google.protobuf.message.Message):
     """
 
     class _CostScalingAlgorithm:
-        ValueType = typing.NewType("ValueType", builtins.int)
-        V: typing_extensions.TypeAlias = ValueType
+        ValueType = _typing.NewType("ValueType", _builtins.int)
+        V: _TypeAlias = ValueType  # noqa: Y015
 
-    class _CostScalingAlgorithmEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[GlopParameters._CostScalingAlgorithm.ValueType], builtins.type):
-        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    class _CostScalingAlgorithmEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[GlopParameters._CostScalingAlgorithm.ValueType], _builtins.type):
+        DESCRIPTOR: _descriptor.EnumDescriptor
         NO_COST_SCALING: GlopParameters._CostScalingAlgorithm.ValueType  # 0
         """Leave the cost as is."""
         CONTAIN_ONE_COST_SCALING: GlopParameters._CostScalingAlgorithm.ValueType  # 1
@@ -208,69 +209,70 @@ class GlopParameters(google.protobuf.message.Message):
     MEDIAN_COST_SCALING: GlopParameters.CostScalingAlgorithm.ValueType  # 3
     """Make the median of the non-zero costs equals to one."""
 
-    SCALING_METHOD_FIELD_NUMBER: builtins.int
-    FEASIBILITY_RULE_FIELD_NUMBER: builtins.int
-    OPTIMIZATION_RULE_FIELD_NUMBER: builtins.int
-    REFACTORIZATION_THRESHOLD_FIELD_NUMBER: builtins.int
-    RECOMPUTE_REDUCED_COSTS_THRESHOLD_FIELD_NUMBER: builtins.int
-    RECOMPUTE_EDGES_NORM_THRESHOLD_FIELD_NUMBER: builtins.int
-    PRIMAL_FEASIBILITY_TOLERANCE_FIELD_NUMBER: builtins.int
-    DUAL_FEASIBILITY_TOLERANCE_FIELD_NUMBER: builtins.int
-    RATIO_TEST_ZERO_THRESHOLD_FIELD_NUMBER: builtins.int
-    HARRIS_TOLERANCE_RATIO_FIELD_NUMBER: builtins.int
-    SMALL_PIVOT_THRESHOLD_FIELD_NUMBER: builtins.int
-    MINIMUM_ACCEPTABLE_PIVOT_FIELD_NUMBER: builtins.int
-    DROP_TOLERANCE_FIELD_NUMBER: builtins.int
-    USE_SCALING_FIELD_NUMBER: builtins.int
-    COST_SCALING_FIELD_NUMBER: builtins.int
-    INITIAL_BASIS_FIELD_NUMBER: builtins.int
-    USE_TRANSPOSED_MATRIX_FIELD_NUMBER: builtins.int
-    BASIS_REFACTORIZATION_PERIOD_FIELD_NUMBER: builtins.int
-    DYNAMICALLY_ADJUST_REFACTORIZATION_PERIOD_FIELD_NUMBER: builtins.int
-    SOLVE_DUAL_PROBLEM_FIELD_NUMBER: builtins.int
-    DUALIZER_THRESHOLD_FIELD_NUMBER: builtins.int
-    SOLUTION_FEASIBILITY_TOLERANCE_FIELD_NUMBER: builtins.int
-    PROVIDE_STRONG_OPTIMAL_GUARANTEE_FIELD_NUMBER: builtins.int
-    CHANGE_STATUS_TO_IMPRECISE_FIELD_NUMBER: builtins.int
-    MAX_NUMBER_OF_REOPTIMIZATIONS_FIELD_NUMBER: builtins.int
-    LU_FACTORIZATION_PIVOT_THRESHOLD_FIELD_NUMBER: builtins.int
-    MAX_TIME_IN_SECONDS_FIELD_NUMBER: builtins.int
-    MAX_DETERMINISTIC_TIME_FIELD_NUMBER: builtins.int
-    MAX_NUMBER_OF_ITERATIONS_FIELD_NUMBER: builtins.int
-    MARKOWITZ_ZLATEV_PARAMETER_FIELD_NUMBER: builtins.int
-    MARKOWITZ_SINGULARITY_THRESHOLD_FIELD_NUMBER: builtins.int
-    USE_DUAL_SIMPLEX_FIELD_NUMBER: builtins.int
-    ALLOW_SIMPLEX_ALGORITHM_CHANGE_FIELD_NUMBER: builtins.int
-    DEVEX_WEIGHTS_RESET_PERIOD_FIELD_NUMBER: builtins.int
-    USE_PREPROCESSING_FIELD_NUMBER: builtins.int
-    USE_MIDDLE_PRODUCT_FORM_UPDATE_FIELD_NUMBER: builtins.int
-    INITIALIZE_DEVEX_WITH_COLUMN_NORMS_FIELD_NUMBER: builtins.int
-    EXPLOIT_SINGLETON_COLUMN_IN_INITIAL_BASIS_FIELD_NUMBER: builtins.int
-    DUAL_SMALL_PIVOT_THRESHOLD_FIELD_NUMBER: builtins.int
-    PREPROCESSOR_ZERO_TOLERANCE_FIELD_NUMBER: builtins.int
-    OBJECTIVE_LOWER_LIMIT_FIELD_NUMBER: builtins.int
-    OBJECTIVE_UPPER_LIMIT_FIELD_NUMBER: builtins.int
-    DEGENERATE_MINISTEP_FACTOR_FIELD_NUMBER: builtins.int
-    RANDOM_SEED_FIELD_NUMBER: builtins.int
-    NUM_OMP_THREADS_FIELD_NUMBER: builtins.int
-    PERTURB_COSTS_IN_DUAL_SIMPLEX_FIELD_NUMBER: builtins.int
-    USE_DEDICATED_DUAL_FEASIBILITY_ALGORITHM_FIELD_NUMBER: builtins.int
-    RELATIVE_COST_PERTURBATION_FIELD_NUMBER: builtins.int
-    RELATIVE_MAX_COST_PERTURBATION_FIELD_NUMBER: builtins.int
-    INITIAL_CONDITION_NUMBER_THRESHOLD_FIELD_NUMBER: builtins.int
-    LOG_SEARCH_PROGRESS_FIELD_NUMBER: builtins.int
-    LOG_TO_STDOUT_FIELD_NUMBER: builtins.int
-    CROSSOVER_BOUND_SNAPPING_DISTANCE_FIELD_NUMBER: builtins.int
-    PUSH_TO_VERTEX_FIELD_NUMBER: builtins.int
-    USE_IMPLIED_FREE_PREPROCESSOR_FIELD_NUMBER: builtins.int
-    MAX_VALID_MAGNITUDE_FIELD_NUMBER: builtins.int
-    DUAL_PRICE_PRIORITIZE_NORM_FIELD_NUMBER: builtins.int
-    scaling_method: global___GlopParameters.ScalingAlgorithm.ValueType
-    feasibility_rule: global___GlopParameters.PricingRule.ValueType
+    SCALING_METHOD_FIELD_NUMBER: _builtins.int
+    FEASIBILITY_RULE_FIELD_NUMBER: _builtins.int
+    OPTIMIZATION_RULE_FIELD_NUMBER: _builtins.int
+    REFACTORIZATION_THRESHOLD_FIELD_NUMBER: _builtins.int
+    RECOMPUTE_REDUCED_COSTS_THRESHOLD_FIELD_NUMBER: _builtins.int
+    RECOMPUTE_EDGES_NORM_THRESHOLD_FIELD_NUMBER: _builtins.int
+    PRIMAL_FEASIBILITY_TOLERANCE_FIELD_NUMBER: _builtins.int
+    DUAL_FEASIBILITY_TOLERANCE_FIELD_NUMBER: _builtins.int
+    RATIO_TEST_ZERO_THRESHOLD_FIELD_NUMBER: _builtins.int
+    HARRIS_TOLERANCE_RATIO_FIELD_NUMBER: _builtins.int
+    SMALL_PIVOT_THRESHOLD_FIELD_NUMBER: _builtins.int
+    MINIMUM_ACCEPTABLE_PIVOT_FIELD_NUMBER: _builtins.int
+    DROP_TOLERANCE_FIELD_NUMBER: _builtins.int
+    USE_SCALING_FIELD_NUMBER: _builtins.int
+    COST_SCALING_FIELD_NUMBER: _builtins.int
+    INITIAL_BASIS_FIELD_NUMBER: _builtins.int
+    USE_TRANSPOSED_MATRIX_FIELD_NUMBER: _builtins.int
+    BASIS_REFACTORIZATION_PERIOD_FIELD_NUMBER: _builtins.int
+    DYNAMICALLY_ADJUST_REFACTORIZATION_PERIOD_FIELD_NUMBER: _builtins.int
+    SOLVE_DUAL_PROBLEM_FIELD_NUMBER: _builtins.int
+    DUALIZER_THRESHOLD_FIELD_NUMBER: _builtins.int
+    SOLUTION_FEASIBILITY_TOLERANCE_FIELD_NUMBER: _builtins.int
+    PROVIDE_STRONG_OPTIMAL_GUARANTEE_FIELD_NUMBER: _builtins.int
+    CHANGE_STATUS_TO_IMPRECISE_FIELD_NUMBER: _builtins.int
+    MAX_NUMBER_OF_REOPTIMIZATIONS_FIELD_NUMBER: _builtins.int
+    LU_FACTORIZATION_PIVOT_THRESHOLD_FIELD_NUMBER: _builtins.int
+    MAX_TIME_IN_SECONDS_FIELD_NUMBER: _builtins.int
+    MAX_DETERMINISTIC_TIME_FIELD_NUMBER: _builtins.int
+    MAX_NUMBER_OF_ITERATIONS_FIELD_NUMBER: _builtins.int
+    MARKOWITZ_ZLATEV_PARAMETER_FIELD_NUMBER: _builtins.int
+    MARKOWITZ_SINGULARITY_THRESHOLD_FIELD_NUMBER: _builtins.int
+    USE_DUAL_SIMPLEX_FIELD_NUMBER: _builtins.int
+    ALLOW_SIMPLEX_ALGORITHM_CHANGE_FIELD_NUMBER: _builtins.int
+    DEVEX_WEIGHTS_RESET_PERIOD_FIELD_NUMBER: _builtins.int
+    USE_PREPROCESSING_FIELD_NUMBER: _builtins.int
+    USE_MIDDLE_PRODUCT_FORM_UPDATE_FIELD_NUMBER: _builtins.int
+    INITIALIZE_DEVEX_WITH_COLUMN_NORMS_FIELD_NUMBER: _builtins.int
+    EXPLOIT_SINGLETON_COLUMN_IN_INITIAL_BASIS_FIELD_NUMBER: _builtins.int
+    DUAL_SMALL_PIVOT_THRESHOLD_FIELD_NUMBER: _builtins.int
+    PREPROCESSOR_ZERO_TOLERANCE_FIELD_NUMBER: _builtins.int
+    OBJECTIVE_LOWER_LIMIT_FIELD_NUMBER: _builtins.int
+    OBJECTIVE_UPPER_LIMIT_FIELD_NUMBER: _builtins.int
+    DEGENERATE_MINISTEP_FACTOR_FIELD_NUMBER: _builtins.int
+    RANDOM_SEED_FIELD_NUMBER: _builtins.int
+    NUM_OMP_THREADS_FIELD_NUMBER: _builtins.int
+    PERTURB_COSTS_IN_DUAL_SIMPLEX_FIELD_NUMBER: _builtins.int
+    USE_DEDICATED_DUAL_FEASIBILITY_ALGORITHM_FIELD_NUMBER: _builtins.int
+    RELATIVE_COST_PERTURBATION_FIELD_NUMBER: _builtins.int
+    RELATIVE_MAX_COST_PERTURBATION_FIELD_NUMBER: _builtins.int
+    INITIAL_CONDITION_NUMBER_THRESHOLD_FIELD_NUMBER: _builtins.int
+    LOG_SEARCH_PROGRESS_FIELD_NUMBER: _builtins.int
+    LOG_TO_STDOUT_FIELD_NUMBER: _builtins.int
+    CROSSOVER_BOUND_SNAPPING_DISTANCE_FIELD_NUMBER: _builtins.int
+    PUSH_TO_VERTEX_FIELD_NUMBER: _builtins.int
+    USE_IMPLIED_FREE_PREPROCESSOR_FIELD_NUMBER: _builtins.int
+    MAX_VALID_MAGNITUDE_FIELD_NUMBER: _builtins.int
+    DROP_MAGNITUDE_FIELD_NUMBER: _builtins.int
+    DUAL_PRICE_PRIORITIZE_NORM_FIELD_NUMBER: _builtins.int
+    scaling_method: Global___GlopParameters.ScalingAlgorithm.ValueType
+    feasibility_rule: Global___GlopParameters.PricingRule.ValueType
     """PricingRule to use during the feasibility phase."""
-    optimization_rule: global___GlopParameters.PricingRule.ValueType
+    optimization_rule: Global___GlopParameters.PricingRule.ValueType
     """PricingRule to use during the optimization phase."""
-    refactorization_threshold: builtins.float
+    refactorization_threshold: _builtins.float
     """We estimate the factorization accuracy of B during each pivot by using
     the fact that we can compute the pivot coefficient in two ways:
     - From direction[leaving_row].
@@ -278,21 +280,21 @@ class GlopParameters(google.protobuf.message.Message):
     If the two values have a relative difference above this threshold, we
     trigger a refactorization.
     """
-    recompute_reduced_costs_threshold: builtins.float
+    recompute_reduced_costs_threshold: _builtins.float
     """We estimate the accuracy of the iteratively computed reduced costs. If
     it falls below this threshold, we reinitialize them from scratch. Note
     that such an operation is pretty fast, so we can use a low threshold.
     It is important to have a good accuracy here (better than the
     dual_feasibility_tolerance below) to be sure of the sign of such a cost.
     """
-    recompute_edges_norm_threshold: builtins.float
+    recompute_edges_norm_threshold: _builtins.float
     """Note that the threshold is a relative error on the actual norm (not the
     squared one) and that edge norms are always greater than 1. Recomputing
     norms is a really expensive operation and a large threshold is ok since
     this doesn't impact directly the solution but just the entering variable
     choice.
     """
-    primal_feasibility_tolerance: builtins.float
+    primal_feasibility_tolerance: _builtins.float
     """The three following parameters correspond to the tolerance epsilon 1,2 and
     3 described in Chvatal p. 115 in the section "Zero Tolerances".
 
@@ -304,7 +306,7 @@ class GlopParameters(google.protobuf.message.Message):
 
     This is also simply called feasibility tolerance in other solvers.
     """
-    dual_feasibility_tolerance: builtins.float
+    dual_feasibility_tolerance: _builtins.float
     """Variables whose reduced costs have an absolute value smaller than this
     tolerance are not considered as entering candidates. That is they do not
     take part in deciding whether a solution is dual-feasible or not.
@@ -316,7 +318,7 @@ class GlopParameters(google.protobuf.message.Message):
 
     This is also known as the optimality tolerance in other solvers.
     """
-    ratio_test_zero_threshold: builtins.float
+    ratio_test_zero_threshold: _builtins.float
     """During the primal simplex (resp. dual simplex), the coefficients of the
     direction (resp. update row) with a magnitude lower than this threshold are
     not considered during the ratio test. This tolerance is related to the
@@ -325,7 +327,7 @@ class GlopParameters(google.protobuf.message.Message):
     TODO(user): Automatically increase it when we detect that the precision
     of the Solve() is worse than this.
     """
-    harris_tolerance_ratio: builtins.float
+    harris_tolerance_ratio: _builtins.float
     """This impacts the ratio test and indicates by how much we allow a basic
     variable value that we move to go out of bounds. The value should be in
     [0.0, 1.0) and should be interpreted as a ratio of the
@@ -338,56 +340,56 @@ class GlopParameters(google.protobuf.message.Message):
     we allow the reduced costs to be of an infeasible sign by as much as this
     ratio times the dual_feasibility_tolerance.
     """
-    small_pivot_threshold: builtins.float
+    small_pivot_threshold: _builtins.float
     """When we choose the leaving variable, we want to avoid small pivot because
     they are the less precise and may cause numerical instabilities. For a
     pivot under this threshold times the infinity norm of the direction, we try
     various countermeasures in order to avoid using it.
     """
-    minimum_acceptable_pivot: builtins.float
+    minimum_acceptable_pivot: _builtins.float
     """We never follow a basis change with a pivot under this threshold."""
-    drop_tolerance: builtins.float
+    drop_tolerance: _builtins.float
     """In order to increase the sparsity of the manipulated vectors, floating
     point values with a magnitude smaller than this parameter are set to zero
     (only in some places). This parameter should be positive or zero.
     """
-    use_scaling: builtins.bool
+    use_scaling: _builtins.bool
     """Whether or not we scale the matrix A so that the maximum coefficient on
     each line and each column is 1.0.
     """
-    cost_scaling: global___GlopParameters.CostScalingAlgorithm.ValueType
-    initial_basis: global___GlopParameters.InitialBasisHeuristic.ValueType
+    cost_scaling: Global___GlopParameters.CostScalingAlgorithm.ValueType
+    initial_basis: Global___GlopParameters.InitialBasisHeuristic.ValueType
     """What heuristic is used to try to replace the fixed slack columns in the
     initial basis of the primal simplex.
     """
-    use_transposed_matrix: builtins.bool
+    use_transposed_matrix: _builtins.bool
     """Whether or not we keep a transposed version of the matrix A to speed-up the
     pricing at the cost of extra memory and the initial tranposition
     computation.
     """
-    basis_refactorization_period: builtins.int
+    basis_refactorization_period: _builtins.int
     """Number of iterations between two basis refactorizations. Note that various
     conditions in the algorithm may trigger a refactorization before this
     period is reached. Set this to 0 if you want to refactorize at each step.
     """
-    dynamically_adjust_refactorization_period: builtins.bool
+    dynamically_adjust_refactorization_period: _builtins.bool
     """If this is true, then basis_refactorization_period becomes a lower bound on
     the number of iterations between two refactorization (provided there is no
     numerical accuracy issues). Depending on the estimated time to refactorize
     vs the extra time spend in each solves because of the LU update, we try to
     balance the two times.
     """
-    solve_dual_problem: global___GlopParameters.SolverBehavior.ValueType
+    solve_dual_problem: Global___GlopParameters.SolverBehavior.ValueType
     """Whether or not we solve the dual of the given problem.
     With a value of auto, the algorithm decide which approach is probably the
     fastest depending on the problem dimensions (see dualizer_threshold).
     """
-    dualizer_threshold: builtins.float
+    dualizer_threshold: _builtins.float
     """When solve_dual_problem is LET_SOLVER_DECIDE, take the dual if the number
     of constraints of the problem is more than this threshold times the number
     of variables.
     """
-    solution_feasibility_tolerance: builtins.float
+    solution_feasibility_tolerance: _builtins.float
     """When the problem status is OPTIMAL, we check the optimality using this
     relative tolerance and change the status to IMPRECISE if an issue is
     detected.
@@ -397,7 +399,7 @@ class GlopParameters(google.protobuf.message.Message):
     - tolerance * max(1.0, abs(cost)) for an infeasible reduced cost.
     - tolerance for an infeasible dual value.
     """
-    provide_strong_optimal_guarantee: builtins.bool
+    provide_strong_optimal_guarantee: _builtins.bool
     """If true, then when the solver returns a solution with an OPTIMAL status,
     we can guarantee that:
     - The primal variable are in their bounds.
@@ -417,58 +419,58 @@ class GlopParameters(google.protobuf.message.Message):
     don't move the primal/dual values within their bounds and leave them
     untouched.
     """
-    change_status_to_imprecise: builtins.bool
+    change_status_to_imprecise: _builtins.bool
     """If true, the internal API will change the return status to imprecise if the
     solution does not respect the internal tolerances.
     """
-    max_number_of_reoptimizations: builtins.float
+    max_number_of_reoptimizations: _builtins.float
     """When the solution of phase II is imprecise, we re-run the phase II with the
     opposite algorithm from that imprecise solution (i.e., if primal or dual
     simplex was used, we use dual or primal simplex, respectively). We repeat
     such re-optimization until the solution is precise, or we hit this limit.
     """
-    lu_factorization_pivot_threshold: builtins.float
+    lu_factorization_pivot_threshold: _builtins.float
     """Threshold for LU-factorization: for stability reasons, the magnitude of the
     chosen pivot at a given step is guaranteed to be greater than this
     threshold times the maximum magnitude of all the possible pivot choices in
     the same column. The value must be in [0,1].
     """
-    max_time_in_seconds: builtins.float
+    max_time_in_seconds: _builtins.float
     """Maximum time allowed in seconds to solve a problem."""
-    max_deterministic_time: builtins.float
+    max_deterministic_time: _builtins.float
     """Maximum deterministic time allowed to solve a problem. The deterministic
     time is more or less correlated to the running time, and its unit should
     be around the second (at least on a Xeon(R) CPU E5-1650 v2 @ 3.50GHz).
 
     TODO(user): Improve the correlation.
     """
-    max_number_of_iterations: builtins.int
+    max_number_of_iterations: _builtins.int
     """Maximum number of simplex iterations to solve a problem.
     A value of -1 means no limit.
     """
-    markowitz_zlatev_parameter: builtins.int
+    markowitz_zlatev_parameter: _builtins.int
     """How many columns do we look at in the Markowitz pivoting rule to find
     a good pivot. See markowitz.h.
     """
-    markowitz_singularity_threshold: builtins.float
+    markowitz_singularity_threshold: _builtins.float
     """If a pivot magnitude is smaller than this during the Markowitz LU
     factorization, then the matrix is assumed to be singular. Note that
     this is an absolute threshold and is not relative to the other possible
     pivots on the same column (see lu_factorization_pivot_threshold).
     """
-    use_dual_simplex: builtins.bool
+    use_dual_simplex: _builtins.bool
     """Whether or not we use the dual simplex algorithm instead of the primal."""
-    allow_simplex_algorithm_change: builtins.bool
+    allow_simplex_algorithm_change: _builtins.bool
     """During incremental solve, let the solver decide if it use the primal or
     dual simplex algorithm depending on the current solution and on the new
     problem. Note that even if this is true, the value of use_dual_simplex
     still indicates the default algorithm that the solver will use.
     """
-    devex_weights_reset_period: builtins.int
+    devex_weights_reset_period: _builtins.int
     """Devex weights will be reset to 1.0 after that number of updates."""
-    use_preprocessing: builtins.bool
+    use_preprocessing: _builtins.bool
     """Whether or not we use advanced preprocessing techniques."""
-    use_middle_product_form_update: builtins.bool
+    use_middle_product_form_update: _builtins.bool
     """Whether or not to use the middle product form update rather than the
     standard eta LU update. The middle form product update should be a lot more
     efficient (close to the Forrest-Tomlin update, a bit slower but easier to
@@ -477,20 +479,20 @@ class GlopParameters(google.protobuf.message.Message):
     simplex method", 28 january 2013, Technical Report ERGO-13-0001
     http://www.maths.ed.ac.uk/hall/HuHa12/ERGO-13-001.pdf
     """
-    initialize_devex_with_column_norms: builtins.bool
+    initialize_devex_with_column_norms: _builtins.bool
     """Whether we initialize devex weights to 1.0 or to the norms of the matrix
     columns.
     """
-    exploit_singleton_column_in_initial_basis: builtins.bool
+    exploit_singleton_column_in_initial_basis: _builtins.bool
     """Whether or not we exploit the singleton columns already present in the
     problem when we create the initial basis.
     """
-    dual_small_pivot_threshold: builtins.float
+    dual_small_pivot_threshold: _builtins.float
     """Like small_pivot_threshold but for the dual simplex. This is needed because
     the dual algorithm does not interpret this value in the same way.
     TODO(user): Clean this up and use the same small pivot detection.
     """
-    preprocessor_zero_tolerance: builtins.float
+    preprocessor_zero_tolerance: _builtins.float
     """A floating point tolerance used by the preprocessors. This is used for
     things like detecting if two columns/rows are proportional or if an
     interval is empty.
@@ -498,7 +500,7 @@ class GlopParameters(google.protobuf.message.Message):
     Note that the preprocessors also use solution_feasibility_tolerance() to
     detect if a problem is infeasible.
     """
-    objective_lower_limit: builtins.float
+    objective_lower_limit: _builtins.float
     """The solver will stop as soon as it has proven that the objective is smaller
     than objective_lower_limit or greater than objective_upper_limit. Depending
     on the simplex algorithm (primal or dual) and the optimization direction,
@@ -509,8 +511,8 @@ class GlopParameters(google.protobuf.message.Message):
     crosses one of these bounds (strictly), the search will stop. It is up to
     the client to add any tolerance if needed.
     """
-    objective_upper_limit: builtins.float
-    degenerate_ministep_factor: builtins.float
+    objective_upper_limit: _builtins.float
+    degenerate_ministep_factor: _builtins.float
     """During a degenerate iteration, the more conservative approach is to do a
     step of length zero (while shifting the bound of the leaving variable).
     That is, the variable values are unchanged for the primal simplex or the
@@ -530,7 +532,7 @@ class GlopParameters(google.protobuf.message.Message):
     Setting this to zero reverts to the more conservative approach of a zero
     step during degenerate iterations.
     """
-    random_seed: builtins.int
+    random_seed: _builtins.int
     """At the beginning of each solve, the random number generator used in some
     part of the solver is reinitialized to this seed. If you change the random
     seed, the solver may make different choices during the solving process.
@@ -547,17 +549,17 @@ class GlopParameters(google.protobuf.message.Message):
     limit, they might of course yield different results because one will have
     advanced farther than the other.
     """
-    num_omp_threads: builtins.int
+    num_omp_threads: _builtins.int
     """Number of threads in the OMP parallel sections. If left to 1, the code will
     not create any OMP threads and will remain single-threaded.
     """
-    perturb_costs_in_dual_simplex: builtins.bool
+    perturb_costs_in_dual_simplex: _builtins.bool
     """When this is true, then the costs are randomly perturbed before the dual
     simplex is even started. This has been shown to improve the dual simplex
     performance. For a good reference, see Huangfu Q (2013) "High performance
     simplex solver", Ph.D, dissertation, University of Edinburgh.
     """
-    use_dedicated_dual_feasibility_algorithm: builtins.bool
+    use_dedicated_dual_feasibility_algorithm: _builtins.bool
     """We have two possible dual phase I algorithms. Both work on an LP that
     minimize the sum of dual infeasiblities. One use dedicated code (when this
     param is true), the other one use exactly the same code as the dual phase
@@ -567,26 +569,26 @@ class GlopParameters(google.protobuf.message.Message):
     TODO(user): For now we have both, but ideally the non-dedicated version
     will win since it is a lot less code to maintain.
     """
-    relative_cost_perturbation: builtins.float
+    relative_cost_perturbation: _builtins.float
     """The magnitude of the cost perturbation is given by
     RandomIn(1.0, 2.0) * (
         relative_cost_perturbation * cost
       + relative_max_cost_perturbation * max_cost);
     """
-    relative_max_cost_perturbation: builtins.float
-    initial_condition_number_threshold: builtins.float
+    relative_max_cost_perturbation: _builtins.float
+    initial_condition_number_threshold: _builtins.float
     """If our upper bound on the condition number of the initial basis (from our
     heurisitic or a warm start) is above this threshold, we revert to an all
     slack basis.
     """
-    log_search_progress: builtins.bool
+    log_search_progress: _builtins.bool
     """If true, logs the progress of a solve to LOG(INFO). Note that the same
     messages can also be turned on by displaying logs at level 1 for the
     relevant files.
     """
-    log_to_stdout: builtins.bool
+    log_to_stdout: _builtins.bool
     """If true, logs will be displayed to stdout instead of using Google log info."""
-    crossover_bound_snapping_distance: builtins.float
+    crossover_bound_snapping_distance: _builtins.float
     """If the starting basis contains FREE variable with bounds, we will move
     any such variable to their closer bounds if the distance is smaller than
     this parameter.
@@ -603,7 +605,7 @@ class GlopParameters(google.protobuf.message.Message):
     and an interior point value might still be left in the final solution.
     Enable push_to_vertex to clean these up.
     """
-    push_to_vertex: builtins.bool
+    push_to_vertex: _builtins.bool
     """If the optimization phases finishes with super-basic variables (i.e.,
     variables that either 1) have bounds but are FREE in the basis, or 2) have
     no bounds and are FREE in the basis at a nonzero value), then run a "push"
@@ -611,9 +613,9 @@ class GlopParameters(google.protobuf.message.Message):
     this situation can happen only if a starting value was specified via
     SetStartingVariableValuesForNextSolve().
     """
-    use_implied_free_preprocessor: builtins.bool
+    use_implied_free_preprocessor: _builtins.bool
     """If presolve runs, include the pass that detects implied free variables."""
-    max_valid_magnitude: builtins.float
+    max_valid_magnitude: _builtins.float
     """Any finite values in the input LP must be below this threshold, otherwise
     the model will be reported invalid. This is needed to avoid floating point
     overflow when evaluating bounds * coeff for instance. In practice, users
@@ -621,72 +623,81 @@ class GlopParameters(google.protobuf.message.Message):
     evaluating large constraint with variables at their bound shouldn't cause
     any overflow.
     """
-    dual_price_prioritize_norm: builtins.bool
+    drop_magnitude: _builtins.float
+    """Value in the input LP lower than this will be ignored. This is similar to
+    drop_tolerance but more aggressive as this is used before scaling. This is
+    mainly here to avoid underflow and have simpler invariant in the code, like
+    a * b == 0 iff a or b is zero and things like this.
+    """
+    dual_price_prioritize_norm: _builtins.bool
     """On some problem like stp3d or pds-100 this makes a huge difference in
     speed and number of iterations of the dual simplex.
     """
     def __init__(
         self,
         *,
-        scaling_method: global___GlopParameters.ScalingAlgorithm.ValueType | None = ...,
-        feasibility_rule: global___GlopParameters.PricingRule.ValueType | None = ...,
-        optimization_rule: global___GlopParameters.PricingRule.ValueType | None = ...,
-        refactorization_threshold: builtins.float | None = ...,
-        recompute_reduced_costs_threshold: builtins.float | None = ...,
-        recompute_edges_norm_threshold: builtins.float | None = ...,
-        primal_feasibility_tolerance: builtins.float | None = ...,
-        dual_feasibility_tolerance: builtins.float | None = ...,
-        ratio_test_zero_threshold: builtins.float | None = ...,
-        harris_tolerance_ratio: builtins.float | None = ...,
-        small_pivot_threshold: builtins.float | None = ...,
-        minimum_acceptable_pivot: builtins.float | None = ...,
-        drop_tolerance: builtins.float | None = ...,
-        use_scaling: builtins.bool | None = ...,
-        cost_scaling: global___GlopParameters.CostScalingAlgorithm.ValueType | None = ...,
-        initial_basis: global___GlopParameters.InitialBasisHeuristic.ValueType | None = ...,
-        use_transposed_matrix: builtins.bool | None = ...,
-        basis_refactorization_period: builtins.int | None = ...,
-        dynamically_adjust_refactorization_period: builtins.bool | None = ...,
-        solve_dual_problem: global___GlopParameters.SolverBehavior.ValueType | None = ...,
-        dualizer_threshold: builtins.float | None = ...,
-        solution_feasibility_tolerance: builtins.float | None = ...,
-        provide_strong_optimal_guarantee: builtins.bool | None = ...,
-        change_status_to_imprecise: builtins.bool | None = ...,
-        max_number_of_reoptimizations: builtins.float | None = ...,
-        lu_factorization_pivot_threshold: builtins.float | None = ...,
-        max_time_in_seconds: builtins.float | None = ...,
-        max_deterministic_time: builtins.float | None = ...,
-        max_number_of_iterations: builtins.int | None = ...,
-        markowitz_zlatev_parameter: builtins.int | None = ...,
-        markowitz_singularity_threshold: builtins.float | None = ...,
-        use_dual_simplex: builtins.bool | None = ...,
-        allow_simplex_algorithm_change: builtins.bool | None = ...,
-        devex_weights_reset_period: builtins.int | None = ...,
-        use_preprocessing: builtins.bool | None = ...,
-        use_middle_product_form_update: builtins.bool | None = ...,
-        initialize_devex_with_column_norms: builtins.bool | None = ...,
-        exploit_singleton_column_in_initial_basis: builtins.bool | None = ...,
-        dual_small_pivot_threshold: builtins.float | None = ...,
-        preprocessor_zero_tolerance: builtins.float | None = ...,
-        objective_lower_limit: builtins.float | None = ...,
-        objective_upper_limit: builtins.float | None = ...,
-        degenerate_ministep_factor: builtins.float | None = ...,
-        random_seed: builtins.int | None = ...,
-        num_omp_threads: builtins.int | None = ...,
-        perturb_costs_in_dual_simplex: builtins.bool | None = ...,
-        use_dedicated_dual_feasibility_algorithm: builtins.bool | None = ...,
-        relative_cost_perturbation: builtins.float | None = ...,
-        relative_max_cost_perturbation: builtins.float | None = ...,
-        initial_condition_number_threshold: builtins.float | None = ...,
-        log_search_progress: builtins.bool | None = ...,
-        log_to_stdout: builtins.bool | None = ...,
-        crossover_bound_snapping_distance: builtins.float | None = ...,
-        push_to_vertex: builtins.bool | None = ...,
-        use_implied_free_preprocessor: builtins.bool | None = ...,
-        max_valid_magnitude: builtins.float | None = ...,
-        dual_price_prioritize_norm: builtins.bool | None = ...,
+        scaling_method: Global___GlopParameters.ScalingAlgorithm.ValueType | None = ...,
+        feasibility_rule: Global___GlopParameters.PricingRule.ValueType | None = ...,
+        optimization_rule: Global___GlopParameters.PricingRule.ValueType | None = ...,
+        refactorization_threshold: _builtins.float | None = ...,
+        recompute_reduced_costs_threshold: _builtins.float | None = ...,
+        recompute_edges_norm_threshold: _builtins.float | None = ...,
+        primal_feasibility_tolerance: _builtins.float | None = ...,
+        dual_feasibility_tolerance: _builtins.float | None = ...,
+        ratio_test_zero_threshold: _builtins.float | None = ...,
+        harris_tolerance_ratio: _builtins.float | None = ...,
+        small_pivot_threshold: _builtins.float | None = ...,
+        minimum_acceptable_pivot: _builtins.float | None = ...,
+        drop_tolerance: _builtins.float | None = ...,
+        use_scaling: _builtins.bool | None = ...,
+        cost_scaling: Global___GlopParameters.CostScalingAlgorithm.ValueType | None = ...,
+        initial_basis: Global___GlopParameters.InitialBasisHeuristic.ValueType | None = ...,
+        use_transposed_matrix: _builtins.bool | None = ...,
+        basis_refactorization_period: _builtins.int | None = ...,
+        dynamically_adjust_refactorization_period: _builtins.bool | None = ...,
+        solve_dual_problem: Global___GlopParameters.SolverBehavior.ValueType | None = ...,
+        dualizer_threshold: _builtins.float | None = ...,
+        solution_feasibility_tolerance: _builtins.float | None = ...,
+        provide_strong_optimal_guarantee: _builtins.bool | None = ...,
+        change_status_to_imprecise: _builtins.bool | None = ...,
+        max_number_of_reoptimizations: _builtins.float | None = ...,
+        lu_factorization_pivot_threshold: _builtins.float | None = ...,
+        max_time_in_seconds: _builtins.float | None = ...,
+        max_deterministic_time: _builtins.float | None = ...,
+        max_number_of_iterations: _builtins.int | None = ...,
+        markowitz_zlatev_parameter: _builtins.int | None = ...,
+        markowitz_singularity_threshold: _builtins.float | None = ...,
+        use_dual_simplex: _builtins.bool | None = ...,
+        allow_simplex_algorithm_change: _builtins.bool | None = ...,
+        devex_weights_reset_period: _builtins.int | None = ...,
+        use_preprocessing: _builtins.bool | None = ...,
+        use_middle_product_form_update: _builtins.bool | None = ...,
+        initialize_devex_with_column_norms: _builtins.bool | None = ...,
+        exploit_singleton_column_in_initial_basis: _builtins.bool | None = ...,
+        dual_small_pivot_threshold: _builtins.float | None = ...,
+        preprocessor_zero_tolerance: _builtins.float | None = ...,
+        objective_lower_limit: _builtins.float | None = ...,
+        objective_upper_limit: _builtins.float | None = ...,
+        degenerate_ministep_factor: _builtins.float | None = ...,
+        random_seed: _builtins.int | None = ...,
+        num_omp_threads: _builtins.int | None = ...,
+        perturb_costs_in_dual_simplex: _builtins.bool | None = ...,
+        use_dedicated_dual_feasibility_algorithm: _builtins.bool | None = ...,
+        relative_cost_perturbation: _builtins.float | None = ...,
+        relative_max_cost_perturbation: _builtins.float | None = ...,
+        initial_condition_number_threshold: _builtins.float | None = ...,
+        log_search_progress: _builtins.bool | None = ...,
+        log_to_stdout: _builtins.bool | None = ...,
+        crossover_bound_snapping_distance: _builtins.float | None = ...,
+        push_to_vertex: _builtins.bool | None = ...,
+        use_implied_free_preprocessor: _builtins.bool | None = ...,
+        max_valid_magnitude: _builtins.float | None = ...,
+        drop_magnitude: _builtins.float | None = ...,
+        dual_price_prioritize_norm: _builtins.bool | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["allow_simplex_algorithm_change", b"allow_simplex_algorithm_change", "basis_refactorization_period", b"basis_refactorization_period", "change_status_to_imprecise", b"change_status_to_imprecise", "cost_scaling", b"cost_scaling", "crossover_bound_snapping_distance", b"crossover_bound_snapping_distance", "degenerate_ministep_factor", b"degenerate_ministep_factor", "devex_weights_reset_period", b"devex_weights_reset_period", "drop_tolerance", b"drop_tolerance", "dual_feasibility_tolerance", b"dual_feasibility_tolerance", "dual_price_prioritize_norm", b"dual_price_prioritize_norm", "dual_small_pivot_threshold", b"dual_small_pivot_threshold", "dualizer_threshold", b"dualizer_threshold", "dynamically_adjust_refactorization_period", b"dynamically_adjust_refactorization_period", "exploit_singleton_column_in_initial_basis", b"exploit_singleton_column_in_initial_basis", "feasibility_rule", b"feasibility_rule", "harris_tolerance_ratio", b"harris_tolerance_ratio", "initial_basis", b"initial_basis", "initial_condition_number_threshold", b"initial_condition_number_threshold", "initialize_devex_with_column_norms", b"initialize_devex_with_column_norms", "log_search_progress", b"log_search_progress", "log_to_stdout", b"log_to_stdout", "lu_factorization_pivot_threshold", b"lu_factorization_pivot_threshold", "markowitz_singularity_threshold", b"markowitz_singularity_threshold", "markowitz_zlatev_parameter", b"markowitz_zlatev_parameter", "max_deterministic_time", b"max_deterministic_time", "max_number_of_iterations", b"max_number_of_iterations", "max_number_of_reoptimizations", b"max_number_of_reoptimizations", "max_time_in_seconds", b"max_time_in_seconds", "max_valid_magnitude", b"max_valid_magnitude", "minimum_acceptable_pivot", b"minimum_acceptable_pivot", "num_omp_threads", b"num_omp_threads", "objective_lower_limit", b"objective_lower_limit", "objective_upper_limit", b"objective_upper_limit", "optimization_rule", b"optimization_rule", "perturb_costs_in_dual_simplex", b"perturb_costs_in_dual_simplex", "preprocessor_zero_tolerance", b"preprocessor_zero_tolerance", "primal_feasibility_tolerance", b"primal_feasibility_tolerance", "provide_strong_optimal_guarantee", b"provide_strong_optimal_guarantee", "push_to_vertex", b"push_to_vertex", "random_seed", b"random_seed", "ratio_test_zero_threshold", b"ratio_test_zero_threshold", "recompute_edges_norm_threshold", b"recompute_edges_norm_threshold", "recompute_reduced_costs_threshold", b"recompute_reduced_costs_threshold", "refactorization_threshold", b"refactorization_threshold", "relative_cost_perturbation", b"relative_cost_perturbation", "relative_max_cost_perturbation", b"relative_max_cost_perturbation", "scaling_method", b"scaling_method", "small_pivot_threshold", b"small_pivot_threshold", "solution_feasibility_tolerance", b"solution_feasibility_tolerance", "solve_dual_problem", b"solve_dual_problem", "use_dedicated_dual_feasibility_algorithm", b"use_dedicated_dual_feasibility_algorithm", "use_dual_simplex", b"use_dual_simplex", "use_implied_free_preprocessor", b"use_implied_free_preprocessor", "use_middle_product_form_update", b"use_middle_product_form_update", "use_preprocessing", b"use_preprocessing", "use_scaling", b"use_scaling", "use_transposed_matrix", b"use_transposed_matrix"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["allow_simplex_algorithm_change", b"allow_simplex_algorithm_change", "basis_refactorization_period", b"basis_refactorization_period", "change_status_to_imprecise", b"change_status_to_imprecise", "cost_scaling", b"cost_scaling", "crossover_bound_snapping_distance", b"crossover_bound_snapping_distance", "degenerate_ministep_factor", b"degenerate_ministep_factor", "devex_weights_reset_period", b"devex_weights_reset_period", "drop_tolerance", b"drop_tolerance", "dual_feasibility_tolerance", b"dual_feasibility_tolerance", "dual_price_prioritize_norm", b"dual_price_prioritize_norm", "dual_small_pivot_threshold", b"dual_small_pivot_threshold", "dualizer_threshold", b"dualizer_threshold", "dynamically_adjust_refactorization_period", b"dynamically_adjust_refactorization_period", "exploit_singleton_column_in_initial_basis", b"exploit_singleton_column_in_initial_basis", "feasibility_rule", b"feasibility_rule", "harris_tolerance_ratio", b"harris_tolerance_ratio", "initial_basis", b"initial_basis", "initial_condition_number_threshold", b"initial_condition_number_threshold", "initialize_devex_with_column_norms", b"initialize_devex_with_column_norms", "log_search_progress", b"log_search_progress", "log_to_stdout", b"log_to_stdout", "lu_factorization_pivot_threshold", b"lu_factorization_pivot_threshold", "markowitz_singularity_threshold", b"markowitz_singularity_threshold", "markowitz_zlatev_parameter", b"markowitz_zlatev_parameter", "max_deterministic_time", b"max_deterministic_time", "max_number_of_iterations", b"max_number_of_iterations", "max_number_of_reoptimizations", b"max_number_of_reoptimizations", "max_time_in_seconds", b"max_time_in_seconds", "max_valid_magnitude", b"max_valid_magnitude", "minimum_acceptable_pivot", b"minimum_acceptable_pivot", "num_omp_threads", b"num_omp_threads", "objective_lower_limit", b"objective_lower_limit", "objective_upper_limit", b"objective_upper_limit", "optimization_rule", b"optimization_rule", "perturb_costs_in_dual_simplex", b"perturb_costs_in_dual_simplex", "preprocessor_zero_tolerance", b"preprocessor_zero_tolerance", "primal_feasibility_tolerance", b"primal_feasibility_tolerance", "provide_strong_optimal_guarantee", b"provide_strong_optimal_guarantee", "push_to_vertex", b"push_to_vertex", "random_seed", b"random_seed", "ratio_test_zero_threshold", b"ratio_test_zero_threshold", "recompute_edges_norm_threshold", b"recompute_edges_norm_threshold", "recompute_reduced_costs_threshold", b"recompute_reduced_costs_threshold", "refactorization_threshold", b"refactorization_threshold", "relative_cost_perturbation", b"relative_cost_perturbation", "relative_max_cost_perturbation", b"relative_max_cost_perturbation", "scaling_method", b"scaling_method", "small_pivot_threshold", b"small_pivot_threshold", "solution_feasibility_tolerance", b"solution_feasibility_tolerance", "solve_dual_problem", b"solve_dual_problem", "use_dedicated_dual_feasibility_algorithm", b"use_dedicated_dual_feasibility_algorithm", "use_dual_simplex", b"use_dual_simplex", "use_implied_free_preprocessor", b"use_implied_free_preprocessor", "use_middle_product_form_update", b"use_middle_product_form_update", "use_preprocessing", b"use_preprocessing", "use_scaling", b"use_scaling", "use_transposed_matrix", b"use_transposed_matrix"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["allow_simplex_algorithm_change", b"allow_simplex_algorithm_change", "basis_refactorization_period", b"basis_refactorization_period", "change_status_to_imprecise", b"change_status_to_imprecise", "cost_scaling", b"cost_scaling", "crossover_bound_snapping_distance", b"crossover_bound_snapping_distance", "degenerate_ministep_factor", b"degenerate_ministep_factor", "devex_weights_reset_period", b"devex_weights_reset_period", "drop_magnitude", b"drop_magnitude", "drop_tolerance", b"drop_tolerance", "dual_feasibility_tolerance", b"dual_feasibility_tolerance", "dual_price_prioritize_norm", b"dual_price_prioritize_norm", "dual_small_pivot_threshold", b"dual_small_pivot_threshold", "dualizer_threshold", b"dualizer_threshold", "dynamically_adjust_refactorization_period", b"dynamically_adjust_refactorization_period", "exploit_singleton_column_in_initial_basis", b"exploit_singleton_column_in_initial_basis", "feasibility_rule", b"feasibility_rule", "harris_tolerance_ratio", b"harris_tolerance_ratio", "initial_basis", b"initial_basis", "initial_condition_number_threshold", b"initial_condition_number_threshold", "initialize_devex_with_column_norms", b"initialize_devex_with_column_norms", "log_search_progress", b"log_search_progress", "log_to_stdout", b"log_to_stdout", "lu_factorization_pivot_threshold", b"lu_factorization_pivot_threshold", "markowitz_singularity_threshold", b"markowitz_singularity_threshold", "markowitz_zlatev_parameter", b"markowitz_zlatev_parameter", "max_deterministic_time", b"max_deterministic_time", "max_number_of_iterations", b"max_number_of_iterations", "max_number_of_reoptimizations", b"max_number_of_reoptimizations", "max_time_in_seconds", b"max_time_in_seconds", "max_valid_magnitude", b"max_valid_magnitude", "minimum_acceptable_pivot", b"minimum_acceptable_pivot", "num_omp_threads", b"num_omp_threads", "objective_lower_limit", b"objective_lower_limit", "objective_upper_limit", b"objective_upper_limit", "optimization_rule", b"optimization_rule", "perturb_costs_in_dual_simplex", b"perturb_costs_in_dual_simplex", "preprocessor_zero_tolerance", b"preprocessor_zero_tolerance", "primal_feasibility_tolerance", b"primal_feasibility_tolerance", "provide_strong_optimal_guarantee", b"provide_strong_optimal_guarantee", "push_to_vertex", b"push_to_vertex", "random_seed", b"random_seed", "ratio_test_zero_threshold", b"ratio_test_zero_threshold", "recompute_edges_norm_threshold", b"recompute_edges_norm_threshold", "recompute_reduced_costs_threshold", b"recompute_reduced_costs_threshold", "refactorization_threshold", b"refactorization_threshold", "relative_cost_perturbation", b"relative_cost_perturbation", "relative_max_cost_perturbation", b"relative_max_cost_perturbation", "scaling_method", b"scaling_method", "small_pivot_threshold", b"small_pivot_threshold", "solution_feasibility_tolerance", b"solution_feasibility_tolerance", "solve_dual_problem", b"solve_dual_problem", "use_dedicated_dual_feasibility_algorithm", b"use_dedicated_dual_feasibility_algorithm", "use_dual_simplex", b"use_dual_simplex", "use_implied_free_preprocessor", b"use_implied_free_preprocessor", "use_middle_product_form_update", b"use_middle_product_form_update", "use_preprocessing", b"use_preprocessing", "use_scaling", b"use_scaling", "use_transposed_matrix", b"use_transposed_matrix"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["allow_simplex_algorithm_change", b"allow_simplex_algorithm_change", "basis_refactorization_period", b"basis_refactorization_period", "change_status_to_imprecise", b"change_status_to_imprecise", "cost_scaling", b"cost_scaling", "crossover_bound_snapping_distance", b"crossover_bound_snapping_distance", "degenerate_ministep_factor", b"degenerate_ministep_factor", "devex_weights_reset_period", b"devex_weights_reset_period", "drop_magnitude", b"drop_magnitude", "drop_tolerance", b"drop_tolerance", "dual_feasibility_tolerance", b"dual_feasibility_tolerance", "dual_price_prioritize_norm", b"dual_price_prioritize_norm", "dual_small_pivot_threshold", b"dual_small_pivot_threshold", "dualizer_threshold", b"dualizer_threshold", "dynamically_adjust_refactorization_period", b"dynamically_adjust_refactorization_period", "exploit_singleton_column_in_initial_basis", b"exploit_singleton_column_in_initial_basis", "feasibility_rule", b"feasibility_rule", "harris_tolerance_ratio", b"harris_tolerance_ratio", "initial_basis", b"initial_basis", "initial_condition_number_threshold", b"initial_condition_number_threshold", "initialize_devex_with_column_norms", b"initialize_devex_with_column_norms", "log_search_progress", b"log_search_progress", "log_to_stdout", b"log_to_stdout", "lu_factorization_pivot_threshold", b"lu_factorization_pivot_threshold", "markowitz_singularity_threshold", b"markowitz_singularity_threshold", "markowitz_zlatev_parameter", b"markowitz_zlatev_parameter", "max_deterministic_time", b"max_deterministic_time", "max_number_of_iterations", b"max_number_of_iterations", "max_number_of_reoptimizations", b"max_number_of_reoptimizations", "max_time_in_seconds", b"max_time_in_seconds", "max_valid_magnitude", b"max_valid_magnitude", "minimum_acceptable_pivot", b"minimum_acceptable_pivot", "num_omp_threads", b"num_omp_threads", "objective_lower_limit", b"objective_lower_limit", "objective_upper_limit", b"objective_upper_limit", "optimization_rule", b"optimization_rule", "perturb_costs_in_dual_simplex", b"perturb_costs_in_dual_simplex", "preprocessor_zero_tolerance", b"preprocessor_zero_tolerance", "primal_feasibility_tolerance", b"primal_feasibility_tolerance", "provide_strong_optimal_guarantee", b"provide_strong_optimal_guarantee", "push_to_vertex", b"push_to_vertex", "random_seed", b"random_seed", "ratio_test_zero_threshold", b"ratio_test_zero_threshold", "recompute_edges_norm_threshold", b"recompute_edges_norm_threshold", "recompute_reduced_costs_threshold", b"recompute_reduced_costs_threshold", "refactorization_threshold", b"refactorization_threshold", "relative_cost_perturbation", b"relative_cost_perturbation", "relative_max_cost_perturbation", b"relative_max_cost_perturbation", "scaling_method", b"scaling_method", "small_pivot_threshold", b"small_pivot_threshold", "solution_feasibility_tolerance", b"solution_feasibility_tolerance", "solve_dual_problem", b"solve_dual_problem", "use_dedicated_dual_feasibility_algorithm", b"use_dedicated_dual_feasibility_algorithm", "use_dual_simplex", b"use_dual_simplex", "use_implied_free_preprocessor", b"use_implied_free_preprocessor", "use_middle_product_form_update", b"use_middle_product_form_update", "use_preprocessing", b"use_preprocessing", "use_scaling", b"use_scaling", "use_transposed_matrix", b"use_transposed_matrix"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
 
-global___GlopParameters = GlopParameters
+Global___GlopParameters: _TypeAlias = GlopParameters  # noqa: Y015
